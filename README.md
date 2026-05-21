@@ -125,10 +125,12 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial-
 *   **NonCommercial (NC):** You **MAY NOT** use this software or its codebase for any commercial purposes.
 *   **ShareAlike (SA):** Any derivative works must be distributed under the same license.
 
-For full legal terms, read the [LICENSE](./LICENSE) file.
-
 ---
+<p align="center">
+<a href='https://ko-fi.com/Z1D41ZYKUZ' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+</p>
 
 <p align="center">
   Made with 💻 by <a href="https://github.com/viniciusciconebarbosa">Vinícius Cicone Barbosa</a>
+  
 </p>
