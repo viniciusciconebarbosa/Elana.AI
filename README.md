@@ -31,7 +31,7 @@ O **Elana AI** (ou simplesmente **Elana**) é um assistente de Inteligência Art
 *   **🔮 The Brain Knowledge Base:** A fast, native ingestion pipeline allowing you to upload PDFs, URLs, and plain text to extract knowledge facts and inject them directly into your context trees.
 *   **🌐 Real-Time Search Integration:** Full Tavily API integration enabling the AI to browse the web, with securely managed credential settings.
 *   **🎨 Premium UI/UX:** Stunning, high-performance responsive interface designed with **TailwindCSS**, optimized custom layout scrolling, GPU-accelerated layers, and clean, beautiful typography.
-*   **📱 Native Cross-Platform:** Built on top of **Tauri v2** and **Rust**, offering native performance for Windows, macOS, Linux, and Android with a microscopic memory footprint.
+*   **📱 Native Cross-Platform:** Built on top of **Tauri v2** and **Rust**, initially available and optimized for **Linux, Android, and Windows** 
 
 ---
 
@@ -46,6 +46,23 @@ O **Elana AI** (ou simplesmente **Elana**) é um assistente de Inteligência Art
 | **Supabase / SQLite** | Hybrid relational storage and sync |
 | **Qdrant** | High-speed vector search for RAG memories |
 | **Web Crypto API** | Secure client-side cryptographic hashing & AES-GCM encryption |
+
+---
+
+## 🗺️ Project Roadmap & Current Status (Status do Projeto)
+
+Para manter total transparência com os avaliadores, recrutadores e com a comunidade open-source, aqui está o status real de desenvolvimento de cada funcionalidade da Elana AI:
+
+### Fully Functional (100% Concluído & Ativo)
+*   **🔒 Criptografia AES-GCM Local:** Camada de segurança client-side que deriva chaves via PBKDF2 localmente para blindar suas credenciais.
+*   **💬 Interface de Chat Premium:** Performance nativa, layout responsivo em dois temas (Light/Dark) e histórico com árvores de mensagens.
+*   **🗄️ SQLite Local + Sincronização Supabase:** Banco relacional nativo offline que sincroniza com seu nó privado na nuvem de forma segura.
+*   **🌐 Pesquisa na Web Integrada (Tavily):** Busca instantânea e pesquisa detalhada diretamente no chat.
+*   **📱 Builds Nativas Otimizadas:** Instaladores compactos e splits de CPU disponíveis inicialmente para **Linux, Android (APK leve) e Windows** (versão macOS planejada para releases futuras).
+
+###  Under Active Development (Em Desenvolvimento — Próxima Build v0.2.0)
+*   **🧠 Banco de Memória Qdrant (RAG):** A arquitetura e o repositório de banco de vetores no backend estão 100% codificados. Estamos integrando a tela de visualização no frontend e os gatilhos automáticos de gravação no chat.
+*   **🔮 Mapeamento de Conhecimento (The Brain):** A lógica de fragmentação (*chunking*) de textos está pronta no backend. A interface de upload de arquivos e processamento de URLs está em fase de conexão com o banco.
 
 ---
 
