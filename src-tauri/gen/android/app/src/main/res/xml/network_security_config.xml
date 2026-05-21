@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Permite HTTP para a rede local (192.168.x.x) -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">192.168.18.43</domain>
+    </domain-config>
+    <!-- Tudo mais usa HTTPS -->
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>
