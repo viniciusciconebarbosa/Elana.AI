@@ -60,7 +60,7 @@ Para manter total transparência com os avaliadores, recrutadores e com a comuni
 *   **🌐 Pesquisa na Web Integrada (Tavily):** Busca instantânea e pesquisa detalhada diretamente no chat.
 *   **📱 Builds Nativas Otimizadas:** Instaladores compactos e splits de CPU disponíveis inicialmente para **Linux, Android (APK leve) e Windows** (versão macOS planejada para releases futuras).
 
-###  Under Active Development (Em Desenvolvimento — Próxima Build v0.2.0)
+###  Under Active Development (Em Desenvolvimento — Próxima Build v1.2.0)
 *   **🧠 Banco de Memória Qdrant (RAG):** A arquitetura e o repositório de banco de vetores no backend estão 100% codificados. Estamos integrando a tela de visualização no frontend e os gatilhos automáticos de gravação no chat.
 *   **🔮 Mapeamento de Conhecimento (The Brain):** A lógica de fragmentação (*chunking*) de textos está pronta no backend. A interface de upload de arquivos e processamento de URLs está em fase de conexão com o banco.
 
