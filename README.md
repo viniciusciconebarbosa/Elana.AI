@@ -21,7 +21,7 @@
 
 ## 🇧🇷 Sobre a Elana (Portuguese Summary)
 
-O **Elana AI** (ou simplesmente **Elana**) é um assistente de Inteligência Artificial multiplataforma (Desktop & Android) projetado com foco absoluto em **privacidade do usuário, segurança de dados e alta performance**. Ele permite que você conecte seus próprios modelos de linguagem (OpenAI, Gemini, LLMs locais) e gerencie seu próprio banco de dados relacional e vetorial de forma totalmente isolada e segura.
+O **Elana AI** (ou simplesmente **Elana**) é um assistente de Inteligência Artificial multiplataforma (Desktop & Android) projetado com foco absoluto em **privacidade do usuário, segurança de dados e alta performance**. Ela permite que você conecte seus próprios modelos de linguagem (OpenAI, Gemini, LLMs locais) e gerencie seu próprio banco de dados relacional e vetorial de forma totalmente isolada e segura.
 
 ## 🇬🇧 Key Features (Recursos Principais)
 
