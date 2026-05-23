@@ -7,6 +7,7 @@ import { ApiKeysProvider } from "@/interface/context/ApiKeysContext"
 import { ChatListProvider } from "@/interface/context/ChatListContext"
 import { ToolsSettingsProvider } from "@/interface/context/ToolsSettingsContext"
 import { DatabaseSettingsProvider } from "@/interface/context/DatabaseSettingsContext"
+import { UserProfileProvider } from "@/interface/context/UserProfileContext"
 import { TitleBar } from "@/interface/components/TitleBar"
 import { AppSidebar } from "@/interface/components/app-sidebar"
 import { LoadingIndicator } from "@/interface/components/chat/LoadingIndicator"
@@ -59,6 +60,7 @@ export default function App() {
         <ApiKeysProvider>
           <ToolsSettingsProvider>
             <ModelProvider>
+            <UserProfileProvider>
             <div id="app-container" className="relative flex flex-col h-screen w-screen overflow-hidden bg-background  border-black/20 border-t border-l border-r border-b pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
               {!isMobileDevice && <TitleBar />}
             <div className="flex-1 overflow-hidden relative">
@@ -68,6 +70,7 @@ export default function App() {
             </div>
             </div>
             <Toaster />
+            </UserProfileProvider>
           </ModelProvider>
           </ToolsSettingsProvider>
         </ApiKeysProvider>

@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/interfa
 import { memo, useState } from "react";
 import { toast } from "sonner"
 import { DeleteMessageButton } from "./DeleteMessageModal"
+import { useUserProfile } from "@/interface/context/UserProfileContext"
 
 interface MessageBubbleProps {
     message: Message
@@ -25,6 +26,7 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
     const isUser = message.role === "user"
     const [copied, setCopied] = useState(false)
     const [activeImage, setActiveImage] = useState<string | null>(null)
+    const { userName, userInitial } = useUserProfile()
 
     const handleCopy = () => {
         navigator.clipboard.writeText(message.content)
@@ -42,7 +44,7 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
             <div className={cn("flex-1 max-w-[100%] sm:max-w-[95%] md:max-w-[95%] lg:max-w-[78%] ", isUser && "flex flex-col items-end")}>
                 {isUser ? (
                     <div>
-                        <span className=" mb-2 rounded-xl px-3 py-5 shadow-lg border border-primary/50 shadow-primary/50  flex items-center justify-center bg-primary/20 font-medium text-primary">Vinicius</span>
+                        <span className=" mb-2 rounded-xl px-3 py-5 shadow-lg border border-primary/50 shadow-primary/50  flex items-center justify-center bg-primary/20 font-medium text-primary">{userName || "Usuário"}</span>
                     </div>
                 ) : (
                     <div className="w-8 h-8 mb-2 rounded-full flex items-center justify-center bg-primary/20 text-accent">

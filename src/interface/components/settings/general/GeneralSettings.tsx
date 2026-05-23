@@ -12,11 +12,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/interface/components/ui/select"
+import { Input } from "@/interface/components/ui/input"
+import { useUserProfile } from "@/interface/context/UserProfileContext"
 
 const SETTINGS_STORAGE_KEY = "elana-general-settings"
 
-// PAINEL DE CONFIGURAÇÕES GERAIS — IDIOMA, AUTO-SAVE, STREAMING E INDICADORES DE MEMÓRIA
+// PAINEL DE CONFIGURAÇÕES GERAIS — PERFIL, IDIOMA, AUTO-SAVE, STREAMING E INDICADORES DE MEMÓRIA
 export function GeneralSettings() {
+  const { userName, updateUserName } = useUserProfile()
   const [settings, setSettings] = useState({
     language: "pt-BR",
     autoSave: true,
@@ -42,7 +45,33 @@ export function GeneralSettings() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
+      {/* Perfil do Usuário */}
+      <Card className="glass border-glass-border">
+        <CardHeader>
+          <CardTitle>Perfil do Usuário</CardTitle>
+          <CardDescription>Personalize como a Elana se comunica com você</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="profile-name">Seu Nome</Label>
+            <Input
+              id="profile-name"
+              type="text"
+              value={userName}
+              onChange={(e) => updateUserName(e.target.value)}
+              placeholder="Digite seu nome..."
+              className="max-w-md bg-background/50 border-glass-border focus-visible:ring-primary/40"
+              maxLength={30}
+              autoComplete="off"
+            />
+            <p className="text-xs text-muted-foreground">
+              Este nome será exibido nos balões das suas mensagens e na barra lateral.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       <Card className="glass border-glass-border">
         <CardHeader>
           <CardTitle>Preferências Gerais</CardTitle>

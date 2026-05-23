@@ -9,7 +9,7 @@ import { AIProviderFactory } from '@/core/infrastructure/ai/AIProviderFactory';
 import { resolveModelConfig, resolveApiKey } from './ChatModelResolver';
 import { ensureChatExists, saveUserMessage } from './ChatPersistenceService';
 import { processMessageImages } from './ChatImageService';
-import { SYSTEM_PROMPT, formatModelMessages } from './ChatPromptBuilder';
+import { getSystemPrompt, formatModelMessages } from './ChatPromptBuilder';
 import {
     consultLifeHistoryTool,
     webSearchTool,
@@ -78,14 +78,14 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
 
     // CHECA SE TEM UMA IMAGEM ATIVA NO MOMENTO
     const finalSystemPrompt = hasActiveImage && supportsVision
-        ? `${SYSTEM_PROMPT}\n\n[ATENÇÃO: Você recebeu uma imagem nesta mensagem. Como os pixels desta imagem serão removidos
+        ? `${getSystemPrompt()}\n\n[ATENÇÃO: Você recebeu uma imagem nesta mensagem. Como os pixels desta imagem serão removidos
          do histórico nas próximas interações para economizar tokens, você DEVE gerar uma análise extremamente detalhada,
           minuciosa e completa dela no FINAL de sua resposta, encapsulada dentro da tag customizada HTML <visual-memory>...
           </visual-memory> 
         (exemplo: <visual-memory>[Análise minuciosa, transcrição de textos, dados de gráficos, cores e detalhes visuais 
         importantes]</visual-memory>). Tudo que estiver dentro dessa tag será ocultado do usuário no frontend por CSS, 
         mas ficará gravado no banco de dados e servirá como sua própria memória visual nas próximas interações deste chat.]`
-        : SYSTEM_PROMPT; 
+        : getSystemPrompt(); 
     // 7. Iniciar Stream
     const result = streamText({
         model,

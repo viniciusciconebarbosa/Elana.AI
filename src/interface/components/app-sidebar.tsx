@@ -40,6 +40,7 @@ import {
 } from "lucide-react"
 
 import { useSidebar } from "@/interface/context/SidebarContext"
+import { useUserProfile } from "@/interface/context/UserProfileContext"
 import { RenameChatModal } from "@/interface/components/chat/RenameChatModal"
 import { DeleteChatModal } from "@/interface/components/chat/DeleteChatModal"
 
@@ -95,6 +96,7 @@ export const AppSidebar = memo(function AppSidebar() {
     const { theme, setTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
     const { chats, removeChat } = useChatList()
+    const { userName, userInitial } = useUserProfile()
 
     // Modal rename state
     const [renameModalOpen, setRenameModalOpen] = useState(false)
@@ -451,18 +453,18 @@ export const AppSidebar = memo(function AppSidebar() {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center cursor-pointer">
-                                    <span className="text-sm font-medium text-primary">U</span>
+                                    <span className="text-sm font-medium text-primary">{userInitial}</span>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent side="right">Usuário</TooltipContent>
+                            <TooltipContent side="right">{userName || "Usuário"}</TooltipContent>
                         </Tooltip>
                     ) : (
                         <div className="flex items-center gap-3 px-2">
                             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                                <span className="text-sm font-medium text-primary">U</span>
+                                <span className="text-sm font-medium text-primary">{userInitial}</span>
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium truncate">Usuário</p>
+                                <p className="text-sm font-medium truncate">{userName || "Usuário"}</p>
                                 <p className="text-xs text-muted-foreground truncate">Plano Pro</p>
                             </div>
                         </div>
