@@ -22,11 +22,11 @@
 
 ## 🇧🇷 Sobre a Elana 
 
-Desenvolvi a Elana para rodar meus modelos de LLM localmente sem depender de serviços caros. É uma aplicaçao desktop e mobile (Tauri + React) que te permite usar suas próprias chaves de OpenAI, Gemini ou modelos locais, com controle total sobre seus dados.
+Desenvolvi a Elana para rodar meus modelos de LLM localmente sem depender de serviços caros. É uma aplicaçao desktop e mobile (Tauri + React) que te permite usar suas próprias chaves da OpenAI, Gemini ou modelos locais, com controle total sobre seus dados.
 
 ## Porque desenvolvi a elana ? 
 
-O Elana nasceu de uma necessidade pessoal: eu precisava de uma interface local para rodar meus modelos de LLM sem depender de serviços caros. Foi assim que comecei a desenvolvê-la. No fim, percebi que outras pessoas também poderiam se beneficiar com a ferramenta, então decidi torná-la pública.
+Elana nasceu de uma necessidade pessoal de criar uma interface local, robusta e acessível para rodar modelos de LLM sem a dependência (e o custo) de APIs proprietárias. Ao perceber que essa solução poderia ajudar outros desenvolvedores e entusiastas de IA que enfrentam o mesmo desafio, decidi transformar o projeto em uma ferramenta pública e gratuita.
 
 
 ## Recursos Principais
