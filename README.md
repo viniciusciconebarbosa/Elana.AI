@@ -31,14 +31,14 @@ O Elana nasceu de uma necessidade pessoal: eu precisava de uma interface local p
 
 ## Recursos Principais
 
-- **🔒 Suas chaves ficam com você:** Criptografadas localmente (AES-GCM 256-bit) - nunca saem da sua máquina
-- **⚡ Banco híbrido:** SQLite local + opcional Supabase pra sincronizar entre dispositivos  
-- **🧠 Memória com contexto (RAG):** Qdrant guarda conversas anteriores pra dar respostas mais precisas
-- **🔮 Extrai conhecimento de arquivos:** Envie PDFs, URLs ou texto pra criar uma base de conhecimento
+- **Suas chaves ficam com você:** Criptografadas localmente (AES-GCM 256-bit) - nunca saem da sua máquina
+- **Banco híbrido:** SQLite local + opcional Supabase pra sincronizar entre dispositivos  
+- **Memória com contexto (RAG):** Qdrant guarda conversas anteriores pra dar respostas mais precisas
+- **Extrai conhecimento de arquivos:** Envie PDFs, URLs ou texto pra criar uma base de conhecimento
 
-- **🌐 Busca na web integrada:** Usa Tavily pra pesquisar em tempo real quando precisa
-- **🎨 Interface responsiva:** TailwindCSS com temas claro/escuro, otimizada pra performance
-- **📱 Apps nativos:** Compilada em Linux, Android e Windows via Tauri v2
+- **Busca na web integrada:** Usa Tavily pra pesquisar em tempo real quando precisa
+- **Interface responsiva:** TailwindCSS com temas claro/escuro, otimizada pra performance
+- **Apps nativos:** Compilada em Linux, Android e Windows via Tauri v2
 
 ---
 
@@ -60,16 +60,16 @@ O Elana nasceu de uma necessidade pessoal: eu precisava de uma interface local p
 
 
 ### Funcionalidades prontas
-- 🔒 Criptografia local AES-GCM (chaves ficam na sua máquina)
-- 💬 Interface de chat com temas claro/escuro  
-- 🗄️ SQLite local + sincronização opcional com Supabase
-- 🌐 Integração com Tavily pra busca na web
-- 📱 Apps nativos pra Linux, Android e Windows
+-  Criptografia local AES-GCM (chaves ficam na sua máquina)
+-  Interface de chat com temas claro/escuro  
+-  SQLite local + sincronização opcional com Supabase
+-  Integração com Tavily pra busca na web
+-  Apps nativos pra Linux, Android e Windows
 
 
 ### Em desenvolvimento (v1.2.0)
-- 🧠 Banco de memória Qdrant (RAG)
-- 🔮 Upload de arquivos/URLs pra extrair conhecimento
+-  Banco de memória Qdrant (RAG)
+-  Upload de arquivos/URLs pra extrair conhecimento
 
 ---
 
