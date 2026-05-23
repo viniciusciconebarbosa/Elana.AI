@@ -18,16 +18,13 @@ interface ChatInputProps {
     onToggleWebSearch?: () => void
 }
 
-// Converte um blob: URL em data URL (base64) apenas no momento do envio
-async function blobUrlToDataUrl(url: string): Promise<string> {
-    if (!url.startsWith("blob:")) return url
-    const res = await fetch(url)
-    const blob = await res.blob()
-    return await new Promise<string>((resolve, reject) => {
+// Converte um objeto File ou Blob em data URL (base64) de forma assíncrona
+function fileToDataUrl(file: File | Blob): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
         const reader = new FileReader()
         reader.onloadend = () => resolve(reader.result as string)
         reader.onerror = reject
-        reader.readAsDataURL(blob)
+        reader.readAsDataURL(file)
     })
 }
 
@@ -36,50 +33,29 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [images, setImages] = useState<string[]>([])
-    const imagesRef = useRef<string[]>([])
-    imagesRef.current = images  // sempre aponta para o array atual
 
-    // Revoga blob URLs ao desmontar — usa ref para evitar closure stale
-    useEffect(() => {
-        return () => {
-            imagesRef.current.forEach((url) => {
-                if (url.startsWith("blob:")) URL.revokeObjectURL(url)
-            })
-        }
-    }, [])
-
-    // REVOGA TODAS AS BLOB URLS DA LISTA PARA LIBERAR MEMÓRIA
-    const revokeAll = (urls: string[]) => {
-        urls.forEach((u) => {
-            if (u.startsWith("blob:")) URL.revokeObjectURL(u)
-        })
-    }
-
-    // SUBMETE A MENSAGEM CONVERTENDO IMAGENS BLOB PARA BASE64 ANTES DO ENVIO
-    const submitWithImages = async (e: React.FormEvent) => {
+    // SUBMETE A MENSAGEM COM AS IMAGENS BASE64 JÁ CARREGADAS
+    const submitWithImages = (e: React.FormEvent) => {
         e.preventDefault()
-        // Converte blob URLs -> data URLs (base64) só agora
-        const dataUrls = await Promise.all(images.map(blobUrlToDataUrl))
-        onSubmit(e, dataUrls)
-        revokeAll(images)
+        onSubmit(e, images)
         setImages([])
     }
 
     // ATALHO DE TECLADO: ENTER ENVIA, SHIFT+ENTER QUEBRA LINHA
-    const handleKeyDown = async (e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault()
             if (isLoading) {
                 toast.warning("Aguarde a resposta", { description: "O modelo ainda está respondendo." })
                 return
             }
-            await submitWithImages(e as unknown as React.FormEvent)
+            submitWithImages(e as unknown as React.FormEvent)
         }
     }
 
     // HANDLER DE SUBMIT DO FORMULÁRIO
-    const handleFormSubmit = async (e: React.FormEvent) => {
-        await submitWithImages(e)
+    const handleFormSubmit = (e: React.FormEvent) => {
+        submitWithImages(e)
     }
 
     // PROCESSA ARQUIVOS SELECIONADOS PELO INPUT DE IMAGEM
@@ -89,8 +65,12 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
 
         Array.from(files).forEach((file) => {
             if (file.type.startsWith("image/")) {
-                const url = URL.createObjectURL(file)
-                setImages((prev) => [...prev, url])
+                fileToDataUrl(file).then((url) => {
+                    setImages((prev) => [...prev, url])
+                }).catch((err) => {
+                    console.error("Erro ao processar imagem selecionada:", err)
+                    toast.error("Erro ao carregar imagem")
+                })
             }
         })
 
@@ -115,8 +95,11 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                 // Checamos a extensão do nome do arquivo como fallback.
                 const isImage = file.type.startsWith("image/") || file.name.match(/\.(png|jpe?g|gif|webp)$/i);
                 if (isImage) {
-                    const url = URL.createObjectURL(file)
-                    setImages((prev) => [...prev, url])
+                    fileToDataUrl(file).then((url) => {
+                        setImages((prev) => [...prev, url])
+                    }).catch((err) => {
+                        console.error("Erro ao converter arquivo colado:", err)
+                    })
                     imagePasted = true
                 }
             })
@@ -132,8 +115,11 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                     if (item.type.startsWith("image/")) {
                         const file = item.getAsFile()
                         if (file) {
-                            const url = URL.createObjectURL(file)
-                            setImages((prev) => [...prev, url])
+                            fileToDataUrl(file).then((url) => {
+                                setImages((prev) => [...prev, url])
+                            }).catch((err) => {
+                                console.error("Erro ao ler item colado:", err)
+                            })
                             imagePasted = true
                             break
                         }
@@ -150,7 +136,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                     for (const type of clipboardItem.types) {
                         if (type.startsWith("image/")) {
                             const blob = await clipboardItem.getType(type)
-                            const url = URL.createObjectURL(blob)
+                            const url = await fileToDataUrl(blob)
                             setImages((prev) => [...prev, url])
                             imagePasted = true
                             break
@@ -167,13 +153,9 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
         }
     }
 
-    // REMOVE UMA IMAGEM DA LISTA E REVOGA A BLOB URL
+    // REMOVE UMA IMAGEM DA LISTA
     const removeImage = (index: number) => {
-        setImages((prev) => {
-            const url = prev[index]
-            if (url?.startsWith("blob:")) URL.revokeObjectURL(url)
-            return prev.filter((_, i) => i !== index)
-        })
+        setImages((prev) => prev.filter((_, i) => i !== index))
     }
 
     return (

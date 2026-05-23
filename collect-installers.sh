@@ -3,7 +3,7 @@
 
 set -e
 
-PROJECT_ROOT="/home/vinicius/Desktop/ekko"
+PROJECT_ROOT="/home/vinicius/Desktop/elana"
 TARGET_DIR="$PROJECT_ROOT/instaladores"
 
 cd "$PROJECT_ROOT"

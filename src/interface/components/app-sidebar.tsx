@@ -155,9 +155,6 @@ export const AppSidebar = memo(function AppSidebar() {
                 <div className="flex items-center justify-between p-2 ">
                     {!collapsed && (
                         <Link to="/chat?id=new" className="flex items-center gap-2" onClick={() => isMobileView && setIsOpenMobile(false)}>
-                            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10">
-                                {/*   <Sparkles className="w-5 h-5 text-primary" /> */}
-                            </div>
                             <span className="text-lg font-semibold gradient-text">Elana</span>
                         </Link>
                     )}

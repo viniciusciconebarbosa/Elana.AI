@@ -1,9 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { MouseEvent } from 'react'
 import { Minus, Square, X, Pin } from 'lucide-react'
 import { cn } from '@/interface/lib/utils'
+
+// Detecção síncrona: verifica __TAURI_INTERNALS__ antes do primeiro render
+const IS_TAURI = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window
 
 // Helper: retorna sempre uma instância fresca da janela atual
 async function getWin() {
@@ -22,41 +25,43 @@ const MOBILE_PLATFORMS = new Set(['android', 'ios'])
 
 // BARRA DE TÍTULO CUSTOMIZADA PARA TAURI (DESKTOP) — SUBSTITUI A BARRA NATIVA DO SISTEMA
 export function TitleBar() {
-    const [isTauri, setIsTauri] = useState(false)
-    // null = ainda não detectado, true = mobile, false = desktop
+    // isMobile: null = não detectado ainda, true = mobile, false = desktop
     const [isMobile, setIsMobile] = useState<boolean | null>(null)
     const [isAlwaysOnTop, setIsAlwaysOnTop] = useState(false)
+    const shown = useRef(false)
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window) {
-            setIsTauri(true)
+        if (!IS_TAURI) {
+            setIsMobile(false)
+            return
+        }
 
-            const detectPlatform = async () => {
-                // Tenta via __TAURI_INTERNALS__ primeiro
-                const platform = getTauriPlatform()
-                if (platform !== null) {
-                    setIsMobile(MOBILE_PLATFORMS.has(platform))
-                    return
-                }
-
-                // Fallback: aguarda um tick e tenta novamente (pode não estar populado ainda)
-                await new Promise(r => setTimeout(r, 100))
-                const platformRetry = getTauriPlatform()
-                if (platformRetry !== null) {
-                    setIsMobile(MOBILE_PLATFORMS.has(platformRetry))
-                    return
-                }
-
-                // Último fallback: usa largura de tela como heurística
-                const isNarrowScreen = window.screen.width <= 768
-                setIsMobile(isNarrowScreen)
+        const detectPlatform = async () => {
+            // Tenta via __TAURI_INTERNALS__ primeiro
+            const platform = getTauriPlatform()
+            if (platform !== null) {
+                setIsMobile(MOBILE_PLATFORMS.has(platform))
+                return
             }
 
-            detectPlatform()
+            // Fallback: aguarda um tick e tenta novamente
+            await new Promise(r => setTimeout(r, 100))
+            const platformRetry = getTauriPlatform()
+            if (platformRetry !== null) {
+                setIsMobile(MOBILE_PLATFORMS.has(platformRetry))
+                return
+            }
+
+            // Último fallback: usa largura de tela como heurística
+            setIsMobile(window.screen.width <= 768)
+        }
+
+        detectPlatform()
+
+        // Mostra a janela apenas uma vez
+        if (!shown.current) {
+            shown.current = true
             getWin().then(win => win.show())
-        } else if (typeof window !== 'undefined') {
-            // Fora do Tauri, não é mobile (não importa)
-            setIsMobile(false)
         }
     }, [])
 
@@ -94,7 +99,8 @@ export function TitleBar() {
         win.startDragging()
     }
 
-    if (!isTauri) return null
+    // Fora do Tauri: não renderiza nada
+    if (!IS_TAURI) return null
 
     return (
         <div className="h-8 flex items-center justify-between select-none z-[200] w-full shrink-0 bg-sidebar border-b border-border/20">

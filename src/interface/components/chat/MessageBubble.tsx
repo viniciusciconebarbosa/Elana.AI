@@ -9,6 +9,7 @@ import { TypingEffect } from "./TypingEffect"
 import type { Message } from "@/interface/components/chat/ChatService"
 
 import { MarkdownRenderer } from "./MarkdownRenderer"
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/interface/components/ui/dialog"
 import { memo, useState } from "react";
 import { toast } from "sonner"
 import { DeleteMessageButton } from "./DeleteMessageModal"
@@ -23,6 +24,7 @@ interface MessageBubbleProps {
 export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere, isFirstMessage }: MessageBubbleProps) {
     const isUser = message.role === "user"
     const [copied, setCopied] = useState(false)
+    const [activeImage, setActiveImage] = useState<string | null>(null)
 
     const handleCopy = () => {
         navigator.clipboard.writeText(message.content)
@@ -57,12 +59,11 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
                     {message.images && message.images.length > 0 && (
                         <div className="flex flex-wrap gap-2 mb-3">
                             {message.images.map((img, i) => (
-                                <a
+                                <button
                                     key={i}
-                                    href={img}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-44 h-30 rounded-lg overflow-hidden group relative cursor-zoom-in shadow-depth-sm"
+                                    type="button"
+                                    onClick={() => setActiveImage(img)}
+                                    className="block w-44 h-30 rounded-lg overflow-hidden group relative cursor-zoom-in shadow-depth-sm text-left border-0 p-0 bg-transparent"
                                 >
                                     <img
                                         src={img}
@@ -70,7 +71,7 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
                                         className="block w-44 h-30  object-cover transition-transform duration-300 group-hover:scale-105"
                                     />
                                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                                </a>
+                                </button>
                             ))}
                         </div>
                     )}
@@ -181,7 +182,6 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
                         </TooltipProvider>
                     </div>
                 )}
-
                 <span className="text-[12px] font-medium text-muted-foreground mt-1.5 opacity-80">
                     {message.timestamp.toLocaleString("pt-BR", {
                         day: "2-digit",
@@ -195,6 +195,21 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
                 </span>
 
             </div>
+
+            {/* Lightbox / Preview da Imagem */}
+            <Dialog open={!!activeImage} onOpenChange={(open) => !open && setActiveImage(null)}>
+                <DialogContent className="max-w-3xl p-1 bg-black/95 border-0 flex items-center justify-center overflow-hidden rounded-lg">
+                    <DialogTitle className="sr-only">Visualização de Imagem</DialogTitle>
+                    <DialogDescription className="sr-only">Visualização da imagem anexada em tamanho grande</DialogDescription>
+                    {activeImage && (
+                        <img
+                            src={activeImage}
+                            alt="Attachment Full Size"
+                            className="max-w-full max-h-[85vh] object-contain rounded-md"
+                        />
+                    )}
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

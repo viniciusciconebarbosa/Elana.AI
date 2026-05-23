@@ -1,6 +1,8 @@
 import type { IChatRepository } from '@/core/domain/interfaces/IChatRepository'
 import type { Chat, Message } from '@/core/infrastructure/repositories/ChatRepository'
 import Database from '@tauri-apps/plugin-sql'
+import { appDataDir } from '@tauri-apps/api/path'
+import { mkdir } from '@tauri-apps/plugin-fs'
 
 // REPOSITÓRIO SQLITE LOCAL COESIVO
 // Usa o tauri-plugin-sql nativo no Mobile/Desktop e sql-asm.js (IndexedDB) como Fallback na Web.
@@ -87,38 +89,54 @@ async function getFallbackDb() {
 
 class DatabaseConnection {
     private nativeDb: Database | null = null
+    private initPromise: Promise<Database> | null = null
     private isTauri = typeof window !== 'undefined' && !!(window as any).__TAURI_INTERNALS__
 
     // OBTÉM OU INICIALIZA A CONEXÃO NATIVA COM SQLITE ATRAVÉS DO TAURI
     private async getNativeDb(): Promise<Database> {
         if (this.nativeDb) return this.nativeDb
         
-        this.nativeDb = await Database.load('sqlite:elana.db')
+        if (!this.initPromise) {
+            this.initPromise = (async () => {
+                // Garante que o diretório pai existe antes de tentar carregar o banco
+                try {
+                    const appData = await appDataDir()
+                    await mkdir(appData, { recursive: true })
+                } catch (e) {
+                    console.warn('Diretório de dados já existe ou foi criado síncronamente:', e)
+                }
+
+                const native = await Database.load('sqlite:elana.db')
+                
+                // Garante a existência das tabelas estruturadas nativamente no SQLite
+                await native.execute(`
+                    CREATE TABLE IF NOT EXISTS chats (
+                        id TEXT PRIMARY KEY,
+                        user_id TEXT NOT NULL DEFAULT 'local-user',
+                        title TEXT NOT NULL DEFAULT 'Novo Chat',
+                        system_prompt TEXT,
+                        created_at TEXT NOT NULL,
+                        updated_at TEXT NOT NULL
+                    );
+                `)
+                await native.execute(`
+                    CREATE TABLE IF NOT EXISTS messages (
+                        id TEXT PRIMARY KEY,
+                        chat_id TEXT NOT NULL REFERENCES chats(id) ON DELETE CASCADE,
+                        parent_id TEXT,
+                        role TEXT NOT NULL CHECK(role IN ('system','user','assistant')),
+                        content TEXT NOT NULL DEFAULT '',
+                        metadata TEXT NOT NULL DEFAULT '{}',
+                        created_at TEXT NOT NULL
+                    );
+                `)
+                
+                this.nativeDb = native
+                return native
+            })()
+        }
         
-        // Garante a existência das tabelas estruturadas nativamente no SQLite
-        await this.nativeDb.execute(`
-            CREATE TABLE IF NOT EXISTS chats (
-                id TEXT PRIMARY KEY,
-                user_id TEXT NOT NULL DEFAULT 'local-user',
-                title TEXT NOT NULL DEFAULT 'Novo Chat',
-                system_prompt TEXT,
-                created_at TEXT NOT NULL,
-                updated_at TEXT NOT NULL
-            );
-        `)
-        await this.nativeDb.execute(`
-            CREATE TABLE IF NOT EXISTS messages (
-                id TEXT PRIMARY KEY,
-                chat_id TEXT NOT NULL REFERENCES chats(id) ON DELETE CASCADE,
-                parent_id TEXT,
-                role TEXT NOT NULL CHECK(role IN ('system','user','assistant')),
-                content TEXT NOT NULL DEFAULT '',
-                metadata TEXT NOT NULL DEFAULT '{}',
-                created_at TEXT NOT NULL
-            );
-        `)
-        
-        return this.nativeDb
+        return this.initPromise
     }
 
     // EXECUTA QUERIES DE ESCRITA (INSERT, UPDATE, DELETE) COM TRADUÇÃO AUTOMÁTICA DE DIALECTO
