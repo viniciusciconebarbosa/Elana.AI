@@ -1,11 +1,12 @@
-# ELANA AI — Privacy-First Desktop & Mobile Assistant
+# ELANA AI - Assistente local para seus modelos de LLM
+
 
 <p align="center">
   <img src="./banner.png" alt="Elana Logo" width="400" />
 </p>
 
 <p align="center">
-  <strong>A premium, ultra-lightweight, and privacy-first AI Assistant powered by Tauri, React, and Supabase.</strong>
+  <strong>Aplicação desktop e mobile (Tauri + React) para usar suas chaves de OpenAI, Gemini ou modelos locais.</strong>
 </p>
 
 <p align="center">
@@ -19,67 +20,73 @@
 
 ---
 
-## 🇧🇷 Sobre a Elana (Portuguese Summary)
+## 🇧🇷 Sobre a Elana 
 
-O **Elana AI** (ou simplesmente **Elana**) é um assistente de Inteligência Artificial multiplataforma (Desktop & Android) projetado com foco absoluto em **privacidade do usuário, segurança de dados e alta performance**. Ela permite que você conecte seus próprios modelos de linguagem (OpenAI, Gemini, LLMs locais) e gerencie seu próprio banco de dados relacional e vetorial de forma totalmente isolada e segura.
+Desenvolvi a Elana para rodar meus modelos de LLM localmente sem depender de serviços caros. É uma aplicaçao desktop e mobile (Tauri + React) que te permite usar suas próprias chaves de OpenAI, Gemini ou modelos locais, com controle total sobre seus dados.
 
-## 🇬🇧 Key Features (Recursos Principais)
+## Porque desenvolvi a elana ? 
 
-*   **🔒 Strict Client-Side Encryption:** All personal API keys and database credentials are encrypted directly in the client using industry-standard **AES-GCM (256-bit)** derived via **PBKDF2** using custom environment salt. Your secrets never leave your local machine or your private database.
-*   **⚡ Hybrid Database Persistence:** Supports seamless message branching and relational persistence using local high-performance engines or securely synchronized remote **Supabase** nodes.
-*   **🧠 Qdrant Vector Memories (RAG):** Dynamic, contextual long-term memory powered by **Qdrant DB** and **Mistral Embeddings**, allowing your assistant to remember previous conversations and facts organically.
-*   **🔮 The Brain Knowledge Base:** A fast, native ingestion pipeline allowing you to upload PDFs, URLs, and plain text to extract knowledge facts and inject them directly into your context trees.
-*   **🌐 Real-Time Search Integration:** Full Tavily API integration enabling the AI to browse the web, with securely managed credential settings.
-*   **🎨 Premium UI/UX:** Stunning, high-performance responsive interface designed with **TailwindCSS**, optimized custom layout scrolling, GPU-accelerated layers, and clean, beautiful typography.
-*   **📱 Native Cross-Platform:** Built on top of **Tauri v2** and **Rust**, initially available and optimized for **Linux, Android, and Windows** 
+O Elana nasceu de uma necessidade pessoal: eu precisava de uma interface local para rodar meus modelos de LLM sem depender de serviços caros. Foi assim que comecei a desenvolvê-la. No fim, percebi que outras pessoas também poderiam se beneficiar com a ferramenta, então decidi torná-la pública.
+
+
+## Recursos Principais
+
+- **🔒 Suas chaves ficam com você:** Criptografadas localmente (AES-GCM 256-bit) - nunca saem da sua máquina
+- **⚡ Banco híbrido:** SQLite local + opcional Supabase pra sincronizar entre dispositivos  
+- **🧠 Memória com contexto (RAG):** Qdrant guarda conversas anteriores pra dar respostas mais precisas
+- **🔮 Extrai conhecimento de arquivos:** Envie PDFs, URLs ou texto pra criar uma base de conhecimento
+
+- **🌐 Busca na web integrada:** Usa Tavily pra pesquisar em tempo real quando precisa
+- **🎨 Interface responsiva:** TailwindCSS com temas claro/escuro, otimizada pra performance
+- **📱 Apps nativos:** Compilada em Linux, Android e Windows via Tauri v2
 
 ---
 
-## 🛠️ Technology Stack (Stack Tecnológica)
+## 🛠️ Ferramentas 
 
-| Technology | Purpose |
+| Tecnologia | Finalidade |
 |---|---|
-| **Tauri v2 (Rust)** | Native system shell, file operations, and platform compilation (Desktop & Android) |
-| **React 18 & Vite** | High-performance reactive UI rendering |
-| **TypeScript** | Type-safe development with strict compiler checks |
-| **TailwindCSS** | Modern, responsive utilities styling |
-| **Supabase / SQLite** | Hybrid relational storage and sync |
-| **Qdrant** | High-speed vector search for RAG memories |
-| **Web Crypto API** | Secure client-side cryptographic hashing & AES-GCM encryption |
+| **Tauri v2 (Rust)** | Shell de sistema nativo, operações de arquivo e compilação para plataformas (Desktop e Android) |
+| **React 18 & Vite** | Renderização de UI reativa de alto desempenho |
+| **TypeScript** | Desenvolvimento com segurança de tipos e verificações rigorosas do compilador |
+| **TailwindCSS** | Estilização moderna com utilitários responsivos |
+| **Supabase / SQLite** | Armazenamento relacional híbrido e sincronização |
+| **Qdrant** | Busca vetorial de alta velocidade para memórias RAG |
+| **Web Crypto API** | Hash criptográfico seguro no cliente e criptografia AES-GCM |
 
 ---
 
-## 🗺️ Project Roadmap & Current Status (Status do Projeto)
+## 🗺️ Status do Projeto
 
-Para manter total transparência com os avaliadores, recrutadores e com a comunidade open-source, aqui está o status real de desenvolvimento de cada funcionalidade da Elana AI:
 
-### Fully Functional (100% Concluído & Ativo)
-*   **🔒 Criptografia AES-GCM Local:** Camada de segurança client-side que deriva chaves via PBKDF2 localmente para blindar suas credenciais.
-*   **💬 Interface de Chat Premium:** Performance nativa, layout responsivo em dois temas (Light/Dark) e histórico com árvores de mensagens.
-*   **🗄️ SQLite Local + Sincronização Supabase:** Banco relacional nativo offline que sincroniza com seu nó privado na nuvem de forma segura.
-*   **🌐 Pesquisa na Web Integrada (Tavily):** Busca instantânea e pesquisa detalhada diretamente no chat.
-*   **📱 Builds Nativas Otimizadas:** Instaladores compactos e splits de CPU disponíveis inicialmente para **Linux, Android (APK leve) e Windows** (versão macOS planejada para releases futuras).
+### Funcionalidades prontas
+- 🔒 Criptografia local AES-GCM (chaves ficam na sua máquina)
+- 💬 Interface de chat com temas claro/escuro  
+- 🗄️ SQLite local + sincronização opcional com Supabase
+- 🌐 Integração com Tavily pra busca na web
+- 📱 Apps nativos pra Linux, Android e Windows
 
-###  Under Active Development (Em Desenvolvimento — Próxima Build v1.2.0)
-*   **🧠 Banco de Memória Qdrant (RAG):** A arquitetura e o repositório de banco de vetores no backend estão 100% codificados. Estamos integrando a tela de visualização no frontend e os gatilhos automáticos de gravação no chat.
-*   **🔮 Mapeamento de Conhecimento (The Brain):** A lógica de fragmentação (*chunking*) de textos está pronta no backend. A interface de upload de arquivos e processamento de URLs está em fase de conexão com o banco.
+
+### Em desenvolvimento (v1.2.0)
+- 🧠 Banco de memória Qdrant (RAG)
+- 🔮 Upload de arquivos/URLs pra extrair conhecimento
 
 ---
 
-## 🚀 Getting Started (Como Rodar o Projeto)
+## 🚀 Como Rodar o Projeto
 
-### Prerequisites (Pré-requisitos)
-*   **Node.js** (v18 or higher)
-*   **Rust & Cargo** (for Tauri native compilations)
-*   **Android Studio** (optional, only for Android builds)
+### Pré-requisitos 
+*   **Node.js** (v18 ou superior)
+*   **Rust & Cargo** (para compilações nativas com Tauri)
+*   **Android Studio** (opcional, só para builds Android)
 
-### 1. Clone the Repository
+### 1. Clone 
 ```bash
 git clone https://github.com/viniciusciconebarbosa/elana.git
 cd elana
 ```
 
-### 2. Configure Environment Variables
+### 2. Configure as variaveis de ambiente
 Create a `.env` file in the root directory and populate it with your local development keys (refer to `.env.example` if available):
 ```env
 VITE_ENCRYPTION_KEY=your_secure_32_character_key_here
@@ -89,58 +96,35 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your_supabase_anon_key
 VITE_TAVILY_API_KEY=your_local_tavily_key
 ```
 
-### 3. Install Dependencies
+### 3. Instalar dependencias.
 ```bash
 npm install
 ```
 
-### 4. Run Development Server
-*   **Run Web View (Browser Mode):**
+### 4. Iniciar servidor de desenvolvimento
+*   **Modo Web (Navegador):**
     ```bash
     npm run dev
     ```
-*   **Run Tauri Native Desktop App:**
+*   **App Desktop Nativo (Tauri):**
     ```bash
     npm run tauri dev
     ```
-*   **Run Tauri Native Android App:**
+*   **App Android Nativo:**
     ```bash
     npm run tauri android dev
     ```
 
-### 5. Run Unit Tests (Rodar Testes Unitários)
-The project includes a robust test suite covering both native Rust system boundaries and frontend utility logic.
+## ✅ Testes
 
-*   **Backend Native Tests (Rust):**
-    Validate system boundaries, UUID formats, and title formatting rules:
-    ```bash
-    cargo test
-    ```
 
-*   **Frontend Utility Tests (Vite/Jest/Vitest):**
-    Validate Tailwind CSS merging, message timestamps, and preview text truncation:
-    ```bash
-    npm test
-    ```
+- **Backend (Rust):** `cargo test`
+- **Frontend:** `npm test`
+ 
+## 📄 Licença
 
----
 
-## 🔒 Security Architecture (Arquitetura de Segurança)
-
-The project stands out by adhering to advanced secure software engineering practices:
-1.  **CWE-321 Compliant:** No hardcoded cryptographic keys exist in the codebase. The application explicitly fails with a descriptive error at startup if the `VITE_ENCRYPTION_KEY` is missing in the environment.
-2.  **Environment Isolation:** Sensitive directories such as Android keystores (`/keys/`), VS Code settings, packages, and local environment files (`.env`) are strictly locked out of the Git tree via a secure `.gitignore` file.
-3.  **Encrypted Local Contexts:** Browser memory buffers and settings contexts encrypt local payloads before storage, ensuring local storage attacks cannot harvest raw API keys.
-
----
-
-## 📄 License (Licença)
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)** License.
-
-*   **Attribution (BY):** You must give appropriate credit to the original author (**Vinícius Cicone Barbosa**).
-*   **NonCommercial (NC):** You **MAY NOT** use this software or its codebase for any commercial purposes.
-*   **ShareAlike (SA):** Any derivative works must be distributed under the same license.
+CC BY-NC-SA 4.0 - Você pode usar e modificar, mas não comercialmente.
 
 ---
 <p align="center">
@@ -148,6 +132,5 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial-
 </p>
 
 <p align="center">
-  Made with 💻 by <a href="https://github.com/viniciusciconebarbosa">Vinícius Cicone Barbosa</a>
-  
+  Desenvolvido por <a href="https://github.com/viniciusciconebarbosa">Vinícius Cicone Barbosa</a>
 </p>
