@@ -81,6 +81,8 @@ async function getFallbackDb() {
             metadata TEXT NOT NULL DEFAULT '{}',
             created_at TEXT NOT NULL
         );
+        CREATE INDEX IF NOT EXISTS idx_messages_chat_id_created_at ON messages(chat_id, created_at);
+        CREATE INDEX IF NOT EXISTS idx_messages_parent_id ON messages(parent_id);
     `)
     return _fallbackDb
 }
@@ -95,7 +97,7 @@ class DatabaseConnection {
     // OBTÉM OU INICIALIZA A CONEXÃO NATIVA COM SQLITE ATRAVÉS DO TAURI
     private async getNativeDb(): Promise<Database> {
         if (this.nativeDb) return this.nativeDb
-        
+
         if (!this.initPromise) {
             this.initPromise = (async () => {
                 // Garante que o diretório pai existe antes de tentar carregar o banco
@@ -107,7 +109,7 @@ class DatabaseConnection {
                 }
 
                 const native = await Database.load('sqlite:elana.db')
-                
+
                 // Garante a existência das tabelas estruturadas nativamente no SQLite
                 await native.execute(`
                     CREATE TABLE IF NOT EXISTS chats (
@@ -130,12 +132,18 @@ class DatabaseConnection {
                         created_at TEXT NOT NULL
                     );
                 `)
-                
+                await native.execute(`
+                    CREATE INDEX IF NOT EXISTS idx_messages_chat_id_created_at ON messages(chat_id, created_at);
+                `)
+                await native.execute(`
+                    CREATE INDEX IF NOT EXISTS idx_messages_parent_id ON messages(parent_id);
+                `)
+
                 this.nativeDb = native
                 return native
             })()
         }
-        
+
         return this.initPromise
     }
 
@@ -164,7 +172,7 @@ class DatabaseConnection {
             const convertedSql = sql.replace(/\$\d+/g, '?')
             const res = db.exec(convertedSql, bindValues)
             if (!res.length) return [] as any as T
-            
+
             const columns = res[0].columns
             const values = res[0].values
             return values.map((row: any[]) => {
@@ -212,7 +220,7 @@ function parseMessageRow(row: any): Message {
 // ─── IMPLEMENTAÇÃO DO REPOSITÓRIO ─────────────────────────────────────────────
 
 export class SQLiteChatRepository implements IChatRepository {
-    
+
     // CRIA UM NOVO REGISTRO DE CHAT NO BANCO DE DADOS LOCAL
     async createChat(chat: Omit<Chat, 'id' | 'created_at' | 'updated_at'> & { id?: string }): Promise<Chat> {
         const id = chat.id || uuid()
@@ -222,13 +230,13 @@ export class SQLiteChatRepository implements IChatRepository {
              VALUES ($1, $2, $3, $4, $5, $6)`,
             [id, chat.user_id || DEFAULT_USER_ID, chat.title, chat.system_prompt ?? null, ts, ts]
         )
-        return { 
-            id, 
-            user_id: chat.user_id || DEFAULT_USER_ID, 
-            title: chat.title, 
-            system_prompt: chat.system_prompt ?? null, 
-            created_at: ts, 
-            updated_at: ts 
+        return {
+            id,
+            user_id: chat.user_id || DEFAULT_USER_ID,
+            title: chat.title,
+            system_prompt: chat.system_prompt ?? null,
+            created_at: ts,
+            updated_at: ts
         }
     }
 
@@ -269,14 +277,14 @@ export class SQLiteChatRepository implements IChatRepository {
              VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [id, msg.chat_id, msg.parent_id ?? null, msg.role, msg.content, JSON.stringify(msg.metadata ?? {}), ts]
         )
-        return { 
-            id, 
-            chat_id: msg.chat_id, 
-            parent_id: msg.parent_id ?? null, 
-            role: msg.role, 
-            content: msg.content, 
-            metadata: msg.metadata ?? {}, 
-            created_at: ts 
+        return {
+            id,
+            chat_id: msg.chat_id,
+            parent_id: msg.parent_id ?? null,
+            role: msg.role,
+            content: msg.content,
+            metadata: msg.metadata ?? {},
+            created_at: ts
         }
     }
 

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from "react"
+import { toast } from "sonner"
 
 const STORAGE_KEY = "elana_user_name"
 
@@ -25,9 +26,11 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
     if (trimmed) {
       setUserName(trimmed)
       localStorage.setItem(STORAGE_KEY, trimmed)
+      toast.success("Nome atualizado com sucesso!")
     } else {
       setUserName("Usuário")
       localStorage.removeItem(STORAGE_KEY)
+      toast.error("Nome inválido!")
     }
   }, [])
 

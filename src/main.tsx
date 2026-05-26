@@ -6,8 +6,8 @@ import "./globals.css"
 
 import { Buffer } from "buffer"
 if (typeof window !== "undefined") {
-  ;(window as any).global = window
-  ;(window as any).Buffer = Buffer
+    ; (window as any).global = window
+        ; (window as any).Buffer = Buffer
 }
 
 // Import local fonts
@@ -26,9 +26,9 @@ import "@fontsource/jetbrains-mono/700.css"
 import "@fontsource/jetbrains-mono/800.css"
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>
 )

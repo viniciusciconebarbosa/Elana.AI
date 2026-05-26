@@ -57,7 +57,7 @@ const ModelContext = createContext<ModelContextType | undefined>(undefined)
 
 // PROVEDOR DE CONTEXTO — GERENCIA A CONFIGURAÇÃO DO MODELO E A LISTA DE ROTAS/PROVEDORES
 export function ModelProvider({ children }: { children: ReactNode }) {
-  const { apiKeys, getEncryptedKeys } = useApiKeys()
+  const { apiKeys, isLoading: isKeysLoading, getEncryptedKeys } = useApiKeys()
 
   // Config iniciada como null no servidor e no cliente para evitar hydration mismatch
   const [config, setConfig] = useState<ModelConfig | null>(null)
@@ -173,10 +173,11 @@ export function ModelProvider({ children }: { children: ReactNode }) {
     setIsRoutesLoading(false)
   }, [getEncryptedKeys])
 
-  // Recarregar rotas quando as chaves mudarem
+  // Recarregar rotas quando as chaves mudarem (aguarda o carregamento inicial para evitar sobrescrever o cache)
   useEffect(() => {
+    if (isKeysLoading) return
     loadAllRoutes()
-  }, [apiKeys])
+  }, [apiKeys, isKeysLoading, loadAllRoutes])
 
   // FORÇA O RECARREGAMENTO DAS ROTAS IGNORANDO O CACHE
   const refreshRoutes = () => loadAllRoutes(true)

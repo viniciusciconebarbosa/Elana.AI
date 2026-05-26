@@ -1,4 +1,5 @@
 "use client"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/interface/components/ui/card"
 import { Bot, Loader2 } from "lucide-react"
 
@@ -54,8 +55,44 @@ function ModelSettingsContent() {
 
 // PAINEL PRINCIPAL DE MODELO — ENVOLVE O CONTEÚDO NO PROVIDER DE CONTEXTO LOCAL
 export function ModelSettings({ onConfigChange }: ModelSelectorProps) {
+    const [isReady, setIsReady] = useState(false)
+
+    useEffect(() => {
+        const t = setTimeout(() => setIsReady(true), 120)
+        return () => clearTimeout(t)
+    }, [])
+
+    if (!isReady) {
+        return (
+            <div 
+                className="space-y-6 animate-in fade-in duration-150"
+                style={{ 
+                    willChange: "transform, opacity",
+                    transform: "translate3d(0, 0, 0)"
+                }}
+            >
+                <Card className="glass border-glass-border">
+                    <CardHeader>
+                        <div className="h-6 w-32 bg-muted-foreground/10 rounded animate-pulse" />
+                        <div className="h-4 w-56 bg-muted-foreground/10 rounded animate-pulse mt-2" />
+                    </CardHeader>
+                    <CardContent className="space-y-6 p-6">
+                        <div className="h-10 bg-muted-foreground/5 rounded animate-pulse" />
+                        <div className="h-10 bg-muted-foreground/5 rounded animate-pulse" />
+                    </CardContent>
+                </Card>
+            </div>
+        )
+    }
+
     return (
-        <div className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+        <div 
+            className="space-y-6 animate-in fade-in duration-200"
+            style={{ 
+                willChange: "transform, opacity",
+                transform: "translate3d(0, 0, 0)"
+            }}
+        >
             <ModelSettingsProvider onConfigChange={onConfigChange}>
                 <ModelSettingsContent />
             </ModelSettingsProvider>

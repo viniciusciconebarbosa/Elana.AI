@@ -43,12 +43,18 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
         <div className={cn("flex items-center justify-center gap-0.1 group", isUser && "flex-row-reverse")}>
             <div className={cn("flex-1 max-w-[100%] sm:max-w-[95%] md:max-w-[95%] lg:max-w-[78%] ", isUser && "flex flex-col items-end")}>
                 {isUser ? (
-                    <div>
-                        <span className=" mb-2 rounded-xl px-3 py-5 shadow-lg border border-primary/50 shadow-primary/50  flex items-center justify-center bg-primary/20 font-medium text-primary">{userName || "Usuário"}</span>
+                    <div className="flex items-center gap-2 mb-1.5 mr-1 select-none animate-in fade-in duration-300">
+                        <div className="h-8 px-3 mb-2 rounded-md bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary flex items-center gap-1.5 uppercase tracking-wider">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                            {userName || "Usuário"}
+                        </div>
                     </div>
                 ) : (
-                    <div className="w-8 h-8 mb-2 rounded-full flex items-center justify-center bg-primary/20 text-accent">
-                        <Coffee className="w-4 h-4" />
+                    <div className="flex items-center gap-2 mb-1.5 ml-1 select-none animate-in fade-in duration-300">
+                        <div className="h-8 px-3 mb-2 rounded-md bg-accent-foreground/10 border border-accent-foreground/20 text-[10px] font-bold text-accent-foreground flex items-center gap-1.5 uppercase tracking-wider">
+                            <Coffee className="w-3.5 h-3.5 text-accent-foreground" />
+                            Elana
+                        </div>
                     </div>
                 )}
                 <div

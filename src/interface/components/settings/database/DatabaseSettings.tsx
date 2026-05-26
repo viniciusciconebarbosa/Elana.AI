@@ -1,6 +1,4 @@
-"use client"
-
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/interface/components/ui/button"
 import { Input } from "@/interface/components/ui/input"
 import { Switch } from "@/interface/components/ui/switch"
@@ -43,7 +41,7 @@ import {
 import { databaseMigrationService } from "@/core/application/services/DatabaseMigrationService"
 import { checkTablesExist, setupSupabaseTables, testSupabaseConnection } from "@/core/application/services/SupabaseSetupService"
 
-// CAMPO COM LABEL, DESCRIÇÃO E TOGGLE DE VISIBILIDADE OPCIONAL
+// CAMPO COM LABEL, DESCRIÇÃO E TOGGLE DE VISIBILIDADE OPCIONAL (OTIMIZADO COM ESTADO LOCAL)
 function SettingField({
     label,
     description,
@@ -62,6 +60,12 @@ function SettingField({
     monospace?: boolean
 }) {
     const [visible, setVisible] = useState(false)
+    const [localValue, setLocalValue] = useState(value)
+
+    // Sincroniza o valor local se o valor externo mudar (ex: reset ou carregamento tardio)
+    useEffect(() => {
+        setLocalValue(value)
+    }, [value])
 
     return (
         <div className="space-y-1.5">
@@ -71,8 +75,18 @@ function SettingField({
             <div className="relative">
                 <Input
                     type={secret && !visible ? "password" : "text"}
-                    value={value}
-                    onChange={(e) => onChange(e.target.value)}
+                    value={localValue}
+                    onChange={(e) => setLocalValue(e.target.value)}
+                    onBlur={() => {
+                        if (localValue !== value) {
+                            onChange(localValue)
+                        }
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && localValue !== value) {
+                            onChange(localValue)
+                        }
+                    }}
                     placeholder={placeholder}
                     className={monospace ? "font-mono text-sm pr-10" : "text-sm pr-10"}
                 />

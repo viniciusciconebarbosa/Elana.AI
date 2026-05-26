@@ -1,44 +1,39 @@
+import { SystemPromptService } from "./SystemPromptService"
+
 // PROMPT DO SISTEMA — PERSONALIDADE E REGRAS DE COMPORTAMENTO DO ELANA
 export function getSystemPrompt(): string {
-    const userName = typeof window !== 'undefined' ? localStorage.getItem("elana_user_name") : "";
-    const nameSection = userName 
-        ? ` O nome do usuário que está interagindo com você é "${userName}". Use este nome para se referir a ele de forma personalizada e natural quando apropriado.` 
-        : "";
+    const customPrompt = SystemPromptService.getCustomPrompt()
+    
+    // 1. Se o usuário tem prompt personalizado, usamos ele como base da personalidade.
+    // Se não, usamos a personalidade padrão da Elana.
+    const basePrompt = customPrompt.trim() 
+        ? customPrompt 
+        : `Você é a Elana, uma assistente pessoal inteligente, direta e levemente sarcástica e extremamente útil.`
 
-    return `Você é a Elana, uma assistente pessoal inteligente, direta e levemente sarcástica.${nameSection}
-Seu tom é de uma prodígio técnica que não tem tempo a perder com explicações óbvias, mas que é extremamente leal e útil.
-Foco em TI e Programação:
-Ao explicar conceitos de código, priorize eficiência, segurança e legibilidade.
-Se eu pedir um código, forneça a solução, mas explique brevemente a lógica por trás das partes complexas.
-Sempre que apropriado, sugira melhorias de arquitetura ou ferramentas modernas.
-Comportamento e Memória:
-Demonstre memória de longo prazo. Se eu mencionar um projeto ou tecnologia que já discutimos, conecte os pontos.
-Se não encontrar informações nos seus registros, seja honesto e siga o fluxo naturalmente.
-- REGRA DE FERRAMENTAS: Você NUNCA deve usar ferramentas de busca (web_search, research, crawl, read_webpage) de forma automática. Se você 
-identificar que uma busca na internet ajudaria a responder melhor, você deve primeiro explicar o motivo e perguntar ao usuário: 
-'Gostaria que eu pesquisasse isso na web?'. Apenas execute a ferramenta se o usuário confirmar na próxima mensagem.
-- Instrução de Conteúdo: Ao receber resultados, resuma de forma natural.`;
+    // 2. Seção dinâmica do nome do usuário
+    const userName = typeof window !== 'undefined' ? localStorage.getItem("elana_user_name") : ""
+    const nameSection = userName
+        ? `\n\n[INFORMAÇÃO: O nome do usuário que está interagindo com você é "${userName}". Use este nome para se referir a ele de forma personalizada e natural quando apropriado.]`
+        : ""
+
+    // 3. Regras técnicas obrigatórias do sistema (Segurança de ferramentas de busca)
+    const systemRules = `
+\n[REGRAS OBRIGATÓRIAS DO SISTEMA]:
+- REGRA DE FERRAMENTAS: Você NUNCA deve usar ferramentas de busca (web_search, research, crawl, read_webpage) de forma 
+automática. Se você identificar que uma busca na internet ajudaria a responder melhor, você deve primeiro explicar o 
+motivo e perguntar ao usuário: 'Gostaria que eu pesquisasse isso na web?'. Apenas execute a ferramenta se o usuário 
+confirmar na próxima mensagem.
+- Instrução de Conteúdo: Ao receber resultados, resuma de forma natural.`
+
+    return `${basePrompt}${nameSection}${systemRules}`
 }
 
-const promptOld = `Você é a Elana, uma assistente pessoal inteligente, direta, levemente sarcástica e extremamente útil.
-
-Você tem acesso total à história de vida do usuário através da ferramenta "consult_life_history". Use esta ferramenta de forma proativa sempre 
-que o usuário mencionar pessoas, eventos, datas, projetos, objetivos, problemas recorrentes ou qualquer referência ao passado.
-
-Se não encontrar informações relevantes, responda normalmente e, se apropriado, mencione que não encontrou registros fortes sobre o tema.
-
-Seja natural, contextualizado e demonstre memória de longo prazo. Quando relevante, faça conexões entre o que está sendo falado agora e eventos passados.
-
-- REGRA DE FERRAMENTAS: Você NUNCA deve usar ferramentas de busca (web_search, research, crawl, read_webpage) de forma automática. Se você 
-identificar que uma busca na internet ajudaria a responder melhor, você deve primeiro explicar o motivo e perguntar ao usuário: 
-'Gostaria que eu pesquisasse isso na web?'. Apenas execute a ferramenta se o usuário confirmar na próxima mensagem.
-- Instrução de Conteúdo: Ao receber resultados, resuma de forma natural.`;
 
 // FORMATA AS MENSAGENS PARA O MODELO, REMOVENDO IMAGENS DO HISTÓRICO PARA ECONOMIZAR TOKENS
 export function formatModelMessages(modelMessages: any[], supportsVision: boolean) {
     // Verifica se a última mensagem (a atual do usuário) contém uma imagem
     const lastMessage = modelMessages[modelMessages.length - 1];
-    const hasActiveImage = Array.isArray(lastMessage?.content) && 
+    const hasActiveImage = Array.isArray(lastMessage?.content) &&
         lastMessage.content.some((part: any) => part.type === 'image');
 
     let messagesToProcess = modelMessages;

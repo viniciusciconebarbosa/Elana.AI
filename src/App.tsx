@@ -20,6 +20,17 @@ const BrainPage = lazy(() => import("@/pages/BrainPage"))
 
 import { SidebarProvider } from "@/interface/context/SidebarContext"
 
+// Lazy loaded Settings Panels
+const GeneralSettings      = lazy(() => import("@/interface/components/settings/general/GeneralSettings").then(m => ({ default: m.GeneralSettings })))
+const ModelSettings        = lazy(() => import("@/interface/components/settings/models/ModelSettings").then(m => ({ default: m.ModelSettings })))
+const DatabaseSettings     = lazy(() => import("@/interface/components/settings/database/DatabaseSettings").then(m => ({ default: m.DatabaseSettings })))
+const ApiKeysSettings      = lazy(() => import("@/interface/components/settings/api-keys/ApiKeysSettings").then(m => ({ default: m.ApiKeysSettings })))
+const ToolsSettings        = lazy(() => import("@/interface/components/settings/tools/ToolsSettings").then(m => ({ default: m.ToolsSettings })))
+const AppearanceSettings   = lazy(() => import("@/interface/components/settings/appearance/AppearanceSettings").then(m => ({ default: m.AppearanceSettings })))
+const NotificationsSettings = lazy(() => import("@/interface/components/settings/notifications/NotificationsSettings").then(m => ({ default: m.NotificationsSettings })))
+const PrivacySettings      = lazy(() => import("@/interface/components/settings/privacy/PrivacySettings").then(m => ({ default: m.PrivacySettings })))
+const DataSettings         = lazy(() => import("@/interface/components/settings/data/DataSettings").then(m => ({ default: m.DataSettings })))
+
 function MainLayout() {
   return (
     <ChatListProvider>
@@ -32,7 +43,18 @@ function MainLayout() {
             <div className="flex-1 flex flex-col min-h-0 h-full">
               <Routes>
                 <Route path="/chat" element={<ChatPage />} />
-                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/settings" element={<SettingsPage />}>
+                  <Route index element={<Navigate to="general" replace />} />
+                  <Route path="general" element={<GeneralSettings />} />
+                  <Route path="models" element={<ModelSettings />} />
+                  <Route path="chat-database" element={<DatabaseSettings />} />
+                  <Route path="api-keys" element={<ApiKeysSettings />} />
+                  <Route path="tools" element={<ToolsSettings />} />
+                  <Route path="appearance" element={<AppearanceSettings />} />
+                  <Route path="notifications" element={<NotificationsSettings />} />
+                  <Route path="privacy" element={<PrivacySettings />} />
+                  <Route path="data" element={<DataSettings />} />
+                </Route>
                 <Route path="/memories" element={<MemoriesPage />} />
                 <Route path="/brain" element={<BrainPage />} />
                 <Route path="*" element={<Navigate to="/chat?id=new" replace />} />

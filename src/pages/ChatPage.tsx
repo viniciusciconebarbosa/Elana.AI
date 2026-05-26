@@ -23,14 +23,15 @@ interface VirtuosoContext {
 /* ─── Componentes estáticos do Virtuoso — definidos FORA do render para que
        suas referências sejam estáveis e o React nunca desmonte/remonte o DOM. ─ */
 
-// Contêiner de scroll — recebe o forwardRef do Virtuoso
+// Contêiner de scroll — recebe o forwardRef do Virtuoso (oculta a barra de rolagem nativa)
 const ChatScroller = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
     (props, ref) => (
         <div
             {...props}
             ref={ref}
             id="chat-scroll-area"
-            className="flex-1 overflow-y-auto mx-5"
+            className="flex-1 overflow-y-auto mx-5 [&::-webkit-scrollbar]:hidden"
+            style={{ ...props.style, scrollbarWidth: "none", msOverflowStyle: "none" }}
         />
     )
 )
@@ -41,7 +42,7 @@ const ChatListHeader = () => <div style={{ height: 32 }} />
 
 // Footer exibe o LoadingIndicator via context (sem closure que invalida a referência)
 const ChatListFooter = ({ context }: { context?: VirtuosoContext }) => (
-    <div className="max-w-5xl mx-auto py-4">
+    <div className="max-w-3xl mx-auto py-1 px-4">
         {context?.isLoading && <LoadingIndicator toolStatus={context.toolStatus} />}
         <div style={{ height: 16 }} />
     </div>
@@ -129,6 +130,34 @@ function ChatPageContent() {
         }
     }, [isLoadingHistory, chatId])
 
+    // Garante que a rolagem acompanhe e se ajuste ao final da lista assim que o LoadingIndicator é desmontado
+    useEffect(() => {
+        if (!isLoading && messages.length > 0) {
+            const scrollToEnd = () => {
+                virtuosoRef.current?.scrollToIndex({ index: "LAST", align: "end", behavior: "smooth" })
+            }
+            // Aguarda um pequeno delay para a desmontagem do LoadingIndicator completar no DOM
+            const t = setTimeout(scrollToEnd, 60)
+            return () => clearTimeout(t)
+        }
+    }, [isLoading])
+
+    // Garante que a rolagem acompanhe e revele totalmente o LoadingIndicator quando ele surge ou muda de status (toolStatus)
+    useEffect(() => {
+        if (isLoading) {
+            const scrollToEnd = () => {
+                virtuosoRef.current?.scrollToIndex({ index: "LAST", align: "end", behavior: "auto" })
+            }
+            scrollToEnd()
+            const t1 = setTimeout(scrollToEnd, 50)
+            const t2 = setTimeout(scrollToEnd, 150)
+            return () => {
+                clearTimeout(t1)
+                clearTimeout(t2)
+            }
+        }
+    }, [isLoading, toolStatus])
+
     // HANDLER DE SUBMIT DA MENSAGEM, PASSANDO AS IMAGENS ANEXADAS
     const handleSubmit = async (e: React.FormEvent, images?: string[]) => {
         e.preventDefault()
@@ -155,7 +184,11 @@ function ChatPageContent() {
 
             /* ── Estado 2: Chat vazio / novo ── */
             ) : messages.length === 0 ? (
-                <div id="chat-scroll-area" className="flex-1 overflow-y-auto px-4">
+                <div 
+                    id="chat-scroll-area" 
+                    className="flex-1 overflow-y-auto px-4 [&::-webkit-scrollbar]:hidden"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                >
                     <div className="max-w-5xl mx-auto py-8">
                         <WelcomeScreen onPromptClick={(prompt) => setInput(prompt)} />
                     </div>

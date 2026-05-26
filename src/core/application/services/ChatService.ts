@@ -11,7 +11,6 @@ import { ensureChatExists, saveUserMessage } from './ChatPersistenceService';
 import { processMessageImages } from './ChatImageService';
 import { getSystemPrompt, formatModelMessages } from './ChatPromptBuilder';
 import {
-    consultLifeHistoryTool,
     webSearchTool,
     readWebpageTool,
     crawlWebTool,
@@ -85,7 +84,7 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
         (exemplo: <visual-memory>[Análise minuciosa, transcrição de textos, dados de gráficos, cores e detalhes visuais 
         importantes]</visual-memory>). Tudo que estiver dentro dessa tag será ocultado do usuário no frontend por CSS, 
         mas ficará gravado no banco de dados e servirá como sua própria memória visual nas próximas interações deste chat.]`
-        : getSystemPrompt(); 
+        : getSystemPrompt();
     // 7. Iniciar Stream
     const result = streamText({
         model,
@@ -98,7 +97,6 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
         frequencyPenalty: isGeminiModel ? undefined : frequencyPenalty,
         stopWhen: stepCountIs(5),
         tools: {
-            consult_life_history: consultLifeHistoryTool,
             ...(webSearchEnabled ? {
                 web_search: webSearchTool,
                 read_webpage: readWebpageTool,

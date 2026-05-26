@@ -411,6 +411,12 @@
   }
 }
 
+/* Animação shimmer para barra de progresso da tool */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
 /* Acessibilidade — respeita preferência por movimento reduzido */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(*),
@@ -425,3 +431,18 @@
 visual-memory {
   display: none !important;
 }
+
+/* ─── GPU-Accelerated Animation Optimization (Tauri & Webview) ───────────── */
+@layer utilities {
+  .animate-in,
+  .animate-out,
+  .nav-forward {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+
+

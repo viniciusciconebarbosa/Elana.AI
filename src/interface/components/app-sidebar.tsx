@@ -308,14 +308,12 @@ export const AppSidebar = memo(function AppSidebar() {
                                 {isActive && item.href === "/settings" && !collapsed && !collapsedMenus["/settings"] && (
                                     <div className="pl-9 pr-2 py-2 space-y-1">
                                         {settingsSections.map((section) => {
-                                            const isSectionActive = searchParams.get("section") === section.id || (!searchParams.get("section") && section.id === "general")
+                                            const isSectionActive = pathname === `/settings/${section.id}` || (pathname === "/settings" && section.id === "general")
                                             return (
                                                 <button
                                                     key={section.id}
                                                     onClick={() => {
-                                                        const params = new URLSearchParams(searchParams.toString())
-                                                        params.set("section", section.id)
-                                                        navigate(`${pathname}?${params.toString()}`)
+                                                        navigate(`/settings/${section.id}`)
                                                         if (isMobileView) setIsOpenMobile(false)
                                                     }}
                                                     className={cn(
