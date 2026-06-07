@@ -446,7 +446,12 @@
     "customCreatedDesc": "あなたが作成したプロンプトテンプレート。",
     "templateAddedSuccess": "テンプレート「{{title}}」が正常に追加されました！",
     "templateUpdatedSuccess": "プロンプトテンプレートが正常に更新されました！",
-    "templateRemovedSuccess": "テンプレート「{{title}}」が正常に削除されました。"
+    "templateRemovedSuccess": "テンプレート「{{title}}」が正常に削除されました。",
+    "llm": {
+      "defaultBase": "あなたはElanaです。知的で、直接的で、少し皮肉屋で、非常に役立つパーソナルアシスタントです。",
+      "nameSection": "\n\n[情報: あなたと対話しているユーザーの名前は「{{userName}}」です。必要に応じて、パーソナライズされた自然な方法でこの名前を使用して呼びかけてください。]",
+      "systemRules": "\n[必須システムルール]:\n- ツールのルール: 検索ツール（web_search、research、crawl、read_webpage）を自動的に使用してはなりません。インターネット検索が回答に役立つと判断した場合は、まずその理由を説明し、ユーザーに「これをウェブで検索しましょうか？」と尋ねる必要があります。ユーザーが次のメッセージで同意した場合にのみ、ツールを実行してください。\n- コンテンツ指示: 結果を受け取ったら、自然な方法で要約してください。"
+    }
   },
   "personalityTemplates": {
     "productivity": {

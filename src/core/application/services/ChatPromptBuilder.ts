@@ -1,29 +1,29 @@
 import { SystemPromptService } from "./SystemPromptService"
+import i18n from "@/i18n"
 
-// PROMPT DO SISTEMA — PERSONALIDADE E REGRAS DE COMPORTAMENTO DO ELANA
+// PROMPT DO SISTEMA — lê textos dos arquivos de locale em vez de hardcode
 export function getSystemPrompt(): string {
     const customPrompt = SystemPromptService.getCustomPrompt()
-    
-    // 1. Se o usuário tem prompt personalizado, usamos ele como base da personalidade.
-    // Se não, usamos a personalidade padrão da Elana.
-    const basePrompt = customPrompt.trim() 
-        ? customPrompt 
-        : `Você é a Elana, uma assistente pessoal inteligente, direta e levemente sarcástica e extremamente útil.`
+    const lang = i18n.language || "pt-BR"
 
-    // 2. Seção dinâmica do nome do usuário
-    const userName = typeof window !== 'undefined' ? localStorage.getItem("elana_user_name") : ""
+    // Lê as chaves do arquivo de locale ativo (fallback para pt-BR)
+    const res = (key: string): string => {
+        return i18n.t(key, { lng: lang }) as string
+    }
+
+    // 1. Prompt base: custom do usuário ou o padrão traduzido
+    const basePrompt = customPrompt.trim()
+        ? customPrompt
+        : res("systemPrompt.llm.defaultBase")
+
+    // 2. Seção do nome do usuário (traduzida)
+    const userName = typeof window !== "undefined" ? localStorage.getItem("elana_user_name") : ""
     const nameSection = userName
-        ? `\n\n[INFORMAÇÃO: O nome do usuário que está interagindo com você é "${userName}". Use este nome para se referir a ele de forma personalizada e natural quando apropriado.]`
+        ? res("systemPrompt.llm.nameSection").replace("{{userName}}", userName)
         : ""
 
-    // 3. Regras técnicas obrigatórias do sistema (Segurança de ferramentas de busca)
-    const systemRules = `
-\n[REGRAS OBRIGATÓRIAS DO SISTEMA]:
-- REGRA DE FERRAMENTAS: Você NUNCA deve usar ferramentas de busca (web_search, research, crawl, read_webpage) de forma 
-automática. Se você identificar que uma busca na internet ajudaria a responder melhor, você deve primeiro explicar o 
-motivo e perguntar ao usuário: 'Gostaria que eu pesquisasse isso na web?'. Apenas execute a ferramenta se o usuário 
-confirmar na próxima mensagem.
-- Instrução de Conteúdo: Ao receber resultados, resuma de forma natural.`
+    // 3. Regras obrigatórias do sistema (traduzidas)
+    const systemRules = res("systemPrompt.llm.systemRules")
 
     return `${basePrompt}${nameSection}${systemRules}`
 }
