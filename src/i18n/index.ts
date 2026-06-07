@@ -4,6 +4,10 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import ptBR from './locales/pt-BR.json'
 import en from './locales/en.json'
+import es from './locales/es.json'
+import ja from './locales/ja.json'
+import zh from './locales/zh.json'
+import ru from './locales/ru.json'
 
 // Detecta o idioma salvo nas configurações gerais do Elana
 function getElanaLanguage(): string | null {
@@ -24,6 +28,10 @@ i18n
     resources: {
       'pt-BR': { translation: ptBR },
       'en': { translation: en },
+      'es': { translation: es },
+      'ja': { translation: ja },
+      'zh': { translation: zh },
+      'ru': { translation: ru },
     },
     lng: getElanaLanguage() || 'pt-BR',
     fallbackLng: 'pt-BR',

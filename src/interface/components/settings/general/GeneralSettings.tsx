@@ -147,6 +147,10 @@ export function GeneralSettings() {
               <SelectContent>
                 <SelectItem value="pt-BR">Português</SelectItem>
                 <SelectItem value="en">English</SelectItem>
+                <SelectItem value="es">Español</SelectItem>
+                <SelectItem value="ja">日本語</SelectItem>
+                <SelectItem value="zh">简体中文</SelectItem>
+                <SelectItem value="ru">Русский</SelectItem>
               </SelectContent>
             </Select>
           </div>

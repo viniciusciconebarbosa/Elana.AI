@@ -1,0 +1,477 @@
+{
+  "sidebar": {
+    "chat": "Chat",
+    "brain": "Cerebro",
+    "memories": "Memorias",
+    "settings": "Configuraciones",
+    "search": "Buscar conversaciones...",
+    "newChat": "Nuevo Chat",
+    "noChats": "Aún no hay conversaciones",
+    "chatList": "Tus Conversaciones",
+    "help": "Ayuda",
+    "categoriesTitle": "Categorías",
+    "recent": "Recientes",
+    "themeLight": "Tema Claro",
+    "themeDark": "Tema Oscuro",
+    "user": "Usuario",
+    "proPlan": "Plan Pro",
+    "navigationMenu": "Menú de Navegación",
+    "categories": {
+      "all": "Todas",
+      "personal": "Personal",
+      "work": "Trabajo",
+      "education": "Educación",
+      "travel": "Viajes",
+      "relationships": "Relaciones",
+      "locations": "Lugares"
+    }
+  },
+  "chat": {
+    "newChat": "Nuevo Chat",
+    "chat": "Chat",
+    "sendPlaceholder": "Escribe un mensaje...",
+    "attachFile": "Adjuntar archivo",
+    "webSearchOn": "Búsqueda web activada",
+    "webSearchOff": "Búsqueda web desactivada",
+    "waitResponse": "Espera la respuesta",
+    "waitDescription": "El modelo aún está respondiendo.",
+    "thinking": "Pensando...",
+    "processing": "Procesando",
+    "resource": "Recurso",
+    "active": "Activo"
+  },
+  "chatModes": {
+    "casual": "Casual",
+    "casualDesc": "Conversación ligera y casual",
+    "deep": "Deep Thinking",
+    "deepDesc": "Análisis profundo y reflexivo",
+    "planning": "Planificación",
+    "planningDesc": "Planificación y organización",
+    "memory": "Revisión de Memoria",
+    "memoryDesc": "Revisar memorias"
+  },
+  "welcome": {
+    "greeting": "¡Hola! Soy Elana.",
+    "subtitle": "¿Listo para explorar nuevas ideas?",
+    "description": "Soy tu asistente personal con memoria a largo plazo. Conozco tu historial y puedo ayudarte de manera personalizada.",
+    "prompts": {
+      "projects": "Proyectos y Logros",
+      "projectsDesc": "Una retrospectiva inteligente de tus hitos técnicos y entregas de alto impacto.",
+      "projectsPrompt": "¿Cuáles fueron mis principales proyectos recientes y qué resultados alcancé en ellos?",
+      "travel": "Planificador de Viajes",
+      "travelDesc": "Itinerarios inteligentes y logística personalizada para tu próximo destino.",
+      "travelPrompt": "Prepara un itinerario de viaje personalizado y optimizado basado en mis preferencias."
+    }
+  },
+  "settings": {
+    "title": "Configuraciones",
+    "subtitle": "Personaliza tu experiencia",
+    "general": {
+      "title": "Perfil de Usuario",
+      "description": "Personaliza cómo se comunica Elana contigo",
+      "yourName": "Tu Nombre",
+      "save": "Guardar",
+      "nameTip": "Este nombre se mostrará en tus burbujas de mensaje y en la barra lateral.",
+      "prefTitle": "Preferencias Generales",
+      "prefDesc": "Configura las opciones básicas de Elana",
+      "lang": "Idioma",
+      "langDesc": "Idioma de la interfaz",
+      "autoSave": "Guardado automático",
+      "autoSaveDesc": "Guardar conversaciones automáticamente",
+      "stream": "Respuestas en tiempo real (streaming)",
+      "streamDesc": "Mostrar las respuestas en tiempo real",
+      "memory": "Indicadores de memoria",
+      "memoryDesc": "Mostrar cuándo se utilizan las memorias"
+    },
+    "sections": {
+      "general": "General",
+      "models": "Modelos",
+      "chatDatabase": "Base de Datos de Chat",
+      "apiKeys": "Claves de API",
+      "tools": "Ferramentas",
+      "appearance": "Apariencia",
+      "notifications": "Notificaciones",
+      "privacy": "Privacidad",
+      "data": "Datos",
+      "help": "Ayuda"
+    },
+    "help": {
+      "title": "Guía y Ayuda de Elana",
+      "description": "Cómo configurar tus modelos y prompts para obtener la mejor experiencia y formato.",
+      "optimizingSystemPrompt": {
+        "title": "Optimización del Prompt del Sistema",
+        "desc": "El Prompt del Sistema define el comportamiento, tono y reglas que el modelo de IA seguirá durante la conversación. Ajustarlo ayuda a evitar respuestas genéricas y asegura el estilo visual correcto.",
+        "exampleTitle": "Ejemplo de Prompt Recomendado",
+        "exampleContent": "Eres Elana, una asistente virtual de alto rendimiento impulsada por inteligencia artificial.\n\nREGLAS DE FORMATO Y COMPORTAMIENTO:\n1. Responde siempre en Markdown estructurado.\n2. Usa siempre bloques de código con el lenguaje especificado (ej. ```typescript ... ```).\n3. Cuando sea útil, organiza la información en tablas de Markdown.\n4. Mantén las respuestas concisas, directas y técnicas, evitando explicaciones redundantes.",
+        "exampleTip": "* Haz clic en el texto de arriba para seleccionarlo y copiarlo a la configuración de tu modelo."
+      },
+      "markdownCapabilities": {
+        "title": "Capacidades de Renderizado (Markdown)",
+        "desc": "Elana tiene un renderizador de Markdown optimizado para desarrolladores. Para aprovecharlo al máximo, anima a los modelos a usar:",
+        "codeBlocks": {
+          "title": "Bloques de Código",
+          "desc": "Con resaltado de sintaxis en color para docenas de lenguajes."
+        },
+        "smartLinks": {
+          "title": "Enlaces Inteligentes",
+          "desc": "Los enlaces de internet se abren de forma segura y automática en tu navegador predeterminado."
+        },
+        "headersList": {
+          "title": "Encabezados y Listas",
+          "desc": "Jerarquía limpia de encabezados (h1 a h6) y listas numeradas o con viñetas."
+        },
+        "tables": {
+          "title": "Tablas Enriquecidas",
+          "desc": "Estructuración de datos en tablas con espaciado y alineación adaptables."
+        }
+      },
+      "advancedParameters": {
+        "title": "Parámetros Avanzados del Modelo",
+        "desc": "En la pestaña Modelos, puedes ajustar el comportamiento de escritura de las IA:",
+        "maxTokens": {
+          "title": "Límite de Respuesta (maxTokens)",
+          "desc": "Número máximo de tokens (partes de palabras) por respuesta. Auméntalo si las respuestas se cortan a la mitad."
+        },
+        "temperature": {
+          "title": "Temperatura (temperature)",
+          "desc": "Creatividad vs Precisión. Valores cercanos a 0 producen respuestas lógicas y exactas (ideal para código). Valores cercanos a 1+ brindan más variedad y creatividad."
+        },
+        "topP": {
+          "title": "Top P (Nucleus Sampling)",
+          "desc": "Controla la diversidad de palabras consideradas. Por ejemplo, 0.1 restringe las opciones solo al 10% de las palabras más probables."
+        },
+        "presence": {
+          "title": "Penalización de Presencia",
+          "desc": "Valores positivos penalizan los términos ya utilizados, animando al modelo a cambiar de tema e introducir conceptos nuevos."
+        },
+        "frequency": {
+          "title": "Penalización de Frecuencia",
+          "desc": "Reduce la repetición literal de palabras en la misma respuesta. Valores positivos obligan al modelo a usar sinónimos y evitar redundancias."
+        }
+      },
+      "apiKeysSearch": {
+        "title": "Claves de API y Búsqueda Web",
+        "keys": {
+          "title": "Claves de API Locales y Seguras",
+          "desc": "Tus claves para OpenAI, Gemini u otros proveedores de LLM se guardan de forma encriptada y local en la base de datos SQLite de tu aplicación. Nunca pasan por servidores intermediarios."
+        },
+        "search": {
+          "title": "Búsqueda Web en Tiempo Real",
+          "desc": "Para permitir que Elana realice búsquedas web en tiempo real (para obtener noticias, documentación o código actualizado), registra tu clave de API de Tavily en la pestaña Claves."
+        },
+        "deepseek": {
+          "title": "DeepSeek, Qwen y Otros",
+          "desc": "¡Los modelos compatibles con la API de OpenAI funcionan al 100%!\n• DeepSeek: Usa la URL https://api.deepseek.com.\n• OpenRouter: Usa la URL https://openrouter.ai/api/v1.\n• Qwen (Local/Ollama): Usa la URL http://localhost:11434/v1.\n• Qwen (Alibaba Cloud): Usa https://dashscope.aliyuncs.com/compatible-mode/v1."
+        }
+      },
+      "tips": {
+        "title": "Consejo Importante de Desarrollo:",
+        "desc": "El modo Deep Thinking (si está disponible en tu modelo) es perfecto para resolver bugs complejos y lógica profunda de software. El modo Casual (representado por el icono de café) está optimizado para velocidad y charlas generales rápidas."
+      }
+    },
+    "appearance": {
+      "title": "Apariencia",
+      "description": "Personaliza el aspecto de Elana",
+      "theme": "Tema",
+      "themes": {
+        "light": "Claro",
+        "dark": "Oscuro",
+        "blackMetal": "Black Metal",
+        "sunrise": "Sunrise Vintage",
+        "system": "Sistema"
+      },
+      "fontSize": "Tamaño de Fuente del Chat",
+      "fontSizeTip": "Ajusta el tamaño de la fuente del mensaje en el chat (mínimo 12px, máximo 24px)."
+    },
+    "apiKeys": {
+      "title": "Claves de API",
+      "description": "Claves de API encriptadas y guardadas de forma segura en el navegador",
+      "addKey": "Añadir Clave",
+      "checkingKeys": "Verificando claves guardadas...",
+      "providerType": "Tipo de Proveedor",
+      "providers": {
+        "auto": "Detección Automática",
+        "openai": "OpenAI Compatible (Proxy)",
+        "custom": "Proveedor Personalizado"
+      },
+      "providerName": "Nombre del Proveedor",
+      "providerNamePlaceholder": "Ej.: Mi Proxy DigitalOcean",
+      "baseUrl": "Base URL (API Host)",
+      "baseUrlPlaceholder": "Ej.: http://localhost:3100/v1",
+      "baseUrlTip": "La URL donde se hospedan los modelos. Debe admitir /models y /chat/completions.",
+      "apiKey": "Clave de API",
+      "apiKeyPlaceholder": "Pega tu clave aquí...",
+      "saveKey": "Guardar Clave",
+      "noKeys": "No hay claves configuradas",
+      "encryptionNotice": "Las claves se encriptan con AES-256 antes de guardarse",
+      "validation": {
+        "urlRequired": "La URL base es obligatoria para proveedores personalizados"
+      },
+      "toast": {
+        "saved": "¡Clave encriptada y guardada!",
+        "saveError": "Error al guardar la clave de API",
+        "deleted": "Clave eliminada"
+      }
+    },
+    "tools": {
+      "title": "Herramientas e Integraciones",
+      "description": "Configure las claves de acceso para herramientas externas utilizadas por la inteligencia artificial.",
+      "tavily": {
+        "keyDesc": "Clave de API para la herramienta de búsqueda web.",
+        "guide": {
+          "title": "Cómo obtener tu clave:",
+          "step1": "Ve a",
+          "step2": "Crea una cuenta gratuita (Free Tier).",
+          "step3": "Ve al panel y copia tu clave de API que comienza con tvly-."
+        }
+      },
+      "unsavedChanges": "Tienes cambios sin guardar.",
+      "saveConfig": "Guardar Configuraciones",
+      "restoreDefaults": "Restaurar Valores Predeterminados"
+    },
+    "database": {
+      "title": "Base de Datos",
+      "description": "Gestiona la persistencia y la conexión de tus conversaciones",
+      "activeSQLite": "SQLite activo: los datos permanecen 100% locales en este dispositivo, no se requiere internet. Ideal para uso privado y sin conexión.",
+      "activeSupabase": "Supabase activo: los chats se sincronizan con la base de datos PostgreSQL en la nube. Configura las credenciales a continuación.",
+      "dynamicConfig": {
+        "title": "Configuración Dinámica",
+        "desc": "Las credenciales introducidas aquí se guardan localmente en el navegador y tienen prioridad sobre las variables de entorno en el .env. Después de guardar o cambiar la base de datos, recarga la aplicación para aplicar los cambios."
+      },
+      "supabase": {
+        "title": "Supabase — Base de Datos",
+        "desc": "Para conectar Elana a la nube, necesitas dos cosas:",
+        "bullet1": "API REST (URL + Anon Key): Se utiliza a diario para leer y escribir mensajes en tiempo real en el chat.",
+        "bullet2": "Connection String: Se usa solo una vez por nuestro botón mágico para crear las tablas iniciales automáticamente, sin abrir el panel SQL de Supabase.",
+        "projectUrl": "Paso 1: URL del Proyecto",
+        "projectUrlDesc": "URL base de tu proyecto Supabase. Ej.: https://xyzabc.supabase.co",
+        "anonKey": "Paso 1: Clave Pública (anon key)",
+        "anonKeyDesc": "Clave de acceso público a Supabase. Se encuentra en Configuración del Proyecto → API.",
+        "connStringTitle": "Paso 2: Connection String (Solo requerida la primera vez)",
+        "connStringDesc": "Esta URL directa permite que Elana se conecte al núcleo de la base de datos y cree la estructura de tablas por sí misma. No se envía a la nube. Encuéntrala en: Configuración del Proyecto → Base de Datos → Connection string (URI)",
+        "connStringLabel": "Connection String (URI) para crear tablas iniciales",
+        "connStringSubDesc": "Se usa solo para crear tablas automáticamente. Ej.: postgresql://postgres:[PASSWORD]...",
+        "testAndSetup": "Probar Conexión y Configurar Base de Datos",
+        "testing": "Verificando y configurando...",
+        "sqlLabel": "SQL para ejecutar en Supabase → SQL Editor",
+        "openSqlEditor": "Abrir Supabase SQL Editor →"
+      },
+      "s3": {
+        "title": "Supabase Storage — S3",
+        "desc": "Almacenamiento de objetos (imágenes, archivos) a través del protocolo S3 compatible.",
+        "accessKeyId": "Access Key ID",
+        "accessKeyIdDesc": "Clave de acceso S3 generada en Supabase Storage.",
+        "region": "Región",
+        "regionDesc": "Región del servidor de almacenamiento.",
+        "secretAccessKey": "Secret Access Key",
+        "secretAccessKeyDesc": "Clave de acceso secreta S3. Nunca compartas esta clave.",
+        "endpoint": "S3 Endpoint",
+        "endpointDesc": "URL del endpoint S3 de Supabase. Se encuentra en Almacenamiento → Conexión S3."
+      },
+      "migration": {
+        "title": "Migración de Datos",
+        "desc": "Transfiere tus chats y mensajes entre la nube (Supabase) y el almacenamiento local en este dispositivo (SQLite). Las imágenes también se descargarán o transferirán automáticamente.",
+        "exportTitle": "Nube ➔ Computadora Local (Exportar)",
+        "exportDesc": "Trae todo desde Supabase a tu SQLite local.",
+        "importTitle": "Computadora Local ➔ Nube (Importar)",
+        "importDesc": "Envía conversaciones e imágenes desde esta PC a Supabase.",
+        "confirmTitle": "¿Iniciar Migración de Datos?",
+        "confirmDesc": "Estás a punto de copiar todos los chats, mensajes e imágenes de {{from}} a {{to}}.<br /><br />Este proceso no eliminará tus datos originales. El tiempo de finalización depende de la cantidad de imágenes a transferir.",
+        "confirmBtn": "Iniciar Migración",
+        "toast": {
+          "sqliteActive": "Modo SQLite Local activado — recarga la aplicación para aplicar.",
+          "supabaseActive": "Modo Supabase (PostgreSQL) activado — recarga la aplicación para aplicar.",
+          "saved": "¡Configuraciones guardadas! Recarga la aplicación para aplicar los cambios.",
+          "fillRequired": "Completa la URL y la Publishable Key antes de probar.",
+          "connOk": "¡Conexión OK! Las tablas ya existen y están listas.",
+          "tablesCreated": "¡Tablas creadas con éxito! Base de datos lista para su uso.",
+          "setupFailed": "Error al configurar la base de datos: {{error}}",
+          "tablesNotFound": "Tablas no encontradas. Pega la Connection String o ejecuta el SQL de abajo en el panel.",
+          "restored": "Configurações restauradas a los valores predeterminados del entorno",
+          "migrated": "¡Migración completada! Recargando para sincronizar datos..."
+        }
+      }
+    },
+    "models": {
+      "title": "Modelo de IA",
+      "description": "Configura el cerebro del asistente",
+      "apiRoute": "Ruta de API",
+      "noRoutes": "No hay rutas configuradas",
+      "default": "Predeterminado",
+      "configureKeyFirst": "Configura una clave primero",
+      "defaultPattern": "Patrón Predeterminado",
+      "noRouteDefault": "Sin ruta (Predeterminado)",
+      "model": "Modelo",
+      "noModels": "No hay modelos disponibles",
+      "reloadModels": "Recargar modelos de API",
+      "selectRouteFirst": "Selecciona una ruta primero",
+      "noModelDefault": "Sin modelo (Predeterminado)",
+      "responseLimit": "Límite de Respuesta",
+      "maxTokensDesc": "Tokens máximos por mensaje",
+      "advancedSettings": "Configuraciones Avanzadas",
+      "restoreDefaults": "Restaurar valores predeterminados",
+      "temperature": "Temperatura",
+      "creativityVsPrecision": "Creatividad vs Precisión",
+      "topP": "Top P",
+      "vocabularyDiversity": "Diversidad de vocabulario",
+      "presencePenalty": "Penalización de Presencia",
+      "newTopics": "Temas nuevos",
+      "frequencyPenalty": "Penalización de Frecuencia",
+      "avoidRepetition": "Evitar repetición",
+      "pending": "Pendiente",
+      "synced": "Sincronizado",
+      "saveChanges": "Guardar Cambios",
+      "toast": {
+        "resetAdvanced": "Parâmetros avanzados restablecidos a los valores predeterminados",
+        "saved": "Modelo guardado: {{modelName}}"
+      }
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "description": "Elige cómo deseas ser notificado",
+      "email": {
+        "label": "Correo Electrónico",
+        "desc": "Alertas de seguridad por correo electrónico"
+      },
+      "push": {
+        "label": "Push",
+        "desc": "Notificaciones del navegador"
+      },
+      "weeklyDigest": {
+        "label": "Resumen Semanal",
+        "desc": "Informe de uso semanal"
+      }
+    },
+    "privacy": {
+      "title": "Privacidad y Seguridad",
+      "description": "Gestiona cómo se manejan tus datos",
+      "shareAnalytics": {
+        "label": "Compartir Estadísticas",
+        "desc": "Ayúdanos a mejorar la aplicación (anónimo)"
+      },
+      "improveModels": {
+        "label": "Mejorar Modelos",
+        "desc": "Permitir el uso de mensajes para entrenamiento (anónimo)"
+      },
+      "retainHistory": {
+        "label": "Retener Historial",
+        "desc": "Mantén tus conversaciones guardadas en el dispositivo"
+      }
+    },
+    "data": {
+      "title": "Gestión de Datos",
+      "description": "Exporta o elimina tus datos",
+      "exportData": {
+        "label": "Exportar todos los datos",
+        "desc": "Descarga una copia completa de tus datos"
+      },
+      "export": "Exportar",
+      "syncMemories": {
+        "label": "Sincronizar memorias",
+        "desc": "Forzar sincronización con el servidor"
+      },
+      "sync": "Sincronizar",
+      "dangerZone": {
+        "label": "Zona de Peligro",
+        "desc": "Eliminar permanentemente todos los datos"
+      },
+      "dangerZoneBtn": "Eliminar Todo"
+    }
+  },
+  "modals": {
+    "deleteChat": {
+      "title": "¿Estás absolutamente seguro?",
+      "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente este historial de chat.",
+      "cancel": "Cancelar",
+      "confirm": "Eliminar Chat",
+      "deleting": "Eliminando..."
+    },
+    "deleteMessage": {
+      "title": "¿Eliminar Historial?",
+      "description": "¿Estás seguro de que deseas eliminar este mensaje y todos los siguientes? Esto eliminará permanentemente los datos y archivos multimedia.",
+      "cancel": "Cancelar",
+      "confirm": "Eliminar Todo",
+      "tooltip": "Eliminar desde aquí"
+    },
+    "renameChat": {
+      "title": "Renombrar Chat",
+      "placeholder": "Escribe el nuevo nombre del chat...",
+      "cancel": "Cancelar",
+      "confirm": "Guardar",
+      "saving": "Guardando..."
+    }
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "export": "Exportar",
+    "reset": "Restaurar",
+    "saving": "Guardando...",
+    "success": "¡Configuraciones guardadas con éxito!",
+    "error": "Error al guardar las configuraciones",
+    "restored": "Configuraciones restauradas a los valores predeterminados"
+  },
+  "systemPrompt": {
+    "title": "Instrucciones del Sistema (System Prompt)",
+    "description": "Define el comportamiento principal, tono y reglas de conducta de Elana.",
+    "activeInstruction": "Instrucción Activa:",
+    "customActive": "Personalizada Activa",
+    "noCustomPrompt": "No hay instrucciones personalizadas activas (personalidad predeterminada de Elana activa).",
+    "instructionNotice": "Esta es la instrucción que sigue la inteligencia artificial actualmente. Para cambiarla, usa los botones de plantilla de personalidad de abajo y guarda los cambios.",
+    "saveChanges": "Guardar Cambios",
+    "restoreDefault": "Restaurar Predeterminado",
+    "personalityTemplatesTitle": "Plantillas de Personalidad (Inspeccionar o Usar)",
+    "templatesSubtitle": "Haz clic en una de las plantillas de abajo para cargarla en el editor de texto. Puedes personalizarla más antes de guardarla.",
+    "newPromptTemplate": "Nueva Plantilla de Prompt",
+    "applyToEditor": "Aplicar al editor",
+    "deleteTemplate": "Eliminar Plantilla",
+    "viewPrompt": "Ver Prompt",
+    "editTemplate": "Editar Plantilla",
+    "createNewTemplateTitle": "Crear Nueva Plantilla de Prompt",
+    "createNewTemplateDesc": "Define una plantilla reutilizable para aplicar al sistema de IA cuando lo desees.",
+    "templateTitleLabel": "Título de la Plantilla",
+    "templateDescLabel": "Descripción Corta",
+    "templatePromptLabel": "Contenido del Prompt (Instrucciones)",
+    "saveTemplateBtn": "Guardar Plantilla",
+    "closeBtn": "Cerrar",
+    "defaultElana": "Predeterminado (Elana)",
+    "custom": "Personalizado",
+    "promptSavedSuccess": "¡Instrucciones del sistema guardadas con éxito!",
+    "personalityRestored": "¡Personalidad restaurada a la predeterminada de Elana!",
+    "templateLoaded": "¡Plantilla \"{{title}}\" cargada en el editor!",
+    "clickToActivate": "Haz clic en 'Guardar Cambios' para activarla.",
+    "fillRequired": "Por favor, completa el título y el contenido del prompt.",
+    "userTag": "Usuario",
+    "customCreatedDesc": "Plantilla de prompt creada por ti.",
+    "templateAddedSuccess": "¡Plantilla \"{{title}}\" añadida con éxito!",
+    "templateUpdatedSuccess": "¡Plantilla de prompt actualizada con éxito!",
+    "templateRemovedSuccess": "Plantilla \"{{title}}\" eliminada con éxito."
+  },
+  "personalityTemplates": {
+    "productivity": {
+      "title": "Asistente de Productividad",
+      "tag": "Enfoque y Organización",
+      "description": "Enfoque en la eficiencia absoluta. Ideal para estructurar rutinas, correos de trabajo, resúmenes y listas de tareas.",
+      "prompt": "Eres un asistente enfocado en la alta productividad, organización y claridad.\nTu objetivo es ayudar al usuario a optimizar su tiempo y estructurar sus tareas diarias.\nAl responder:\n1. Sé directo, enfocado en soluciones prácticas y planes de acción realistas.\n2. Organiza tus respuestas usando listas de tareas, texto en negrita y temas bien estruturados.\n3. Ayuda a resumir textos largos, planificar rutinas semanales y redactar correos electrónicos o comunicaciones corporativas impecables.\n4. Mantén un tono profesional, servicial y motivador."
+    },
+    "didactic": {
+      "title": "Tutor Personal (Estudios)",
+      "tag": "Didáctica y Aprendizaje",
+      "description": "Explica cualquier tema complejo (Historia, Ciencias, Matemáticas, etc.) de forma sencilla e intuitiva.",
+      "prompt": "Eres un Tutor Personal extremadamente paciente, didáctico y apasionado.\nTu misión es ayudar al usuario a aprender sobre cualquier tema de la manera más sencilla posible.\nAl responder:\n1. Explica conceptos difíciles o técnicos usando analogías sencillas y cotidianas del mundo real.\n2. Divide los temas en partes secuenciales y fáciles de digerir.\n3. Adopta un tono alentador y fomenta la curiosidad intelectual.\n4. Al final de las explicaciones largas, haz una pregunta ligera para poner a prueba la comprensión o despertar un nuevo razonamiento."
+    },
+    "empathetic": {
+      "title": "Compañero Empático",
+      "tag": "Conversación y Apoyo",
+      "description": "Tono cálido, acogedor y escucha activa. Ideal para intercambiar ideas, desahogarse o planificar rutinas ligeras.",
+      "prompt": "Eres un compañero cálido, atento, empático y servicial.\nTu papel es ofrecer escucha activa, apoyo emocional y una conversación agradable.\nAl interactuar:\n1. Sé acogedor, muestra empatía sincera y valida los sentimientos y opiniones del usuario.\n2. Mantén un tono amigable, positivo y libre de juicios.\n3. Ayuda a planificar ideas para el bienestar, el ocio, viajes, recetas o simplemente charlar de manera relajada.\n4. Ofrece consejos solo cuando el usuario lo solicite explícitamente."
+    },
+    "creative": {
+      "title": "Escritor y Creador",
+      "tag": "Escritura y Creatividad",
+      "description": "Especialista en redacción, publicaciones para redes sociales, corrección ortográfica y creación de historias.",
+      "prompt": "Eres un excelente escritor y socio de escritura creativa.\nTu tono es expresivo, pulido, rico en vocabulario e inspirador.\nTus pautas:\n1. Ayuda al usuario a estructurar ideas de escritura de manera creativa, lógica y fluida.\n2. Ofrece variaciones de vocabulario y sinónimos interesantes para enriquecer los textos.\n3. Sé versátil: adáptate a cualquier estilo de escritura, desde publicaciones informales hasta escritura literaria o académica.\n4. Brinda comentarios detallados sobre cómo captar y retener la atención del lector."
+    }
+  }
+}

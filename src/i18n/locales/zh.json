@@ -1,0 +1,477 @@
+{
+  "sidebar": {
+    "chat": "对话",
+    "brain": "大脑",
+    "memories": "记忆",
+    "settings": "设置",
+    "search": "搜索对话...",
+    "newChat": "新对话",
+    "noChats": "暂无对话",
+    "chatList": "您的对话",
+    "help": "帮助",
+    "categoriesTitle": "分类",
+    "recent": "最近",
+    "themeLight": "浅色主题",
+    "themeDark": "深色主题",
+    "user": "用户",
+    "proPlan": "专业版方案",
+    "navigationMenu": "导航菜单",
+    "categories": {
+      "all": "全部",
+      "personal": "个人",
+      "work": "工作",
+      "education": "教育",
+      "travel": "旅行",
+      "relationships": "社交关系",
+      "locations": "地点"
+    }
+  },
+  "chat": {
+    "newChat": "新对话",
+    "chat": "对话",
+    "sendPlaceholder": "发送消息...",
+    "attachFile": "附件文件",
+    "webSearchOn": "已启用联网搜索",
+    "webSearchOff": "已禁用联网搜索",
+    "waitResponse": "等待响应",
+    "waitDescription": "模型仍在响应中。",
+    "thinking": "思考中...",
+    "processing": "处理中",
+    "resource": "资源",
+    "active": "活跃"
+  },
+  "chatModes": {
+    "casual": "日常对话",
+    "casualDesc": "轻松休闲的日常聊天",
+    "deep": "深度思考",
+    "deepDesc": "深入推理与反思分析",
+    "planning": "规划整理",
+    "planningDesc": "事务计划与日常管理",
+    "memory": "记忆回顾",
+    "memoryDesc": "查看已存记忆"
+  },
+  "welcome": {
+    "greeting": "你好！我是 Elana。",
+    "subtitle": "准备好探索新想法了吗？",
+    "description": "我是您的个性化人工智能助理，拥有长期记忆。我知道您的历史背景，能提供量身定制的帮助。",
+    "prompts": {
+      "projects": "项目与成就",
+      "projectsDesc": "智能回顾您的技术里程碑和高影响力的工作交付。",
+      "projectsPrompt": "我最近的主要项目是什么，以及在其中取得了什么成果？",
+      "travel": "旅行规划师",
+      "travelDesc": "针对您的下一个目的地定制智能行程和物流建议。",
+      "travelPrompt": "根据我的喜好，量身定制并优化一份旅行日程表。"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "个性化您的使用体验",
+    "general": {
+      "title": "用户个人资料",
+      "description": "个性化 Elana 与您的沟通方式",
+      "yourName": "您的名字",
+      "save": "保存",
+      "nameTip": "此名称将显示在您的消息气泡和侧边栏中。",
+      "prefTitle": "通用首选项",
+      "prefDesc": "配置 Elana 的基本选项",
+      "lang": "语言",
+      "langDesc": "界面语言",
+      "autoSave": "自动保存",
+      "autoSaveDesc": "自动保存对话历史",
+      "stream": "流式传输响应",
+      "streamDesc": "实时显示生成的内容",
+      "memory": "记忆启用指示器",
+      "memoryDesc": "使用记忆时进行提示"
+    },
+    "sections": {
+      "general": "通用",
+      "models": "模型",
+      "chatDatabase": "对话数据库",
+      "apiKeys": "API 密钥",
+      "tools": "工具",
+      "appearance": "外观",
+      "notifications": "通知",
+      "privacy": "隐私",
+      "data": "数据",
+      "help": "帮助"
+    },
+    "help": {
+      "title": "Elana 使用指南与帮助",
+      "description": "如何配置您的模型和系统提示词以获得最佳体验和格式排版。",
+      "optimizingSystemPrompt": {
+        "title": "优化系统提示词 (System Prompt)",
+        "desc": "系统提示词定义了 AI 模型在整个对话中应遵循的行为、语气和规则。合理调整有助于避免生成空洞宽泛的回答并确保正确的排版格式。",
+        "exampleTitle": "推荐的提示词示例",
+        "exampleContent": "您是 Elana，一个基于人工智能驱动的高性能虚拟助手。\n\n格式排版和行为规则：\n1. 务必使用格式丰富且结构清晰的 Markdown 进行回答。\n2. 务必使用指定语言的代码块（例如 ```typescript ... ```）。\n3. 在适合的情况下，使用 Markdown 表格整理信息。\n4. 保持回答简洁、直接和技术性，避免重复多余的解释。",
+        "exampleTip": "* 点击上方的文本以选择并将其复制到您的模型设置中。"
+      },
+      "markdownCapabilities": {
+        "title": "渲染功能 (Markdown)",
+        "desc": "Elana 具有针对开发者优化的 Markdown 渲染器。为了最大程度地利用它，建议模型使用：",
+        "codeBlocks": {
+          "title": "代码块",
+          "desc": "支持数十种语言的彩色语法高亮显示。"
+        },
+        "smartLinks": {
+          "title": "智能链接",
+          "desc": "网页链接将在您的默认浏览器中自动且安全地打开。"
+        },
+        "headersList": {
+          "title": "标题与列表",
+          "desc": "清晰的标题层级（h1 至 h6）以及数字或无序列表。"
+        },
+        "tables": {
+          "title": "多功能表格",
+          "desc": "具有自适应间距和对齐方式的表格数据结构化。"
+        }
+      },
+      "advancedParameters": {
+        "title": "高级模型参数",
+        "desc": "在“模型”选项卡中，您可以调整 AI 的写作行为：",
+        "maxTokens": {
+          "title": "响应字数限制 (maxTokens)",
+          "desc": "每次响应的最大 Token（词块）数。如果响应在中间截断，请增加此值。"
+        },
+        "temperature": {
+          "title": "温度值 (temperature)",
+          "desc": "创造力 vs 精确度。接近 0 的值会产生逻辑严密且准确的回答（最适合写代码）。接近 1+ 的值可提供更丰富、更具创造力的内容。"
+        },
+        "topP": {
+          "title": "Top P (核采样)",
+          "desc": "控制所考虑词汇的多样性。例如，0.1 将选择范围限制为概率最高的前 10% 词汇。"
+        },
+        "presence": {
+          "title": "存在惩罚值 (Presence Penalty)",
+          "desc": "正值会惩罚已经使用过的词汇，促使模型改变话题并引入新概念。"
+        },
+        "frequency": {
+          "title": "频率惩罚值 (Frequency Penalty)",
+          "desc": "减少同一响应中词汇的字面重复。正值会强制模型使用同义词并避免冗余。"
+        }
+      },
+      "apiKeysSearch": {
+        "title": "API 密钥与联网搜索",
+        "keys": {
+          "title": "本地且安全的 API 密钥",
+          "desc": "您针对 OpenAI、Gemini 或其他 LLM 供应商的密钥以加密和本地形式保存在应用的 SQLite 数据库中。它们绝不会通过中间服务器传递。"
+        },
+        "search": {
+          "title": "实时联网搜索",
+          "desc": "为了让 Elana 进行实时联网搜索（获取新闻、文档或最新代码），请在“密钥”选项卡中注册您的 Tavily API 密钥。"
+        },
+        "deepseek": {
+          "title": "DeepSeek、千问与其他",
+          "desc": "完全兼容 OpenAI API 的模型可 100% 正常工作！\n• DeepSeek: 使用 URL https://api.deepseek.com。\n• OpenRouter: 使用 URL https://openrouter.ai/api/v1。\n• 千问 (本地/Ollama): 使用 URL http://localhost:11434/v1。\n• 千问 (阿里云): 使用 https://dashscope.aliyuncs.com/compatible-mode/v1。"
+        }
+      },
+      "tips": {
+        "title": "重要开发提示：",
+        "desc": "深度思考模式（如果您的模型支持）非常适合解决复杂的 Bug 和深层的软件逻辑。日常模式（用咖啡图标表示）则针对速度和快速通用闲聊进行了优化。"
+      }
+    },
+    "appearance": {
+      "title": "外观",
+      "description": "自定义 Elana 的界面外观",
+      "theme": "主题",
+      "themes": {
+        "light": "浅色",
+        "dark": "深色",
+        "blackMetal": "金属黑 (Black Metal)",
+        "sunrise": "日出复古 (Sunrise Vintage)",
+        "system": "跟随系统"
+      },
+      "fontSize": "对话字体大小",
+      "fontSizeTip": "调整对话中的消息字体大小（最小 12 像素，最大 24 像素）。"
+    },
+    "apiKeys": {
+      "title": "API 密钥",
+      "description": "API 密钥已加密并安全地保存在浏览器中",
+      "addKey": "添加密钥",
+      "checkingKeys": "正在检查保存的的密钥...",
+      "providerType": "提供商类型",
+      "providers": {
+        "auto": "自动检测",
+        "openai": "兼容 OpenAI (代理)",
+        "custom": "自定义提供商"
+      },
+      "providerName": "提供商名称",
+      "providerNamePlaceholder": "例如：我的 DigitalOcean 代理",
+      "baseUrl": "基准 URL (API 主机)",
+      "baseUrlPlaceholder": "例如：http://localhost:3100/v1",
+      "baseUrlTip": "托管模型的 URL。必须支持 /models 和 /chat/completions 通信协议。",
+      "apiKey": "API 密钥",
+      "apiKeyPlaceholder": "在此粘贴您的密钥...",
+      "saveKey": "保存密钥",
+      "noKeys": "未配置密钥",
+      "encryptionNotice": "密钥在保存前使用 AES-256 加密",
+      "validation": {
+        "urlRequired": "自定义提供商必须填写基准 URL"
+      },
+      "toast": {
+        "saved": "密钥已加密并保存！",
+        "saveError": "保存 API 密钥时出错",
+        "deleted": "密钥已移除"
+      }
+    },
+    "tools": {
+      "title": "工具与集成",
+      "description": "配置人工智能使用的外部工具访问密钥。",
+      "tavily": {
+        "keyDesc": "网络搜索工具的 API 密钥。",
+        "guide": {
+          "title": "如何获取您的密钥：",
+          "step1": "访问",
+          "step2": "注册免费账户 (Free Tier)。",
+          "step3": "前往控制台并复制以 tvly- 开头的 API 密钥。"
+        }
+      },
+      "unsavedChanges": "您有未保存的更改。",
+      "saveConfig": "保存设置",
+      "restoreDefaults": "恢复默认值"
+    },
+    "database": {
+      "title": "数据库",
+      "description": "管理您对话数据的持续性与连接",
+      "activeSQLite": "SQLite 处于启用状态：数据 100% 保存在此设备本地，无需互联网连接。最适合私密和离线状态下使用。",
+      "activeSupabase": "Supabase 处于启用状态：对话历史同步至云端 PostgreSQL。请在下方配置凭证。",
+      "dynamicConfig": {
+        "title": "动态配置",
+        "desc": "在此处输入的凭证将保存在浏览器本地，并优先于 .env 中的环境变量。保存或更改数据库后，请刷新应用以使更改生效。"
+      },
+      "supabase": {
+        "title": "Supabase — 数据库",
+        "desc": "要将 Elana 连接至云端，您需要两样东西：",
+        "bullet1": "REST API (URL + Anon 密钥)：日常在对话中实时读取和写入消息时使用。",
+        "bullet2": "连接字符串 (Connection String)：由我们的魔法一键配置按钮使用，用于自动创建初始数据表，无需打开 Supabase 的 SQL 控制面板。",
+        "projectUrl": "步骤 1：项目 URL (Project URL)",
+        "projectUrlDesc": "您的 Supabase 项目基准 URL。例如：https://xyzabc.supabase.co",
+        "anonKey": "步骤 1：公钥 (anon key)",
+        "anonKeyDesc": "Supabase 的公共访问密钥。位于“项目设置”→“API”。",
+        "connStringTitle": "步骤 2：连接字符串 (仅首次配置时需要)",
+        "connStringDesc": "此直连 URL 允许 Elana 连接至数据库核心并自行创建数据表结构。它绝不会发送到云端。位于：“项目设置”→“数据库”→“连接字符串(URI)”。",
+        "connStringLabel": "用于创建初始数据表的连接字符串 (URI)",
+        "connStringSubDesc": "仅用于自动创建数据表。例如：postgresql://postgres:[PASSWORD]...",
+        "testAndSetup": "测试连接并配置数据库",
+        "testing": "正在验证并配置...",
+        "sqlLabel": "要在 Supabase → SQL Editor 中运行的 SQL 脚本",
+        "openSqlEditor": "打开 Supabase SQL 编辑器 →"
+      },
+      "s3": {
+        "title": "Supabase 存储 — S3",
+        "desc": "通过兼容的 S3 协议提供对象存储（图像、文件）。",
+        "accessKeyId": "访问密钥 ID (Access Key ID)",
+        "accessKeyIdDesc": "在 Supabase 存储中生成的 S3 访问密钥。",
+        "region": "区域 (Region)",
+        "regionDesc": "存储服务器所在区域。",
+        "secretAccessKey": "机密访问密钥 (Secret Access Key)",
+        "secretAccessKeyDesc": "S3 机密访问密钥。切勿泄露此密钥。",
+        "endpoint": "S3 端点 (S3 Endpoint)",
+        "endpointDesc": "Supabase S3 端点 URL。位于“存储”→“S3 连接”。"
+      },
+      "migration": {
+        "title": "数据迁移",
+        "desc": "在云端 (Supabase) 和此设备上的本地存储 (SQLite) 之间传输您的对话和消息。图像也将自动下载或传输。",
+        "exportTitle": "云端 ➔ 本地电脑 (导出)",
+        "exportDesc": "将所有数据从 Supabase 导入您的本地 SQLite。",
+        "importTitle": "本地电脑 ➔ 云端 (导入)",
+        "importDesc": "将此电脑的对话和图像发送到 Supabase。",
+        "confirmTitle": "开始数据迁移？",
+        "confirmDesc": "您即将将所有对话、消息和图像从 {{from}} 复制到 {{to}}。<br /><br />此过程不会删除您的原始数据。完成时间取决于需要传输的图像数量。",
+        "confirmBtn": "开始迁移",
+        "toast": {
+          "sqliteActive": "本地 SQLite 模式已激活 — 刷新应用以应用更改。",
+          "supabaseActive": "Supabase (PostgreSQL) 模式已激活 — 刷新应用以应用更改。",
+          "saved": "设置已保存！刷新应用以使更改生效。",
+          "fillRequired": "测试前请先填写 URL 和 Anon 公钥。",
+          "connOk": "连接正常！数据表已存在，准备就绪。",
+          "tablesCreated": "数据表创建成功！数据库已准备就绪，可以使用。",
+          "setupFailed": "配置数据库失败：{{error}}",
+          "tablesNotFound": "未找到数据表。请粘贴连接字符串或在控制面板中运行下方的 SQL。",
+          "restored": "设置已恢复为默认环境变量值",
+          "migrated": "迁移完成！正在刷新以同步数据..."
+        }
+      }
+    },
+    "models": {
+      "title": "AI 模型",
+      "description": "配置助理的“大脑”",
+      "apiRoute": "API 路由",
+      "noRoutes": "未配置路由",
+      "default": "默认",
+      "configureKeyFirst": "请先配置密钥",
+      "defaultPattern": "默认模式",
+      "noRouteDefault": "无路由 (默认)",
+      "model": "模型",
+      "noModels": "没有可用模型",
+      "reloadModels": "重新加载 API 模型",
+      "selectRouteFirst": "请先选择一个路由",
+      "noModelDefault": "无模型 (默认)",
+      "responseLimit": "生成字数限制",
+      "maxTokensDesc": "每条消息的最大 Token 数",
+      "advancedSettings": "高级设置",
+      "restoreDefaults": "恢复默认值",
+      "temperature": "温度值 (Temperature)",
+      "creativityVsPrecision": "创造力 vs 精确度",
+      "topP": "核采样 (Top P)",
+      "vocabularyDiversity": "词汇多样性",
+      "presencePenalty": "存在惩罚度",
+      "newTopics": "引出新话题",
+      "frequencyPenalty": "频率惩罚度",
+      "avoidRepetition": "避免词汇重复",
+      "pending": "待处理",
+      "synced": "已同步",
+      "saveChanges": "保存更改",
+      "toast": {
+        "resetAdvanced": "高级参数已重置为默认值",
+        "saved": "模型已保存：{{modelName}}"
+      }
+    },
+    "notifications": {
+      "title": "通知",
+      "description": "选择您希望接收通知的方式",
+      "email": {
+        "label": "电子邮件",
+        "desc": "通过电子邮件接收安全警告"
+      },
+      "push": {
+        "label": "推送通知",
+        "desc": "浏览器弹窗通知"
+      },
+      "weeklyDigest": {
+        "label": "每周摘要",
+        "desc": "每周使用报告"
+      }
+    },
+    "privacy": {
+      "title": "隐私与安全",
+      "description": "管理您数据的处理方式",
+      "shareAnalytics": {
+        "label": "共享分析数据",
+        "desc": "帮助我们改进应用（匿名）"
+      },
+      "improveModels": {
+        "label": "帮助模型改进",
+        "desc": "允许将对话消息用于模型训练（匿名）"
+      },
+      "retainHistory": {
+        "label": "保存历史记录",
+        "desc": "将您的对话保存在此设备上"
+      }
+    },
+    "data": {
+      "title": "数据管理",
+      "description": "导出或删除您的数据",
+      "exportData": {
+        "label": "导出全部数据",
+        "desc": "下载您对话数据的完整副本"
+      },
+      "export": "导出",
+      "syncMemories": {
+        "label": "同步记忆",
+        "desc": "强制执行与服务器的记忆同步"
+      },
+      "sync": "同步",
+      "dangerZone": {
+        "label": "危险区域",
+        "desc": "永久删除所有本地及同步的数据"
+      },
+      "dangerZoneBtn": "删除全部"
+    }
+  },
+  "modals": {
+    "deleteChat": {
+      "title": "您确定要删除吗？",
+      "description": "此操作无法撤销。这将永久删除此对话历史记录。",
+      "cancel": "取消",
+      "confirm": "删除对话",
+      "deleting": "正在删除..."
+    },
+    "deleteMessage": {
+      "title": "删除历史消息？",
+      "description": "您确定要删除此消息以及所有后续消息吗？这会永久删除相关的数据和媒体文件。",
+      "cancel": "取消",
+      "confirm": "删除全部",
+      "tooltip": "从此处删除"
+    },
+    "renameChat": {
+      "title": "重命名对话",
+      "placeholder": "请输入新的对话名称...",
+      "cancel": "取消",
+      "confirm": "保存",
+      "saving": "正在保存..."
+    }
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "export": "导出",
+    "reset": "重置",
+    "saving": "正在保存...",
+    "success": "设置保存成功！",
+    "error": "保存设置时出错",
+    "restored": "设置已恢复默认值"
+  },
+  "systemPrompt": {
+    "title": "系统指令 (System Prompt)",
+    "description": "定义 Elana 的主要行为、语气以及日常规范规则。",
+    "activeInstruction": "当前启用的指令：",
+    "customActive": "自定义活跃",
+    "noCustomPrompt": "未激活任何自定义指令（Elana 的默认人格已启用）。",
+    "instructionNotice": "这是目前人工智能遵循的指令。如需修改，请点击下方的性格模板按钮，然后保存更改。",
+    "saveChanges": "保存更改",
+    "restoreDefault": "恢复默认值",
+    "personalityTemplatesTitle": "性格指令模板 (查看或直接套用)",
+    "templatesSubtitle": "点击下方的任一模板将其加载至文本编辑器中。在保存前，您可以对其进行进一步的个性化修改。",
+    "newPromptTemplate": "新建性格提示词模板",
+    "applyToEditor": "应用至编辑器",
+    "deleteTemplate": "删除模板",
+    "viewPrompt": "查看提示词",
+    "editTemplate": "编辑模板",
+    "createNewTemplateTitle": "创建新提示词模板",
+    "createNewTemplateDesc": "定义一个可重复使用的性格指令，供您随时套用到 AI 系统中。",
+    "templateTitleLabel": "模板标题",
+    "templateDescLabel": "简短描述",
+    "templatePromptLabel": "提示词内容 (详细指令)",
+    "saveTemplateBtn": "保存模板",
+    "closeBtn": "关闭",
+    "defaultElana": "默认 (Elana)",
+    "custom": "自定义",
+    "promptSavedSuccess": "系统指令保存成功！",
+    "personalityRestored": "性格已成功恢复为 Elana 默认状态！",
+    "templateLoaded": "已将模板 \"{{title}}\" 加载至编辑器中！",
+    "clickToActivate": "点击“保存更改”以激活该指令。",
+    "fillRequired": "请填写标题和提示词内容。",
+    "userTag": "用户",
+    "customCreatedDesc": "由您自己创建的提示词模板。",
+    "templateAddedSuccess": "模板 \"{{title}}\" 添加成功！",
+    "templateUpdatedSuccess": "提示词模板更新成功！",
+    "templateRemovedSuccess": "模板 \"{{title}}\" 移除成功。"
+  },
+  "personalityTemplates": {
+    "productivity": {
+      "title": "高能效生产力助手",
+      "tag": "专注与统筹规划",
+      "description": "专注于绝对的效率。最适合规划工作流、起草工作邮件、撰写内容摘要以及整理待办事项清单。",
+      "prompt": "您是一个专注于高生产力、高度条理化和表达清晰的助手。\n您的目标是帮助用户优化时间并规划日常任务。\n回答时：\n1. 务必直截了当，专注于实用的解决方案和可落地的具体行动步骤。\n2. 使用待办事项清单、加粗文本和条理清晰的标题段落组织您的回答。\n3. 协助总结长文、规划周程安排，以及撰写无差错的邮件或企业日常公文沟通。\n4. 保持专业、耐心且能提供正面反馈的语气。"
+    },
+    "didactic": {
+      "title": "私人导师 (学习伴侣)",
+      "tag": "通俗易懂与教学辅助",
+      "description": "以简单直观的方式解释任何复杂学科（历史、科学、数学等）。",
+      "prompt": "您是一位极具耐心、通俗易懂且充满热情的私人导师。\n您的任务是帮助用户以最简单的方式学习任何学科内容。\n回答时：\n1. 使用现实生活中简单贴切的类比，来解释晦涩难懂或专业性强的概念。\n2. 将大段内容拆分为循序渐进、易于消化的小结段落。\n3. 采用鼓励性的语气，培养用户的求知欲和探索精神。\n4. 在大段讲解结束后，提出一个轻松的小问题来检验理解程度或启发新的思考。"
+    },
+    "empathetic": {
+      "title": "倾听伴侣 (情感树洞)",
+      "tag": "陪伴对话与情感支持",
+      "description": "语气温和、真诚包容。非常适合发散思维、倾诉心声或规划轻松的一天。",
+      "prompt": "您是一位温和、细心、感同身受且乐于助人的伙伴。\n您的主要任务是提供积极的倾听、情感支持和令人愉悦的日常聊天。\n互动时：\n1. 保持亲切的态度，展现真挚的共情，肯定用户的感受和看法。\n2. 始终使用友好、积极且不带主观审判色彩的语气。\n3. 协助规划有关个人健康、休闲活动、旅游路线、烹饪菜谱的创意，或以轻松幽默的方式闲聊。\n4. 只有在用户明确请求建议时才提供指导性意见。"
+    },
+    "creative": {
+      "title": "文字创作者 (写手)",
+      "tag": "写作与创意发散",
+      "description": "擅长各类文章起草、社交媒体文案编写、语法润色纠错以及故事创作。",
+      "prompt": "您是一位优秀的写作者和创意写作伙伴。\n您的语言风格富有表现力、文笔流畅细腻、词汇丰富且充满灵感。\n您的行为准则：\n1. 帮助用户以具有创意、符合逻辑且流畅自然的方式构建写作思路。\n2. 提供多样化的表达手法和新颖的同义词替换，以充实文章内容。\n3. 具备多面手属性：能够适应任何写作风格，从日常随笔到文学或学术性创作。\n4. 针对如何吸引读者注意力并维持阅读兴趣，提供细致深入的反馈建议。"
+    }
+  }
+}

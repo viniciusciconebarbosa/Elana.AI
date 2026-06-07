@@ -1,0 +1,477 @@
+{
+  "sidebar": {
+    "chat": "チャット",
+    "brain": "ブレイン",
+    "memories": "メモリー",
+    "settings": "設定",
+    "search": "スレッドを検索...",
+    "newChat": "新規チャット",
+    "noChats": "スレッドがありません",
+    "chatList": "あなたの会話",
+    "help": "ヘルプ",
+    "categoriesTitle": "カテゴリー",
+    "recent": "最近",
+    "themeLight": "ライトテーマ",
+    "themeDark": "ダークテーマ",
+    "user": "ユーザー",
+    "proPlan": "プロプラン",
+    "navigationMenu": "ナビゲーションメニュー",
+    "categories": {
+      "all": "すべて",
+      "personal": "プライベート",
+      "work": "仕事",
+      "education": "教育",
+      "travel": "旅行",
+      "relationships": "人間関係",
+      "locations": "場所"
+    }
+  },
+  "chat": {
+    "newChat": "新規チャット",
+    "chat": "チャット",
+    "sendPlaceholder": "メッセージを入力...",
+    "attachFile": "ファイルを添付",
+    "webSearchOn": "ウェブ検索有効",
+    "webSearchOff": "ウェブ検索無効",
+    "waitResponse": "回答を待っています",
+    "waitDescription": "モデルはまだ応答しています。",
+    "thinking": "考え中...",
+    "processing": "処理中",
+    "resource": "リソース",
+    "active": "アクティブ"
+  },
+  "chatModes": {
+    "casual": "カジュアル",
+    "casualDesc": "気軽な日常会話",
+    "deep": "ディープ思考",
+    "deepDesc": "深く推論し分析する",
+    "planning": "プランニング",
+    "planningDesc": "計画やタスク整理",
+    "memory": "メモリ確認",
+    "memoryDesc": "メモリを確認"
+  },
+  "welcome": {
+    "greeting": "こんにちは！Elanaです。",
+    "subtitle": "新しいアイデアを探索しますか？",
+    "description": "長期メモリを備えたパーソナルアシスタントです。あなたの過去の会話履歴を理解し、パーソナライズされたサポートを提供します。",
+    "prompts": {
+      "projects": "プロジェクトと実績",
+      "projectsDesc": "技術的マイルストーンや影響度の高い成果のスマートな振り返り。",
+      "projectsPrompt": "最近の主なプロジェクトと、そこで達成した成果は何ですか？",
+      "travel": "旅行プランナー",
+      "travelDesc": "目的地に合わせたスマートな旅程とカスタムロジスティクス。",
+      "travelPrompt": "私の好みに基づいて、パーソナライズされ最適化された旅行日程を作成してください。"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "あなたの好みに合わせてカスタマイズ",
+    "general": {
+      "title": "ユーザープロファイル",
+      "description": "Elanaのコミュニケーションスタイルをカスタマイズ",
+      "yourName": "お名前",
+      "save": "保存",
+      "nameTip": "この名前はメッセージの吹き出しやサイドバーに表示されます。",
+      "prefTitle": "全般設定",
+      "prefDesc": "Elanaの基本オプションを設定",
+      "lang": "言語",
+      "langDesc": "インターフェースの言語",
+      "autoSave": "自動保存",
+      "autoSaveDesc": "会話を自動的に保存",
+      "stream": "ストリーミング応答",
+      "streamDesc": "リアルタイムで応答を表示",
+      "memory": "メモリインジケータ",
+      "memoryDesc": "メモリが使用されたときに表示"
+    },
+    "sections": {
+      "general": "全般",
+      "models": "モデル",
+      "chatDatabase": "会話データベース",
+      "apiKeys": "APIキー",
+      "tools": "ツール",
+      "appearance": "外観",
+      "notifications": "通知",
+      "privacy": "プライバシー",
+      "data": "データ",
+      "help": "ヘルプ"
+    },
+    "help": {
+      "title": "Elana ガイドとヘルプ",
+      "description": "最高の体験とフォーマットを得るためのモデルとプロンプトの設定方法。",
+      "optimizingSystemPrompt": {
+        "title": "システムプロンプトの最適化",
+        "desc": "システムプロンプトは、AIモデルが会話全体で従うべき動作、トーン、およびルールを定義します。調整することで、一般的な応答を避け、正しい視覚スタイルを保証します。",
+        "exampleTitle": "推奨されるプロンプト例",
+        "exampleContent": "あなたは人工知能を搭載した高性能なバーチャルアシスタント、Elanaです。\n\nフォーマットと動作のルール：\n1. 常にリッチでよく構造化されたMarkdownで回答してください。\n2. 常に指定された言語のコードブロックを使用してください（例： ```typescript ... ```）。\n3. 役立つ場合は、情報をMarkdownテーブルに整理してください。\n4. 重複する説明を避け、簡潔、直接的、かつテクニカルに回答してください。",
+        "exampleTip": "* 上記のテキストをクリックして選択し、モデル設定にコピーします。"
+      },
+      "markdownCapabilities": {
+        "title": "レンダリング機能 (Markdown)",
+        "desc": "Elanaには開発者向けに最適化されたMarkdownレンダラーがあります。最大限に活用するために、モデルに以下を使用させてください：",
+        "codeBlocks": {
+          "title": "コードブロック",
+          "desc": "数十の言語に対応したカラーシンタックスハイライト。"
+        },
+        "smartLinks": {
+          "title": "スマートリンク",
+          "desc": "インターネットリンクは自動的かつ安全にデフォルトのブラウザで開かれます。"
+        },
+        "headersList": {
+          "title": "見出しとリスト",
+          "desc": "見出し（h1〜h6）のクリーンな階層と、番号付きまたは箇条書きのリスト。"
+        },
+        "tables": {
+          "title": "リッチテーブル",
+          "desc": "レスポンシブな間隔と配置を備えたテーブルデータ構造化。"
+        }
+      },
+      "advancedParameters": {
+        "title": "詳細なモデルパラメータ",
+        "desc": "「モデル」タブで、AIの記述動作を調整できます：",
+        "maxTokens": {
+          "title": "応答制限 (maxTokens)",
+          "desc": "応答あたりの最大トークン（単語の断片）数。応答が途中で切れる場合は、これを増やしてください。"
+        },
+        "temperature": {
+          "title": "温度 (temperature)",
+          "desc": "創造性 vs 精確性。0に近い値は論理的で正確な応答を生成し（コードに最適）、1以上の値はより多様で創造的な応答を提供します。"
+        },
+        "topP": {
+          "title": "Top P (ニュークリアスサンプリング)",
+          "desc": "考慮される単語の多様性を制御します。たとえば、0.1は上位10%の最も確率の高い単語のみに選択肢を制限します。"
+        },
+        "presence": {
+          "title": "存在ペナルティ",
+          "desc": "正の値はすでに使用された単語にペナルティを課し、モデルがトピックを切り替えて新しい概念を導入するのを促します。"
+        },
+        "frequency": {
+          "title": "頻度ペナルティ",
+          "desc": "同じ応答内での単語の文字通りの繰り返しを減らします。正の値はモデルに類義語の使用を強制し、冗長さを避けます。"
+        }
+      },
+      "apiKeysSearch": {
+        "title": "APIキーとウェブ検索",
+        "keys": {
+          "title": "ローカルで安全なAPIキー",
+          "desc": "OpenAI、Gemini、またはその他のLLMプロバイダーのキーは、暗号化されてアプリのローカルSQLiteデータベース内に安全に保存されます。中間サーバーを通過することはありません。"
+        },
+        "search": {
+          "title": "リアルタイムウェブ検索",
+          "desc": "Elanaがリアルタイムウェブ検索を実行できるようにする（ニュース、ドキュメント、または最新のコードを取得するため）には、[キー]タブにTavily APIキーを登録してください。"
+        },
+        "deepseek": {
+          "title": "DeepSeek、Qwenなど",
+          "desc": "OpenAI API互換のモデルは100%動作します！\n• DeepSeek: URL https://api.deepseek.com を使用。\n• OpenRouter: URL https://openrouter.ai/api/v1 を使用。\n• Qwen (Local/Ollama): URL http://localhost:11434/v1 を使用。\n• Qwen (Alibaba Cloud): URL https://dashscope.aliyuncs.com/compatible-mode/v1 を使用。"
+        }
+      },
+      "tips": {
+        "title": "重要な開発のヒント：",
+        "desc": "ディープ思考モード（モデルで利用可能な場合）は、複雑なバグの解決や深いソフトウェアロジックに最適です。カジュアルモード（コーヒーのアイコン）は、速度と簡単な一般チャット向けに最適化されています。"
+      }
+    },
+    "appearance": {
+      "title": "外観",
+      "description": "Elanaの見た目をカスタマイズ",
+      "theme": "テーマ",
+      "themes": {
+        "light": "ライト",
+        "dark": "ダーク",
+        "blackMetal": "ブラックメタル",
+        "sunrise": "サンライズヴィンテージ",
+        "system": "システム"
+      },
+      "fontSize": "チャットフォントサイズ",
+      "fontSizeTip": "チャット内のメッセージのフォントサイズを調整します（最小12px、最大24px）。"
+    },
+    "apiKeys": {
+      "title": "APIキー",
+      "description": "APIキーは暗号化され、ブラウザに安全に保存されます",
+      "addKey": "キーを追加",
+      "checkingKeys": "保存されたキーを確認中...",
+      "providerType": "プロバイダーの種類",
+      "providers": {
+        "auto": "自動検出",
+        "openai": "OpenAI互換 (プロキシ)",
+        "custom": "カスタムプロバイダー"
+      },
+      "providerName": "プロバイダー名",
+      "providerNamePlaceholder": "例: 私のDigitalOceanプロキシ",
+      "baseUrl": "ベースURL (APIホスト)",
+      "baseUrlPlaceholder": "例: http://localhost:3100/v1",
+      "baseUrlTip": "モデルがホストされているURL。/models と /chat/completions をサポートしている必要があります。",
+      "apiKey": "APIキー",
+      "apiKeyPlaceholder": "ここにキーを貼り付け...",
+      "saveKey": "キーを保存",
+      "noKeys": "キーが設定されていません",
+      "encryptionNotice": "キーは保存前にAES-256で暗号化されます",
+      "validation": {
+        "urlRequired": "カスタムプロバイダーにはベースURLが必要です"
+      },
+      "toast": {
+        "saved": "キーが暗号化され、保存されました！",
+        "saveError": "APIキーの保存中にエラーが発生しました",
+        "deleted": "キーが削除されました"
+      }
+    },
+    "tools": {
+      "title": "ツールと統合",
+      "description": "人工知能が使用する外部ツールのアクセスキーを設定します。",
+      "tavily": {
+        "keyDesc": "ウェブ検索ツール用のAPIキー。",
+        "guide": {
+          "title": "キーの取得方法：",
+          "step1": "以下にアクセスします：",
+          "step2": "無料アカウント（Free Tier）を作成します。",
+          "step3": "ダッシュボードに移動し、tvly-で始まるAPIキーをコピーします。"
+        }
+      },
+      "unsavedChanges": "保存されていない変更があります。",
+      "saveConfig": "設定を保存",
+      "restoreDefaults": "デフォルトに戻す"
+    },
+    "database": {
+      "title": "データベース",
+      "description": "会話の永続化と接続を管理します",
+      "activeSQLite": "SQLiteアクティブ: データはこのデバイスに100%ローカルに残り、インターネットは不要です。プライベートおよびオフラインでの使用に最適です。",
+      "activeSupabase": "Supabaseアクティブ: チャットはクラウドのPostgreSQLと同期されます。以下で資格情報を設定してください。",
+      "dynamicConfig": {
+        "title": "動的設定",
+        "desc": "ここに入力された資格情報はブラウザにローカルで保存され、.envの環境変数よりも優先されます。データベースを保存または変更した後は、変更を有効にするためにアプリケーションをリロードしてください。"
+      },
+      "supabase": {
+        "title": "Supabase — データベース",
+        "desc": "Elanaをクラウドに接続するには、次の2つが必要です：",
+        "bullet1": "REST API（URL + Anonキー）: チャットでリアルタイムにメッセージを読み書きするために日常的に使用されます。",
+        "bullet2": "接続文字列 (Connection String): SupabaseのSQLパネルを開くことなく、初期テーブルを自動的に作成するために魔法のボタンによって一度だけ使用されます。",
+        "projectUrl": "ステップ 1: プロジェクトURL",
+        "projectUrlDesc": "SupabaseプロジェクトのベースURL。例: https://xyzabc.supabase.co",
+        "anonKey": "ステップ 1: 公開キー (anon key)",
+        "anonKeyDesc": "Supabaseへの公開アクセスキー。プロジェクト設定 → APIにあります。",
+        "connStringTitle": "ステップ 2: 接続文字列 (初回のみ必要)",
+        "connStringDesc": "この直接URLにより、Elanaはデータベースコアに接続し、自身でテーブル構造を作成できます。クラウドには送信されません。プロジェクト設定 → データベース → 接続文字列 (URI)にあります。",
+        "connStringLabel": "初期テーブルを作成するための接続文字列 (URI)",
+        "connStringSubDesc": "テーブルを自動的に作成するためだけに使用されます。例: postgresql://postgres:[PASSWORD]...",
+        "testAndSetup": "接続テストとデータベース設定",
+        "testing": "検証および設定中...",
+        "sqlLabel": "Supabase → SQL Editor で実行するSQL",
+        "openSqlEditor": "Supabase SQL Editor を開く →"
+      },
+      "s3": {
+        "title": "Supabase ストレージ — S3",
+        "desc": "互換性のあるS3プロトコルを介したオブジェクトストレージ（画像、ファイル）。",
+        "accessKeyId": "アクセスキーID",
+        "accessKeyIdDesc": "Supabase Storageで生成されたS3アクセスキー。",
+        "region": "リージョン",
+        "regionDesc": "ストレージサーバーのリージョン。",
+        "secretAccessKey": "シークレットアクセスキー",
+        "secretAccessKeyDesc": "S3シークレットアクセスキー。このキーは決して共有しないでください。",
+        "endpoint": "S3エンドポイント",
+        "endpointDesc": "Supabase S3エンドポイントURL。ストレージ → S3接続にあります。"
+      },
+      "migration": {
+        "title": "データ移行",
+        "desc": "クラウド（Supabase）とこのデバイスのローカルストレージ（SQLite）の間で、チャットとメッセージを転送します。画像も自動的にダウンロードまたは転送されます。",
+        "exportTitle": "クラウド ➔ ローカルPC (エクスポート)",
+        "exportDesc": "SupabaseからすべてのデータをローカルのSQLiteにインポートします。",
+        "importTitle": "ローカルPC ➔ クラウド (インポート)",
+        "importDesc": "このPCから会話と画像をSupabaseに送信します。",
+        "confirmTitle": "データ移行を開始しますか？",
+        "confirmDesc": "{{from}} から {{to}} にすべてのチャット、メッセージ、および画像をコピーしようとしています。<br /><br />このプロセスによって元のデータが削除されることはありません。完了時間は転送する画像の量によって異なります。",
+        "confirmBtn": "移行を開始",
+        "toast": {
+          "sqliteActive": "SQLiteローカルモードがアクティブになりました — 適用するにはアプリをリロードしてください。",
+          "supabaseActive": "Supabase (PostgreSQL)モードがアクティブになりました — 適用するにはアプリをリロードしてください。",
+          "saved": "設定が保存されました！変更を適用するにはアプリをリロードしてください。",
+          "fillRequired": "テストする前に、URLと公開キーを入力してください。",
+          "connOk": "接続OK！テーブルはすでに存在し、準備ができています。",
+          "tablesCreated": "テーブルが正常に作成されました！データベースを使用する準備が整いました。",
+          "setupFailed": "データベースの設定に失敗しました: {{error}}",
+          "tablesNotFound": "テーブルが見つかりません。接続文字列を貼り付けるか、ダッシュボードで以下のSQLを実行してください。",
+          "restored": "設定がデフォルトの環境変数に復元されました",
+          "migrated": "移行が完了しました！データを同期するためにリロードしています..."
+        }
+      }
+    },
+    "models": {
+      "title": "AIモデル",
+      "description": "アシスタントの頭脳を設定します",
+      "apiRoute": "APIルート",
+      "noRoutes": "ルートが設定されていません",
+      "default": "デフォルト",
+      "configureKeyFirst": "最初にキーを設定してください",
+      "defaultPattern": "デフォルトパターン",
+      "noRouteDefault": "ルートなし (デフォルト)",
+      "model": "モデル",
+      "noModels": "利用可能なモデルがありません",
+      "reloadModels": "APIモデルを再読み込み",
+      "selectRouteFirst": "最初にルートを選択してください",
+      "noModelDefault": "モデルなし (デフォルト)",
+      "responseLimit": "応答制限",
+      "maxTokensDesc": "メッセージあたりの最大トークン数",
+      "advancedSettings": "詳細設定",
+      "restoreDefaults": "デフォルトに戻す",
+      "temperature": "温度",
+      "creativityVsPrecision": "創造性 vs 精確性",
+      "topP": "Top P",
+      "vocabularyDiversity": "語彙の多様性",
+      "presencePenalty": "存在ペナルティ",
+      "newTopics": "新しいトピック",
+      "frequencyPenalty": "頻度ペナルティ",
+      "avoidRepetition": "繰り返しの回避",
+      "pending": "保留中",
+      "synced": "同期済み",
+      "saveChanges": "変更を保存",
+      "toast": {
+        "resetAdvanced": "詳細パラメータがデフォルトにリセットされました",
+        "saved": "モデルを保存しました: {{modelName}}"
+      }
+    },
+    "notifications": {
+      "title": "通知",
+      "description": "通知の受信方法を選択します",
+      "email": {
+        "label": "メール",
+        "desc": "メールによるセキュリティアラート"
+      },
+      "push": {
+        "label": "プッシュ通知",
+        "desc": "ブラウザ通知"
+      },
+      "weeklyDigest": {
+        "label": "週刊要約",
+        "desc": "週ごとの使用状況レポート"
+      }
+    },
+    "privacy": {
+      "title": "プライバシーとセキュリティ",
+      "description": "データの取り扱い方法を管理します",
+      "shareAnalytics": {
+        "label": "分析の共有",
+        "desc": "アプリケーションの改善に協力（匿名）"
+      },
+      "improveModels": {
+        "label": "モデルの改善",
+        "desc": "トレーニングのためのメッセージ使用を許可（匿名）"
+      },
+      "retainHistory": {
+        "label": "履歴の保持",
+        "desc": "デバイスに会話を保存したままにする"
+      }
+    },
+    "data": {
+      "title": "データ管理",
+      "description": "データの書き出しまたは削除",
+      "exportData": {
+        "label": "すべてのデータを書き出す",
+        "desc": "データの完全なコピーをダウンロードする"
+      },
+      "export": "エクスポート",
+      "syncMemories": {
+        "label": "メモリを同期",
+        "desc": "サーバーとの強制同期を実行"
+      },
+      "sync": "同期",
+      "dangerZone": {
+        "label": "危険ゾーン",
+        "desc": "すべてのデータを完全に削除する"
+      },
+      "dangerZoneBtn": "すべて削除"
+    }
+  },
+  "modals": {
+    "deleteChat": {
+      "title": "本当によろしいですか？",
+      "description": "この操作は取り消せません。このチャット履歴は完全に削除されます。",
+      "cancel": "キャンセル",
+      "confirm": "チャットを削除",
+      "deleting": "削除中..."
+    },
+    "deleteMessage": {
+      "title": "履歴を削除しますか？",
+      "description": "このメッセージとそれ以降のすべてのメッセージを削除してもよろしいですか？これにより、データとメディアが完全に削除されます。",
+      "cancel": "キャンセル",
+      "confirm": "すべて削除",
+      "tooltip": "ここから削除"
+    },
+    "renameChat": {
+      "title": "チャット名を変更",
+      "placeholder": "新しいチャット名を入力...",
+      "cancel": "キャンセル",
+      "confirm": "保存",
+      "saving": "保存中..."
+    }
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "export": "エクスポート",
+    "reset": "リセット",
+    "saving": "保存中...",
+    "success": "設定が正常に保存されました！",
+    "error": "設定の保存中にエラーが発生しました",
+    "restored": "設定がデフォルトに復元されました"
+  },
+  "systemPrompt": {
+    "title": "システム指示 (システムプロンプト)",
+    "description": "Elanaの主要な行動、トーン、および行動規範を定義します。",
+    "activeInstruction": "有効な指示:",
+    "customActive": "カスタム有効",
+    "noCustomPrompt": "カスタム指示は有効になっていません（Elanaのデフォルトパーソナリティが有効です）。",
+    "instructionNotice": "これは人工知能が現在従っている指示です。変更するには、以下のパーソナリティテンプレートボタンを使用し、変更を保存してください。",
+    "saveChanges": "変更を保存",
+    "restoreDefault": "デフォルトに戻す",
+    "personalityTemplatesTitle": "パーソナリティテンプレート (確認または使用)",
+    "templatesSubtitle": "以下のテンプレートのいずれかをクリックしてテキストエディタに読み込みます。保存する前にさらにカスタマイズできます。",
+    "newPromptTemplate": "新規プロンプトテンプレート",
+    "applyToEditor": "エディタに適用",
+    "deleteTemplate": "テンプレートを削除",
+    "viewPrompt": "プロンプトを表示",
+    "editTemplate": "テンプレートを編集",
+    "createNewTemplateTitle": "新規プロンプトテンプレート作成",
+    "createNewTemplateDesc": "いつでもAIシステムに適用できる再利用可能なテンプレートを定義します。",
+    "templateTitleLabel": "テンプレートタイトル",
+    "templateDescLabel": "簡単な説明",
+    "templatePromptLabel": "プロンプト内容 (指示)",
+    "saveTemplateBtn": "テンプレートを保存",
+    "closeBtn": "閉じる",
+    "defaultElana": "デフォルト (Elana)",
+    "custom": "カスタム",
+    "promptSavedSuccess": "システム指示が正常に保存されました！",
+    "personalityRestored": "パーソナリティがElanaのデフォルトに復元されました！",
+    "templateLoaded": "テンプレート「{{title}}」がエディタに読み込まれました！",
+    "clickToActivate": "有効にするには「変更を保存」をクリックしてください。",
+    "fillRequired": "タイトルとプロンプト内容を入力してください。",
+    "userTag": "ユーザー",
+    "customCreatedDesc": "あなたが作成したプロンプトテンプレート。",
+    "templateAddedSuccess": "テンプレート「{{title}}」が正常に追加されました！",
+    "templateUpdatedSuccess": "プロンプトテンプレートが正常に更新されました！",
+    "templateRemovedSuccess": "テンプレート「{{title}}」が正常に削除されました。"
+  },
+  "personalityTemplates": {
+    "productivity": {
+      "title": "生産性アシスタント",
+      "tag": "フォーカスと組織",
+      "description": "絶対的な効率に焦点を当てます。ルーチンの構築、仕事用メール、要約、タスクリストの作成に最適です。",
+      "prompt": "あなたは高い生産性、組織化、明確さに焦点を当てたアシスタントです。\nあなたの目標は、ユーザーが時間を最適化し、日々のタスクを構造化するのを支援することです。\n回答する際：\n1. 直接的であり、実用的な解決策と現実的なアクションプランに焦点を当てます。\n2. タスクリスト、太字テキスト、およびよく構造化されたトピックを使用して回答を整理します。\n3. 長いテキストの要約、週間のルーチンの計画、ミスのないメールや企業コミュニケーションの作成を支援します。\n4. プロフェッショナルで親切、かつモチベーションを高めるトーンを維持します。"
+    },
+    "didactic": {
+      "title": "個人チューター (学習)",
+      "tag": "教育と学習",
+      "description": "歴史、科学、数学などの複雑なテーマをシンプルかつ直感的に説明します。",
+      "prompt": "あなたは非常に忍耐強く、教育的で、情熱的な個人チューターです。\nあなたの使命は、ユーザーがどんなトピックでもできるだけ簡単に学習できるようにすることです。\n回答する際：\n1. 現実世界のシンプルで親しみやすい比喩を使用して、難しいまたは専門的な概念を説明します。\n2. トピックを順序だった、消化しやすい部分に分割します。\n3. 励ますようなトーンを採用し、知的好奇心を育みます。\n4. 長い説明の最後に、理解度を確認するための簡単な質問をしたり、新しい推論を促したりします。"
+    },
+    "empathetic": {
+      "title": "共感パートナー",
+      "tag": "会話とサポート",
+      "description": "温かいトーン、歓迎的、アクティブリスニング。アイデア出し、愚痴聞き、気軽な日常計画に最適です。",
+      "prompt": "あなたは温かく、気配りができ、共感的で、役に立つパートナーです。\nあなたの役割は、アクティブリスニング、感情的なサポート、および快適な会話を提供することです。\n対話する際：\n1. 歓迎的であり、誠実な共感を示し、ユーザーの感情や意見を尊重します。\n2. フレンドリーで前向き、かつ偏見のないトーンを維持します。\n3. 健康、レジャー、旅行、レシピのアイデアを計画するのを手伝ったり、リラックスした方法でチャットしたりします。\n4. ユーザーが明示的に要求した場合にのみアドバイスを提供します。"
+    },
+    "creative": {
+      "title": "ライターとクリエイター",
+      "tag": "執筆と創造性",
+      "description": "文章執筆、ソーシャルメディア投稿、スペル修正、ストーリー作成のスペシャリスト。",
+      "prompt": "あなたは優れたライターであり、創造的な執筆パートナーです。\nあなたのトーンは表現豊かで洗練されており、語彙が豊富でインスピレーションを与えます。\nガイドライン：\n1. ユーザーが執筆のアイデアを創造的、論理的、かつ流動的に構造化するのを支援します。\n2. 文章を豊かにするために、語彙のバリエーションや興味深い類義語を提案します。\n3. 多才であること：カジュアルな投稿から文学的または学術的な執筆まで、あらゆる執筆スタイルに適応します。\n4. 読者の注意を引きつけ、維持する方法について詳細なフィードバックを提供します。"
+    }
+  }
+}
