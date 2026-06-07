@@ -1,0 +1,477 @@
+{
+  "sidebar": {
+    "chat": "Chat",
+    "brain": "Brain",
+    "memories": "Memories",
+    "settings": "Settings",
+    "search": "Search conversations...",
+    "newChat": "New Chat",
+    "noChats": "No conversations yet",
+    "chatList": "Your Conversations",
+    "help": "Help",
+    "categoriesTitle": "Categories",
+    "recent": "Recent",
+    "themeLight": "Light Theme",
+    "themeDark": "Dark Theme",
+    "user": "User",
+    "proPlan": "Pro Plan",
+    "navigationMenu": "Navigation Menu",
+    "categories": {
+      "all": "All",
+      "personal": "Personal",
+      "work": "Work",
+      "education": "Education",
+      "travel": "Travel",
+      "relationships": "Relationships",
+      "locations": "Locations"
+    }
+  },
+  "chat": {
+    "newChat": "New Chat",
+    "chat": "Chat",
+    "sendPlaceholder": "Send a message...",
+    "attachFile": "Attach file",
+    "webSearchOn": "Web Search Enabled",
+    "webSearchOff": "Web Search Disabled",
+    "waitResponse": "Wait for response",
+    "waitDescription": "The model is still responding.",
+    "thinking": "Thinking...",
+    "processing": "Processing",
+    "resource": "Resource",
+    "active": "Active"
+  },
+  "chatModes": {
+    "casual": "Casual",
+    "casualDesc": "Light and casual conversation",
+    "deep": "Deep Thinking",
+    "deepDesc": "Deep and reflective analysis",
+    "planning": "Planning",
+    "planningDesc": "Planning and organization",
+    "memory": "Memory Review",
+    "memoryDesc": "Review memories"
+  },
+  "welcome": {
+    "greeting": "Hi! I'm Elana.",
+    "subtitle": "Ready to explore new ideas?",
+    "description": "I'm your personal assistant with long-term memory. I know your history and can help in a personalized way.",
+    "prompts": {
+      "projects": "Projects & Achievements",
+      "projectsDesc": "A smart retrospective of your technical milestones and high-impact deliveries.",
+      "projectsPrompt": "What were my main recent projects and the results I achieved in them?",
+      "travel": "Travel Planner",
+      "travelDesc": "Smart itineraries and custom logistics for your next destination.",
+      "travelPrompt": "Set up a personalized and optimized travel itinerary based on my preferences."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Personalize your experience",
+    "general": {
+      "title": "User Profile",
+      "description": "Personalize how Elana communicates with you",
+      "yourName": "Your Name",
+      "save": "Save",
+      "nameTip": "This name will be displayed in your message bubbles and in the sidebar.",
+      "prefTitle": "General Preferences",
+      "prefDesc": "Configure basic options for Elana",
+      "lang": "Language",
+      "langDesc": "Interface language",
+      "autoSave": "Auto-save",
+      "autoSaveDesc": "Automatically save conversations",
+      "stream": "Streaming responses",
+      "streamDesc": "Show responses in real time",
+      "memory": "Memory indicators",
+      "memoryDesc": "Show when memories are used"
+    },
+    "sections": {
+      "general": "General",
+      "models": "Models",
+      "chatDatabase": "Chat Database",
+      "apiKeys": "API Keys",
+      "tools": "Tools",
+      "appearance": "Appearance",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "data": "Data",
+      "help": "Help"
+    },
+    "help": {
+      "title": "Elana Guide & Help",
+      "description": "How to configure your models and prompts to get the best experience and formatting.",
+      "optimizingSystemPrompt": {
+        "title": "Optimizing the System Prompt",
+        "desc": "The System Prompt defines the behavior, tone, and rules that the AI model will follow throughout the conversation. Adjusting it helps avoid generic responses and ensures the correct visual style.",
+        "exampleTitle": "Recommended Prompt Example",
+        "exampleContent": "You are Elana, a high-performance virtual assistant powered by artificial intelligence.\n\nFORMATTING AND BEHAVIOR RULES:\n1. Always respond in rich, well-structured Markdown.\n2. Always use code blocks with the specified language (e.g. ```typescript ... ```).\n3. When helpful, organize information in Markdown tables.\n4. Keep responses concise, direct, and technical, avoiding redundant explanations.",
+        "exampleTip": "* Click on the text above to select it and copy it to your model settings."
+      },
+      "markdownCapabilities": {
+        "title": "Rendering Capabilities (Markdown)",
+        "desc": "Elana has a Markdown renderer optimized for developers. To get the most out of it, encourage models to use:",
+        "codeBlocks": {
+          "title": "Code Blocks",
+          "desc": "With colored syntax highlighting for dozens of languages."
+        },
+        "smartLinks": {
+          "title": "Smart Links",
+          "desc": "Internet links are automatically and securely opened in your default browser."
+        },
+        "headersList": {
+          "title": "Headings & Lists",
+          "desc": "Clean hierarchy of headings (h1 to h6) and numbered or bulleted lists."
+        },
+        "tables": {
+          "title": "Rich Tables",
+          "desc": "Tabular data structuring with responsive spacing and alignment."
+        }
+      },
+      "advancedParameters": {
+        "title": "Advanced Model Parameters",
+        "desc": "In the Models tab, you can adjust the writing behavior of the AIs:",
+        "maxTokens": {
+          "title": "Response Limit (maxTokens)",
+          "desc": "Maximum number of tokens (word pieces) per response. Increase this if responses are cutting off in the middle."
+        },
+        "temperature": {
+          "title": "Temperature (temperature)",
+          "desc": "Creativity vs Precision. Values close to 0 yield logical and exact responses (ideal for code). Values close to 1+ provide more variety and creativity."
+        },
+        "topP": {
+          "title": "Top P (Nucleus Sampling)",
+          "desc": "Controls the diversity of words considered. For example, 0.1 restricts choices to only the top 10% most probable words."
+        },
+        "presence": {
+          "title": "Presence Penalty",
+          "desc": "Positive values penalize already used terms, encouraging the model to switch topics and introduce new concepts."
+        },
+        "frequency": {
+          "title": "Frequency Penalty",
+          "desc": "Reduces literal repetition of words in the same response. Positive values force the model to use synonyms and avoid redundancies."
+        }
+      },
+      "apiKeysSearch": {
+        "title": "API Keys & Web Search",
+        "keys": {
+          "title": "Local & Secure API Keys",
+          "desc": "Your keys for OpenAI, Gemini, or other LLM providers are saved in an encrypted and local format inside your app's SQLite database. They never pass through intermediary servers."
+        },
+        "search": {
+          "title": "Real-Time Web Search",
+          "desc": "To allow Elana to perform real-time web searches (to fetch news, documentation, or up-to-date code), register your Tavily API key in the Keys tab."
+        },
+        "deepseek": {
+          "title": "DeepSeek, Qwen & Others",
+          "desc": "Models compatible with the OpenAI API work 100%!\n• DeepSeek: Use URL https://api.deepseek.com.\n• OpenRouter: Use URL https://openrouter.ai/api/v1.\n• Qwen (Local/Ollama): Use URL http://localhost:11434/v1.\n• Qwen (Alibaba Cloud): Use https://dashscope.aliyuncs.com/compatible-mode/v1."
+        }
+      },
+      "tips": {
+        "title": "Important Development Tip:",
+        "desc": "Deep Thinking mode (if available in your model) is perfect for solving complex bugs and deep software logic. Casual mode (represented by the coffee icon) is optimized for speed and quick general chats."
+      }
+    },
+    "appearance": {
+      "title": "Appearance",
+      "description": "Customize Elana's look",
+      "theme": "Theme",
+      "themes": {
+        "light": "Light",
+        "dark": "Dark",
+        "blackMetal": "Black Metal",
+        "sunrise": "Sunrise Vintage",
+        "system": "System"
+      },
+      "fontSize": "Chat Font Size",
+      "fontSizeTip": "Adjust the message font size in the chat (minimum 12px, maximum 24px)."
+    },
+    "apiKeys": {
+      "title": "API Keys",
+      "description": "API keys encrypted and saved securely in the browser",
+      "addKey": "Add Key",
+      "checkingKeys": "Checking saved keys...",
+      "providerType": "Provider Type",
+      "providers": {
+        "auto": "Automatic Detection",
+        "openai": "OpenAI Compatible (Proxy)",
+        "custom": "Custom Provider"
+      },
+      "providerName": "Provider Name",
+      "providerNamePlaceholder": "E.g.: My DigitalOcean Proxy",
+      "baseUrl": "Base URL (API Host)",
+      "baseUrlPlaceholder": "E.g.: http://localhost:3100/v1",
+      "baseUrlTip": "The URL where models are hosted. Must support /models and /chat/completions.",
+      "apiKey": "API Key",
+      "apiKeyPlaceholder": "Paste your key here...",
+      "saveKey": "Save Key",
+      "noKeys": "No keys configured",
+      "encryptionNotice": "Keys are encrypted with AES-256 before being saved",
+      "validation": {
+        "urlRequired": "Base URL is required for custom providers"
+      },
+      "toast": {
+        "saved": "Key encrypted and saved!",
+        "saveError": "Error saving API key",
+        "deleted": "Key removed"
+      }
+    },
+    "tools": {
+      "title": "Tools and Integrations",
+      "description": "Configure access keys for external tools used by the artificial intelligence.",
+      "tavily": {
+        "keyDesc": "API Key for the web search tool.",
+        "guide": {
+          "title": "How to get your key:",
+          "step1": "Go to",
+          "step2": "Create a free account (Free Tier).",
+          "step3": "Go to the dashboard and copy your API Key starting with tvly-."
+        }
+      },
+      "unsavedChanges": "You have unsaved changes.",
+      "saveConfig": "Save Settings",
+      "restoreDefaults": "Restore Defaults"
+    },
+    "database": {
+      "title": "Database",
+      "description": "Manage persistence and connection of your conversations",
+      "activeSQLite": "SQLite active: data stays 100% local on this device, no internet required. Ideal for private and offline use.",
+      "activeSupabase": "Supabase active: chats are synced with cloud PostgreSQL. Configure credentials below.",
+      "dynamicConfig": {
+        "title": "Dynamic Configuration",
+        "desc": "Credentials entered here are saved locally in the browser and take priority over environment variables in .env. After saving or changing the database, reload the application for changes to take effect."
+      },
+      "supabase": {
+        "title": "Supabase — Database",
+        "desc": "To connect Elana to the cloud, you need two things:",
+        "bullet1": "REST API (URL + Anon Key): Used daily to read and write messages in real-time in the chat.",
+        "bullet2": "Connection String: Used only once by our magic button to create the initial tables automatically, without opening the Supabase SQL panel.",
+        "projectUrl": "Step 1: Project URL",
+        "projectUrlDesc": "Base URL of your Supabase project. E.g.: https://xyzabc.supabase.co",
+        "anonKey": "Step 1: Publishable Key (anon key)",
+        "anonKeyDesc": "Public access key to Supabase. Found in Project Settings → API.",
+        "connStringTitle": "Step 2: Connection String (Only required the 1st time)",
+        "connStringDesc": "This direct URL allows Elana to connect to the database core and create the table structure on its own. It is not sent to the cloud. Find it in: Project Settings → Database → Connection string (URI)",
+        "connStringLabel": "Connection String (URI) to create initial tables",
+        "connStringSubDesc": "Used only to create tables automatically. E.g.: postgresql://postgres:[PASSWORD]...",
+        "testAndSetup": "Test Connection and Configure Database",
+        "testing": "Verifying and configuring...",
+        "sqlLabel": "SQL to run on Supabase → SQL Editor",
+        "openSqlEditor": "Open Supabase SQL Editor →"
+      },
+      "s3": {
+        "title": "Supabase Storage — S3",
+        "desc": "Object storage (images, files) via compatible S3 protocol.",
+        "accessKeyId": "Access Key ID",
+        "accessKeyIdDesc": "S3 access key generated in Supabase Storage.",
+        "region": "Region",
+        "regionDesc": "Storage server region.",
+        "secretAccessKey": "Secret Access Key",
+        "secretAccessKeyDesc": "S3 secret access key. Never share this key.",
+        "endpoint": "S3 Endpoint",
+        "endpointDesc": "Supabase S3 endpoint URL. Found in Storage → S3 Connection."
+      },
+      "migration": {
+        "title": "Data Migration",
+        "desc": "Transfer your chats and messages between the cloud (Supabase) and local storage on this device (SQLite). Images will also be downloaded or transferred automatically.",
+        "exportTitle": "Cloud ➔ Local Computer (Export)",
+        "exportDesc": "Brings everything from Supabase to your local SQLite.",
+        "importTitle": "Local Computer ➔ Cloud (Import)",
+        "importDesc": "Sends conversations and images from this PC to Supabase.",
+        "confirmTitle": "Start Data Migration?",
+        "confirmDesc": "You are about to copy all chats, messages, and images from {{from}} to {{to}}.<br /><br />This process will not delete your original data. Completion time depends on the amount of images to transfer.",
+        "confirmBtn": "Start Migration",
+        "toast": {
+          "sqliteActive": "SQLite Local mode activated — reload the app to apply.",
+          "supabaseActive": "Supabase (PostgreSQL) mode activated — reload the app to apply.",
+          "saved": "Settings saved! Reload the app to apply the changes.",
+          "fillRequired": "Fill in the URL and Publishable Key before testing.",
+          "connOk": "Connection OK! Tables already exist and are ready.",
+          "tablesCreated": "Tables created successfully! Database ready for use.",
+          "setupFailed": "Failed to configure database: {{error}}",
+          "tablesNotFound": "Tables not found. Paste the Connection String or run the SQL below in the dashboard.",
+          "restored": "Settings restored to default environment values",
+          "migrated": "Migration completed! Reloading to sync data..."
+        }
+      }
+    },
+    "models": {
+      "title": "AI Model",
+      "description": "Configure the brain of the assistant",
+      "apiRoute": "API Route",
+      "noRoutes": "No routes configured",
+      "default": "Default",
+      "configureKeyFirst": "Configure a Key first",
+      "defaultPattern": "Default Pattern",
+      "noRouteDefault": "No route (Default)",
+      "model": "Model",
+      "noModels": "No models available",
+      "reloadModels": "Reload API models",
+      "selectRouteFirst": "Select a Route first",
+      "noModelDefault": "No model (Default)",
+      "responseLimit": "Response Limit",
+      "maxTokensDesc": "Maximum tokens per message",
+      "advancedSettings": "Advanced Settings",
+      "restoreDefaults": "Restore defaults",
+      "temperature": "Temperature",
+      "creativityVsPrecision": "Creativity vs Precision",
+      "topP": "Top P",
+      "vocabularyDiversity": "Vocabulary diversity",
+      "presencePenalty": "Presence Penalty",
+      "newTopics": "New topics",
+      "frequencyPenalty": "Frequency Penalty",
+      "avoidRepetition": "Avoid repetition",
+      "pending": "Pending",
+      "synced": "Synced",
+      "saveChanges": "Save Changes",
+      "toast": {
+        "resetAdvanced": "Advanced parameters reset to default",
+        "saved": "Model saved: {{modelName}}"
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Choose how you want to be notified",
+      "email": {
+        "label": "Email",
+        "desc": "Security alerts by email"
+      },
+      "push": {
+        "label": "Push",
+        "desc": "Browser notifications"
+      },
+      "weeklyDigest": {
+        "label": "Weekly Digest",
+        "desc": "Weekly usage report"
+      }
+    },
+    "privacy": {
+      "title": "Privacy & Security",
+      "description": "Manage how your data is handled",
+      "shareAnalytics": {
+        "label": "Share Analytics",
+        "desc": "Help us improve the app (anonymous)"
+      },
+      "improveModels": {
+        "label": "Improve Models",
+        "desc": "Allow message usage for training (anonymous)"
+      },
+      "retainHistory": {
+        "label": "Retain History",
+        "desc": "Keep your conversations saved on the device"
+      }
+    },
+    "data": {
+      "title": "Data Management",
+      "description": "Export or delete your data",
+      "exportData": {
+        "label": "Export all data",
+        "desc": "Download a complete copy of your data"
+      },
+      "export": "Export",
+      "syncMemories": {
+        "label": "Sync memories",
+        "desc": "Force synchronization with the server"
+      },
+      "sync": "Sync",
+      "dangerZone": {
+        "label": "Danger Zone",
+        "desc": "Permanently delete all data"
+      },
+      "dangerZoneBtn": "Delete All"
+    }
+  },
+  "modals": {
+    "deleteChat": {
+      "title": "Are you absolutely sure?",
+      "description": "This action cannot be undone. This will permanently delete this chat history.",
+      "cancel": "Cancel",
+      "confirm": "Delete Chat",
+      "deleting": "Deleting..."
+    },
+    "deleteMessage": {
+      "title": "Delete History?",
+      "description": "Are you sure you want to delete this message and all subsequent ones? This will permanently delete data and media.",
+      "cancel": "Cancel",
+      "confirm": "Delete All",
+      "tooltip": "Delete from here"
+    },
+    "renameChat": {
+      "title": "Rename Chat",
+      "placeholder": "Type the new chat name...",
+      "cancel": "Cancel",
+      "confirm": "Save",
+      "saving": "Saving..."
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "export": "Export",
+    "reset": "Reset",
+    "saving": "Saving...",
+    "success": "Settings saved successfully!",
+    "error": "Error saving settings",
+    "restored": "Settings restored to defaults"
+  },
+  "systemPrompt": {
+    "title": "System Instructions (System Prompt)",
+    "description": "Define the main behavior, tone, and rules of conduct for Elana.",
+    "activeInstruction": "Active Instruction:",
+    "customActive": "Custom Active",
+    "noCustomPrompt": "No custom instructions active (Elana's default personality active).",
+    "instructionNotice": "This is the instruction the artificial intelligence is currently following. To change it, use the personality template buttons below and save changes.",
+    "saveChanges": "Save Changes",
+    "restoreDefault": "Restore Default",
+    "personalityTemplatesTitle": "Personality Templates (Inspect or Use)",
+    "templatesSubtitle": "Click on one of the templates below to load it into the text editor. You can customize it further before saving.",
+    "newPromptTemplate": "New Prompt Template",
+    "applyToEditor": "Apply to editor",
+    "deleteTemplate": "Delete Template",
+    "viewPrompt": "View Prompt",
+    "editTemplate": "Edit Template",
+    "createNewTemplateTitle": "Create New Prompt Template",
+    "createNewTemplateDesc": "Define a reusable template to apply to the AI system whenever you want.",
+    "templateTitleLabel": "Template Title",
+    "templateDescLabel": "Short Description",
+    "templatePromptLabel": "Prompt Content (Instructions)",
+    "saveTemplateBtn": "Save Template",
+    "closeBtn": "Close",
+    "defaultElana": "Default (Elana)",
+    "custom": "Custom",
+    "promptSavedSuccess": "System instructions saved successfully!",
+    "personalityRestored": "Personality restored to Elana's default!",
+    "templateLoaded": "Template \"{{title}}\" loaded into the editor!",
+    "clickToActivate": "Click on 'Save Changes' to activate it.",
+    "fillRequired": "Please fill in the title and the prompt content.",
+    "userTag": "User",
+    "customCreatedDesc": "Prompt template created by you.",
+    "templateAddedSuccess": "Template \"{{title}}\" added successfully!",
+    "templateUpdatedSuccess": "Prompt template updated successfully!",
+    "templateRemovedSuccess": "Template \"{{title}}\" removed successfully."
+  },
+  "personalityTemplates": {
+    "productivity": {
+      "title": "Productivity Assistant",
+      "tag": "Focus & Organization",
+      "description": "Focus on absolute efficiency. Ideal for structuring routines, work emails, summaries, and task lists.",
+      "prompt": "You are an assistant focused on high productivity, organization, and clarity.\nYour goal is to help the user optimize their time and structure their daily tasks.\nWhen responding:\n1. Be direct, focused on practical solutions and realistic action plans.\n2. Organize your responses using task lists, bold text, and well-structured topics.\n3. Help summarize long texts, plan weekly routines, and write flawless emails or corporate communications.\n4. Maintain a professional, helpful, and motivating tone."
+    },
+    "didactic": {
+      "title": "Personal Tutor (Studies)",
+      "tag": "Didactics & Learning",
+      "description": "Explains any complex subject (History, Sciences, Math, etc.) simply and intuitively.",
+      "prompt": "You are an extremely patient, didactic, and passionate Personal Tutor.\nYour mission is to help the user learn about any subject as simply as possible.\nWhen responding:\n1. Explain difficult or technical concepts using simple, relatable real-world analogies.\n2. Divide topics into sequential, easy-to-digest parts.\n3. Adopt an encouraging tone and foster intellectual curiosity.\n4. At the end of long explanations, ask a light question to test understanding or spark new reasoning."
+    },
+    "empathetic": {
+      "title": "Empathetic Companion",
+      "tag": "Conversation & Support",
+      "description": "Warm tone, welcoming, and active listening. Ideal for brainstorming, venting, or light routine planning.",
+      "prompt": "You are a warm, attentive, empathetic, and helpful companion.\nYour role is to offer active listening, emotional support, and pleasant conversation.\nWhen interacting:\n1. Be welcoming, show sincere empathy, and validate the user's feelings and opinions.\n2. Maintain a friendly, positive, and non-judgmental tone.\n3. Help plan ideas for well-being, leisure, travel, recipes, or just chat in a relaxed manner.\n4. Offer advice only when the user explicitly requests it."
+    },
+    "creative": {
+      "title": "Writer & Creator",
+      "tag": "Writing & Creativity",
+      "description": "Specialist in writing, social media posts, spelling correction, and story creation.",
+      "prompt": "You are an excellent writer and creative writing partner.\nYour tone is expressive, polished, rich in vocabulary, and inspiring.\nYour guidelines:\n1. Help the user structure writing ideas creatively, logically, and fluidly.\n2. Offer vocabulary variations and interesting synonyms to enrich texts.\n3. Be versatile: adapt to any writing style, from informal posts to literary or academic writing.\n4. Give detailed feedback on how to capture and retain the reader's attention."
+    }
+  }
+}

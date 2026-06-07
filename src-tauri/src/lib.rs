@@ -1,3 +1,18 @@
+
+/// Variáveis lidas pelo WebKitGTK na **inicialização do processo** (não no `cargo build`).
+#[cfg(target_os = "linux")]
+fn configure_linux_runtime_env() {
+    // AppImage: linuxdeploy força GDK_BACKEND=x11 no apprun-hook; em GNOME Wayland isso
+    // roda via XWayland e quebra foco/transparência de forma diferente do `tauri dev`.
+    if std::env::var("XDG_SESSION_TYPE").as_deref() == Ok("wayland") {
+        std::env::set_var("GDK_BACKEND", "wayland");
+    }
+    std::env::set_var("WEBKIT_DISABLE_COMPOSITING_MODE", "1");
+    std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+}
+
+
+
 #[tauri::command]
 async fn setup_supabase_tables(connection_string: String) -> Result<bool, String> {
     use sqlx::postgres::PgPoolOptions;
@@ -45,6 +60,9 @@ async fn setup_supabase_tables(connection_string: String) -> Result<bool, String
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+    #[cfg(target_os = "linux")]
+    configure_linux_runtime_env();
+
     tauri::Builder::default()
         .plugin(tauri_plugin_sql::Builder::new().build())
         .invoke_handler(tauri::generate_handler![setup_supabase_tables])

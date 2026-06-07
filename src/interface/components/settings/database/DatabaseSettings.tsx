@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/interface/components/ui/button"
 import { Input } from "@/interface/components/ui/input"
 import { Switch } from "@/interface/components/ui/switch"
@@ -109,6 +110,7 @@ function SettingField({
 
 // PAINEL DE CONFIGURAÇÃO DO BANCO DE DADOS (SUPABASE + S3)
 export function DatabaseSettings() {
+    const { t } = useTranslation()
     const { config, updateConfig, saveConfig, resetConfig, isDirty } = useDatabaseSettings()
     const [isSaving, setIsSaving] = useState(false)
     const [provider, setProvider] = useState<DbProvider>(getActiveDbProvider())
@@ -160,8 +162,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
         setActiveDbProvider(next)
         toast.success(
             next === "sqlite"
-                ? "Modo SQLite Local ativado — recarregue o app para aplicar."
-                : "Modo Supabase (PostgreSQL) ativado — recarregue o app para aplicar.",
+                ? t("settings.database.migration.toast.sqliteActive", "Modo SQLite Local ativado — recarregue o app para aplicar.")
+                : t("settings.database.migration.toast.supabaseActive", "Modo Supabase (PostgreSQL) ativado — recarregue o app para aplicar."),
             { duration: 5000 }
         )
     }
@@ -172,12 +174,12 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
         setIsSaving(true)
         try {
             saveConfig()
-            toast.success("Configurações salvas! Recarregue o app para aplicar as mudanças.", {
+            toast.success(t("settings.database.migration.toast.saved", "Configurações salvas! Recarregue o app para aplicar as mudanças."), {
                 icon: <CheckCircle2 className="w-4 h-4 text-green-500" />,
                 duration: 5000,
             })
         } catch {
-            toast.error("Erro ao salvar configurações")
+            toast.error(t("settings.database.migration.toast.setupFailed", "Erro ao salvar configurações"))
         } finally {
             setIsSaving(false)
         }
@@ -186,7 +188,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
     // TESTA A CONEXÃO COM O SUPABASE E CONFIGURA AS TABELAS INICIAIS AUTOMATICAMENTE CASO NECESSÁRIO
     const handleTestAndSetup = async () => {
         if (!config.supabaseUrl || !config.supabasePublishableKey) {
-            toast.error("Preencha a URL e a Publishable Key antes de testar.")
+            toast.error(t("settings.database.migration.toast.fillRequired", "Preencha a URL e a Publishable Key antes de testar."))
             return
         }
         setIsSettingUp(true)
@@ -202,7 +204,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
             // 2. Verifica se as tabelas já existem
             const exists = await checkTablesExist(config.supabaseUrl, config.supabasePublishableKey)
             if (exists) {
-                toast.success("Conexão OK! As tabelas já existem e estão prontas.", {
+                toast.success(t("settings.database.migration.toast.connOk", "Conexão OK! As tabelas já existem e estão prontas."), {
                     icon: <CheckCircle2 className="w-4 h-4 text-green-500" />,
                     duration: 4000,
                 })
@@ -213,7 +215,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
             if (config.supabaseConnectionString) {
                 const setup = await setupSupabaseTables(config.supabaseConnectionString)
                 if (setup.success) {
-                    toast.success("Tabelas criadas com sucesso! Banco pronto para uso.", {
+                    toast.success(t("settings.database.migration.toast.tablesCreated", "Tabelas criadas com sucesso! Banco pronto para uso."), {
                         icon: <CheckCircle2 className="w-4 h-4 text-green-500" />,
                         duration: 5000,
                     })
@@ -225,7 +227,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
 
             // 4. Fallback: mostra o SQL para o usuário executar manualmente
             setShowManualSQL(true)
-            toast.warning("Tabelas não encontradas. Cole a Connection String ou execute o SQL abaixo no painel.", {
+            toast.warning(t("settings.database.migration.toast.tablesNotFound", "Tabelas não encontradas. Cole a Connection String ou execute o SQL abaixo no painel."), {
                 duration: 6000,
             })
         } finally {
@@ -236,7 +238,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
     // RESTAURA AS CONFIGURAÇÕES PARA OS VALORES PADRÃO DO AMBIENTE
     const handleReset = () => {
         resetConfig()
-        toast.success("Configurações restauradas para os valores padrão do ambiente")
+        toast.success(t("settings.database.migration.toast.restored", "Configurações restauradas para os valores padrão do ambiente"))
     }
 
     // ABRE O DIÁLOGO DE CONFIRMAÇÃO PARA INICIAR A MIGRAÇÃO ENTRE BANCOS DE DADOS
@@ -252,21 +254,21 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
         setMigrationDialog({ isOpen: false, from: null, to: null })
         setIsMigrating(true)
         setMigrationProgress(0)
-        setMigrationStatus("Iniciando...")
+        setMigrationStatus(t("settings.database.migration.toast.starting", "Iniciando..."))
 
         try {
             await databaseMigrationService.migrate(from, to, (progress, status) => {
                 setMigrationProgress(progress)
                 setMigrationStatus(status)
             })
-            toast.success(`Migração concluída! Recarregando para sincronizar os dados...`, {
+            toast.success(t("settings.database.migration.toast.migrated", "Migração concluída! Recarregando para sincronizar os dados..."), {
                 duration: 2000,
             })
             setTimeout(() => {
                 window.location.reload()
             }, 2000)
         } catch (e: any) {
-            toast.error(e.message || "Ocorreu um erro ao migrar os dados.", {
+            toast.error(e.message || t("settings.database.migration.toast.setupFailed", "Ocorreu um erro ao migrar os dados."), {
                 duration: 5000,
                 action: {
                     label: "X",
@@ -292,9 +294,9 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                             </div>
                             <div>
                                 <p className="font-semibold text-sm">Supabase</p>
-                                <p className="text-xs text-muted-foreground">PostgreSQL na nuvem</p>
+                                <p className="text-xs text-muted-foreground">{t("settings.database.description", "PostgreSQL na nuvem")}</p>
                             </div>
-                            {!isSQLite && <Badge className="ml-1 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-0 text-[10px]">Ativo</Badge>}
+                            {!isSQLite && <Badge className="ml-1 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-0 text-[10px]">{t("settings.database.active", "Ativo")}</Badge>}
                         </div>
 
                         {/* Switch central */}
@@ -306,10 +308,10 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
 
                         {/* Lado SQLite */}
                         <div className={`flex items-center gap-3 flex-1 justify-end transition-opacity duration-200 ${isSQLite ? "opacity-100" : "opacity-40"}`}>
-                            {isSQLite && <Badge className="mr-1 bg-violet-500/15 text-violet-600 dark:text-violet-400 border-0 text-[10px]">Ativo</Badge>}
+                            {isSQLite && <Badge className="mr-1 bg-violet-500/15 text-violet-600 dark:text-violet-400 border-0 text-[10px]">{t("settings.database.active", "Ativo")}</Badge>}
                             <div className="text-right">
                                 <p className="font-semibold text-sm">SQLite Local</p>
-                                <p className="text-xs text-muted-foreground">Dados no dispositivo</p>
+                                <p className="text-xs text-muted-foreground">{t("settings.database.sqlite.desc", "Dados no dispositivo")}</p>
                             </div>
                             <div className="w-10 h-10 rounded-xl bg-violet-500/10 flex items-center justify-center shrink-0">
                                 <HardDriveDownload className="w-5 h-5 text-violet-500" />
@@ -322,8 +324,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                         }`}>
                         <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                         {isSQLite
-                            ? "SQLite ativo: os dados ficam 100% locais neste dispositivo, sem necessidade de internet. Ideal para uso privado e offline."
-                            : "Supabase ativo: os chats são sincronizados com o PostgreSQL na nuvem. Configure as credenciais abaixo."}
+                            ? t("settings.database.activeSQLite", "SQLite ativo: os dados ficam 100% locais neste dispositivo, sem necessidade de internet. Ideal para uso privado e offline.")
+                            : t("settings.database.activeSupabase", "Supabase ativo: os chats são sincronizados com o PostgreSQL na nuvem. Configure as credenciais abaixo.")}
                     </div>
                 </CardContent>
             </Card>
@@ -332,11 +334,9 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
             <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-sm">
                 <Info className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
                 <div className="space-y-1">
-                    <p className="font-medium text-blue-400">Configuração Dinâmica</p>
+                    <p className="font-medium text-blue-400">{t("settings.database.dynamicConfig.title", "Configuração Dinâmica")}</p>
                     <p className="text-muted-foreground text-xs leading-relaxed">
-                        As credenciais inseridas aqui ficam salvas localmente no navegador e têm prioridade
-                        sobre as variáveis de ambiente do <code className="font-mono">.env</code>.
-                        Após salvar ou trocar o banco, <strong>recarregue o aplicativo</strong> para que as mudanças entrem em vigor.
+                        {t("settings.database.dynamicConfig.desc")}
                     </p>
                 </div>
             </div>
@@ -351,28 +351,28 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                                     <Database className="w-4 h-4 text-emerald-500" />
                                 </div>
-                                Supabase — Banco de Dados
+                                {t("settings.database.supabase.title", "Supabase — Banco de Dados")}
                             </CardTitle>
                             <CardDescription className="space-y-2 mt-2">
-                                <p>Para conectar a Elana à nuvem, você precisa de duas coisas:</p>
+                                <p>{t("settings.database.supabase.desc", "Para conectar a Elana à nuvem, você precisa de duas coisas:")}</p>
                                 <ul className="list-disc pl-4 space-y-1 text-xs">
-                                    <li><strong>API REST (URL + Anon Key)</strong>: Usada no dia a dia para ler e escrever mensagens em tempo real no chat.</li>
-                                    <li><strong>Connection String</strong>: Usada <em>apenas uma vez</em> pelo nosso botão mágico para criar as tabelas iniciais automaticamente, sem precisar abrir o painel SQL do Supabase.</li>
+                                    <li>{t("settings.database.supabase.bullet1")}</li>
+                                    <li>{t("settings.database.supabase.bullet2")}</li>
                                 </ul>
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <SettingField
-                                label="Passo 1: URL do Projeto"
-                                description="URL base do seu projeto Supabase. Ex: https://xyzabc.supabase.co"
+                                label={t("settings.database.supabase.projectUrl", "Passo 1: URL do Projeto")}
+                                description={t("settings.database.supabase.projectUrlDesc", "URL base do seu projeto Supabase. Ex: https://xyzabc.supabase.co")}
                                 value={config.supabaseUrl}
                                 onChange={(v) => updateConfig({ supabaseUrl: v })}
                                 placeholder="https://xxxxxxxxxxxx.supabase.co"
                                 monospace
                             />
                             <SettingField
-                                label="Passo 1: Publishable Key (anon key)"
-                                description="Chave pública de acesso ao Supabase. Encontrada em Project Settings → API."
+                                label={t("settings.database.supabase.anonKey", "Passo 1: Publishable Key (anon key)")}
+                                description={t("settings.database.supabase.anonKeyDesc", "Chave pública de acesso ao Supabase. Encontrada em Project Settings → API.")}
                                 value={config.supabasePublishableKey}
                                 onChange={(v) => updateConfig({ supabasePublishableKey: v })}
                                 placeholder="sb_publishable_..."
@@ -385,16 +385,15 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
                                     <Info className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
                                     <div className="text-sm space-y-1">
-                                        <p className="font-semibold text-blue-400">Passo 2: Connection String (Obrigatório apenas na 1ª vez)</p>
+                                        <p className="font-semibold text-blue-400">{t("settings.database.supabase.connStringTitle", "Passo 2: Connection String (Obrigatório apenas na 1ª vez)")}</p>
                                         <p className="text-muted-foreground text-xs leading-relaxed">
-                                            Essa URL direta permite que a Elana se conecte no núcleo do banco e crie a estrutura de tabelas sozinha.
-                                            <strong className="text-foreground"> Ela não é enviada para a nuvem.</strong> Encontre em: Project Settings → Database → Connection string (URI)
+                                            {t("settings.database.supabase.connStringDesc")}
                                         </p>
                                     </div>
                                 </div>
                                 <SettingField
-                                    label="Connection String (URI) para criar tabelas iniciais"
-                                    description="Usada apenas para criar tabelas automaticamente. Ex: postgresql://postgres:[SENHA]..."
+                                    label={t("settings.database.supabase.connStringLabel", "Connection String (URI) para criar tabelas iniciais")}
+                                    description={t("settings.database.supabase.connStringSubDesc", "Usada apenas para criar tabelas automaticamente. Ex: postgresql://postgres:[SENHA]...")}
                                     value={config.supabaseConnectionString}
                                     onChange={(v) => updateConfig({ supabaseConnectionString: v })}
                                     placeholder="postgresql://postgres:[YOUR-PASSWORD]@db.xxxx.supabase.co:5432/postgres"
@@ -411,14 +410,14 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 disabled={isSettingUp}
                             >
                                 <Wand2 className="w-4 h-4" />
-                                {isSettingUp ? "Verificando e configurando..." : "Testar Conexão e Configurar Banco"}
+                                {isSettingUp ? t("settings.database.supabase.testing", "Verificando e configurando...") : t("settings.database.supabase.testAndSetup", "Testar Conexão e Configurar Banco")}
                             </Button>
 
                             {/* SQL Manual de fallback */}
                             {showManualSQL && (
                                 <div className="space-y-2 p-4 rounded-lg bg-black/30 border border-white/10">
                                     <div className="flex items-center justify-between">
-                                        <p className="text-xs font-semibold text-muted-foreground">SQL para executar no Supabase → SQL Editor</p>
+                                        <p className="text-xs font-semibold text-muted-foreground">{t("settings.database.supabase.sqlLabel", "SQL para executar no Supabase → SQL Editor")}</p>
                                         <Button
                                             size="sm"
                                             variant="ghost"
@@ -430,7 +429,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                             }}
                                         >
                                             {sqlCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                                            {sqlCopied ? "Copiado!" : "Copiar"}
+                                            {sqlCopied ? t("database.supabase.copied", "Copiado!") : t("database.supabase.copy", "Copiar")}
                                         </Button>
                                     </div>
                                     <pre className="text-[11px] font-mono text-muted-foreground overflow-x-auto whitespace-pre-wrap leading-relaxed">{MANUAL_SQL}</pre>
@@ -440,7 +439,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                         rel="noopener noreferrer"
                                         className="text-xs text-primary underline underline-offset-2"
                                     >
-                                        Abrir SQL Editor do Supabase →
+                                        {t("settings.database.supabase.openSqlEditor", "Abrir SQL Editor do Supabase →")}
                                     </a>
                                 </div>
                             )}
@@ -454,17 +453,17 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center">
                                     <HardDrive className="w-4 h-4 text-violet-500" />
                                 </div>
-                                Supabase Storage — S3
+                                {t("settings.database.s3.title", "Supabase Storage — S3")}
                             </CardTitle>
                             <CardDescription>
-                                Armazenamento de objetos (imagens, arquivos) via protocolo S3 compatível.
+                                {t("settings.database.s3.desc", "Armazenamento de objetos (imagens, arquivos) via protocolo S3 compatível.")}
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <SettingField
-                                    label="Access Key ID"
-                                    description="Chave de acesso S3 gerada no Supabase Storage."
+                                    label={t("settings.database.s3.accessKeyId", "Access Key ID")}
+                                    description={t("settings.database.s3.accessKeyIdDesc", "Chave de acesso S3 gerada no Supabase Storage.")}
                                     value={config.s3AccessKeyId}
                                     onChange={(v) => updateConfig({ s3AccessKeyId: v })}
                                     placeholder="35910573f85542ea..."
@@ -472,8 +471,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                     monospace
                                 />
                                 <SettingField
-                                    label="Região"
-                                    description="Região do servidor de armazenamento."
+                                    label={t("settings.database.s3.region", "Região")}
+                                    description={t("settings.database.s3.regionDesc", "Região do servidor de armazenamento.")}
                                     value={config.s3Region}
                                     onChange={(v) => updateConfig({ s3Region: v })}
                                     placeholder="sa-east-1"
@@ -482,8 +481,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                             </div>
 
                             <SettingField
-                                label="Secret Access Key"
-                                description="Chave secreta de acesso S3. Nunca compartilhe esta chave."
+                                label={t("settings.database.s3.secretAccessKey", "Secret Access Key")}
+                                description={t("settings.database.s3.secretAccessKeyDesc", "Chave secreta de acesso S3. Nunca compartilhe esta chave.")}
                                 value={config.s3SecretAccessKey}
                                 onChange={(v) => updateConfig({ s3SecretAccessKey: v })}
                                 placeholder="4abb78a78e7fa6a045bad03caf27ca66..."
@@ -492,8 +491,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                             />
 
                             <SettingField
-                                label="S3 Endpoint"
-                                description="URL do endpoint S3 do Supabase. Encontrada em Storage → S3 Connection."
+                                label={t("settings.database.s3.endpoint", "S3 Endpoint")}
+                                description={t("settings.database.s3.endpointDesc", "URL do endpoint S3 do Supabase. Encontrada em Storage → S3 Connection.")}
                                 value={config.s3Endpoint}
                                 onChange={(v) => updateConfig({ s3Endpoint: v })}
                                 placeholder="https://xxxxxxxxxxxx.storage.supabase.co/storage/v1/s3"
@@ -506,7 +505,7 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                     {isDirty && (
                         <div className="flex items-center gap-2 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-sm text-amber-400">
                             <AlertTriangle className="w-4 h-4 shrink-0" />
-                            <span>Você tem alterações não salvas.</span>
+                            <span>{t("settings.tools.unsavedChanges", "Você tem alterações não salvas.")}</span>
                         </div>
                     )}
 
@@ -514,11 +513,11 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                     <div className="flex items-center gap-3">
                         <Button onClick={handleSave} disabled={isSaving || !isDirty} className="gap-2">
                             <Save className="w-4 h-4" />
-                            {isSaving ? "Salvando..." : "Salvar Configurações"}
+                            {isSaving ? t("common.saving", "Salvando...") : t("settings.tools.saveConfig", "Salvar Configurações")}
                         </Button>
                         <Button variant="outline" onClick={handleReset} className="gap-2">
                             <RotateCcw className="w-4 h-4" />
-                            Restaurar Padrões
+                            {t("settings.tools.restoreDefaults", "Restaurar Padrões")}
                         </Button>
                     </div>
                 </>
@@ -531,11 +530,10 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                         <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center">
                             <HardDrive className="w-4 h-4 text-blue-500" />
                         </div>
-                        Migração de Dados
+                        {t("settings.database.migration.title", "Migração de Dados")}
                     </CardTitle>
                     <CardDescription>
-                        Transfira seus chats e mensagens entre a nuvem (Supabase) e o armazenamento local deste dispositivo (SQLite).
-                        As imagens também serão baixadas ou transferidas automaticamente.
+                        {t("settings.database.migration.desc")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -550,8 +548,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 <Database className="w-4 h-4 text-blue-500" />
                             </div>
                             <div className="text-left flex-1">
-                                <div className="font-medium text-secondary-foreground">Nuvem ➔ Computador Local (Exportar)</div>
-                                <div className="text-xs text-muted-foreground font-normal">Traz tudo do Supabase para o seu SQLite local.</div>
+                                <div className="font-medium text-secondary-foreground">{t("settings.database.migration.exportTitle", "Nuvem ➔ Computador Local (Exportar)")}</div>
+                                <div className="text-xs text-muted-foreground font-normal">{t("settings.database.migration.exportDesc", "Traz tudo do Supabase para o seu SQLite local.")}</div>
                             </div>
                         </Button>
 
@@ -565,8 +563,8 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
                                 <HardDrive className="w-4 h-4 text-emerald-500" />
                             </div>
                             <div className="text-left flex-1">
-                                <div className="font-medium text-secondary-foreground">Computador Local ➔ Nuvem (Importar)</div>
-                                <div className="text-xs text-muted-foreground font-normal">Envia as conversas e imagens deste PC para o Supabase.</div>
+                                <div className="font-medium text-secondary-foreground">{t("settings.database.migration.importTitle", "Computador Local ➔ Nuvem (Importar)")}</div>
+                                <div className="text-xs text-muted-foreground font-normal">{t("settings.database.migration.importDesc", "Envia as conversas e imagens deste PC para o Supabase.")}</div>
                             </div>
                         </Button>
                     </div>
@@ -595,23 +593,23 @@ CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);`
             >
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Iniciar Migração de Dados?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            Você está prestes a copiar todos os chats, mensagens e imagens do
-                            <strong className="text-foreground ml-1">{migrationDialog.from?.toUpperCase()}</strong> para
-                            o <strong className="text-foreground ml-1">{migrationDialog.to?.toUpperCase()}</strong>.
-                            <br /><br />
-                            Este processo não apagará seus dados originais. O tempo de conclusão dependerá
-                            da quantidade de imagens que precisam ser transferidas.
-                        </AlertDialogDescription>
+                        <AlertDialogTitle>{t("settings.database.migration.confirmTitle", "Iniciar Migração de Dados?")}</AlertDialogTitle>
+                        <AlertDialogDescription
+                            dangerouslySetInnerHTML={{
+                                __html: t("settings.database.migration.confirmDesc", "Você está prestes a copiar todos os chats, mensagens e imagens do {{from}} para o {{to}}.<br /><br />Este processo não apagará seus dados originais. O tempo de conclusão dependerá da quantidade de imagens que precisam ser transferidas.", {
+                                    from: migrationDialog.from?.toUpperCase(),
+                                    to: migrationDialog.to?.toUpperCase()
+                                })
+                            }}
+                        />
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel disabled={isMigrating}>Cancelar</AlertDialogCancel>
+                        <AlertDialogCancel disabled={isMigrating}>{t("common.cancel", "Cancelar")}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleMigrate}
                             className="bg-blue-600 hover:bg-blue-700 text-white"
                         >
-                            Iniciar Migração
+                            {t("settings.database.migration.confirmBtn", "Iniciar Migração")}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>

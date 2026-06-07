@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { MouseEvent } from 'react'
-import { Minus, Square, X, Pin } from 'lucide-react'
+import { Minus, Square, X, Pin, MessageSquare } from 'lucide-react'
 import { cn } from '@/interface/lib/utils'
 
 // Detecção síncrona: verifica __TAURI_INTERNALS__ antes do primeiro render
@@ -103,16 +103,17 @@ export function TitleBar() {
     if (!IS_TAURI) return null
 
     return (
-        <div className="h-8 flex items-center justify-between select-none z-[200] w-full shrink-0 bg-sidebar border-b border-border/20">
+        <div className="h-11 flex items-center justify-between select-none z-[200] w-full shrink-0 bg-sidebar/85 backdrop-blur-md transition-all duration-300 rounded-t-[23px]">
 
             {/* Drag Area & Logo */}
             <div
                 onMouseDown={handleDrag}
-                className="flex items-center pl-4 h-full flex-1 cursor-default group"
+                className="flex items-center pl-4 h-full flex-1 cursor-default"
             >
-                <div className="flex items-center gap-2 transition-transform duration-200 group-active:scale-[0.98]">
-                    <span className="text-[11px] font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                        <span className="text-primary/80">ELANA</span>
+                <div className="flex items-center gap-2.5">
+                    <MessageSquare className="w-5 h-3.5 text-primary" />
+                    <span className="text-[10px] font-bold tracking-[0.15em] text-foreground font-sans uppercase">
+                        ELANA<span className="text-primary">.</span>
                     </span>
                 </div>
             </div>
@@ -125,40 +126,40 @@ export function TitleBar() {
                     <button
                         onClick={toggleAlwaysOnTop}
                         className={cn(
-                            'flex items-center justify-center w-7 h-7 rounded-md transition-all duration-200',
+                            'flex items-center justify-center w-7 h-7 rounded-md transition-all duration-300 hover:scale-[1.02] active:scale-95',
                             isAlwaysOnTop
-                                ? 'bg-primary/10 text-primary shadow-inner'
-                                : 'text-muted-foreground hover:bg-secondary/80 hover:text-foreground'
+                                ? 'bg-primary/15 text-primary shadow-sm border border-primary/20'
+                                : 'text-muted-foreground hover:bg-foreground/5 hover:text-foreground'
                         )}
                         title={isAlwaysOnTop ? 'Desafixar do topo' : 'Fixar no topo'}
                     >
-                        <Pin className={cn('w-3 h-3 transition-transform', isAlwaysOnTop && 'fill-current scale-110')} />
+                        <Pin className={cn('w-3 h-3 transition-all duration-300', isAlwaysOnTop && 'fill-current scale-105 rotate-45')} />
                     </button>
                 )}
 
                 {/* Separator */}
-                {isMobile === false && <div className="w-[1px] h-4 bg-border/20 mx-1" />}
+                {isMobile === false && <div className="w-[1px] h-4 bg-border/30 mx-1" />}
 
                 {/* Min / Max / Close */}
                 {isMobile === false && (
-                    <div className="flex items-center gap-0.5">
+                    <div className="flex items-center gap-1">
                         <button
                             onClick={minimize}
-                            className="flex items-center justify-center w-8 h-7 rounded-md text-muted-foreground hover:bg-secondary/80 hover:text-foreground transition-colors"
+                            className="flex items-center justify-center w-8 h-7 rounded-md text-muted-foreground hover:bg-foreground/5 hover:text-foreground transition-all active:scale-90"
                         >
                             <Minus className="w-3.5 h-3.5" />
                         </button>
                         <button
                             onClick={toggleMaximize}
-                            className="flex items-center justify-center w-8 h-7 rounded-md text-muted-foreground hover:bg-secondary/80 hover:text-foreground transition-colors"
+                            className="flex items-center justify-center w-8 h-7 rounded-md text-muted-foreground hover:bg-foreground/5 hover:text-foreground transition-all active:scale-90"
                         >
                             <Square className="w-2.5 h-2.5" />
                         </button>
                         <button
                             onClick={close}
-                            className="flex items-center justify-center w-8 h-7 rounded-md text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors group/close"
+                            className="flex items-center justify-center w-11 h-7 rounded-md text-muted-foreground hover:bg-destructive/15 hover:text-destructive transition-all active:scale-90 group/close"
                         >
-                            <X className="w-3.5 h-3.5 group-hover/close:scale-110 transition-transform" />
+                            <X className="w-3.5 h-3.5 transition-transform group-hover/close:scale-105" />
                         </button>
                     </div>
                 )}

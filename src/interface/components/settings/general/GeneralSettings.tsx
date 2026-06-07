@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Label } from "@/interface/components/ui/label"
 import { Switch } from "@/interface/components/ui/switch"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/interface/components/ui/card"
@@ -13,13 +14,13 @@ import {
 import { Input } from "@/interface/components/ui/input"
 import { useUserProfile } from "@/interface/context/UserProfileContext"
 import { Button } from "../../ui/button"
+import { SystemPromptSettingsCard } from "./SystemPromptSettingsCard"
 
 const SETTINGS_STORAGE_KEY = "elana-general-settings"
 
-import { SystemPromptSettingsCard } from "./SystemPromptSettingsCard"
-
 // PAINEL DE CONFIGURAÇÕES GERAIS — PERFIL, IDIOMA, AUTO-SAVE, STREAMING E INDICADORES DE MEMÓRIA
 export function GeneralSettings() {
+  const { t, i18n } = useTranslation()
   const { userName, updateUserName } = useUserProfile()
   const [settings, setSettings] = useState({
       language: "pt-BR",
@@ -55,6 +56,10 @@ export function GeneralSettings() {
     const newSettings = { ...settings, [key]: value }
     setSettings(newSettings)
     localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(newSettings))
+
+    if (key === "language" && typeof value === "string") {
+      i18n.changeLanguage(value)
+    }
   }
 
   if (!isReady) {
@@ -99,12 +104,12 @@ export function GeneralSettings() {
       {/* Perfil do Usuário */}
       <Card className="glass border-glass-border">
         <CardHeader>
-          <CardTitle>Perfil do Usuário</CardTitle>
-          <CardDescription>Personalize como a Elana se comunica com você</CardDescription>
+          <CardTitle>{t("settings.general.title")}</CardTitle>
+          <CardDescription>{t("settings.general.description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="profile-name">Seu Nome</Label>
+            <Label htmlFor="profile-name">{t("settings.general.yourName")}</Label>
             <Input
               id="profile-name"
               type="text"
@@ -115,10 +120,10 @@ export function GeneralSettings() {
               maxLength={30}
               autoComplete="off"
             />
-            <Button variant="outline" onClick={() => updateUserName(nameInput)}>Salvar</Button>
+            <Button variant="outline" onClick={() => updateUserName(nameInput)}>{t("settings.general.save")}</Button>
 
             <p className="text-xs text-muted-foreground">
-              Este nome será exibido nos balões das suas mensagens e na barra lateral.
+              {t("settings.general.nameTip")}
             </p>
           </div>
         </CardContent>
@@ -126,23 +131,22 @@ export function GeneralSettings() {
 
       <Card className="glass border-glass-border">
         <CardHeader>
-          <CardTitle>Preferências Gerais</CardTitle>
-          <CardDescription>Configure as opções básicas da Elana</CardDescription>
+          <CardTitle>{t("settings.general.prefTitle")}</CardTitle>
+          <CardDescription>{t("settings.general.prefDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <Label>Idioma</Label>
-              <p className="text-sm text-muted-foreground">Idioma da interface</p>
+              <Label>{t("settings.general.lang")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.general.langDesc")}</p>
             </div>
             <Select value={settings.language} onValueChange={(value) => handleChange("language", value)}>
               <SelectTrigger className="w-40">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="pt-BR">Português (BR)</SelectItem>
-                <SelectItem value="en-US">English (US)</SelectItem>
-                <SelectItem value="es">Español</SelectItem>
+                <SelectItem value="pt-BR">Português</SelectItem>
+                <SelectItem value="en">English</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -151,8 +155,8 @@ export function GeneralSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Salvar automaticamente</Label>
-              <p className="text-sm text-muted-foreground">Salva conversas automaticamente</p>
+              <Label>{t("settings.general.autoSave")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.general.autoSaveDesc")}</p>
             </div>
             <Switch
               checked={settings.autoSave}
@@ -164,8 +168,8 @@ export function GeneralSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Streaming de respostas</Label>
-              <p className="text-sm text-muted-foreground">Mostra respostas em tempo real</p>
+              <Label>{t("settings.general.stream")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.general.streamDesc")}</p>
             </div>
             <Switch
               checked={settings.streamResponses}
@@ -177,8 +181,8 @@ export function GeneralSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Indicadores de memória</Label>
-              <p className="text-sm text-muted-foreground">Mostra quando memórias são usadas</p>
+              <Label>{t("settings.general.memory")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.general.memoryDesc")}</p>
             </div>
             <Switch
               checked={settings.showMemoryIndicators}

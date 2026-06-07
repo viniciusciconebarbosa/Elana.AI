@@ -9,6 +9,7 @@ import { ScrollArea } from "@/interface/components/ui/scroll-area"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/interface/components/ui/tooltip"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/interface/components/ui/sheet"
 import { useChatList } from "@/interface/context/ChatListContext"
+import { CATEGORIES_META } from "@/interface/lib/categories"
 import {
     MessageSquare,
     Brain,
@@ -37,47 +38,57 @@ import {
     Trash2,
     ServerCog,
     Hammer,
+    HelpCircle,
 } from "lucide-react"
 
+import { useTranslation } from "react-i18next"
 import { useSidebar } from "@/interface/context/SidebarContext"
 import { useUserProfile } from "@/interface/context/UserProfileContext"
 import { RenameChatModal } from "@/interface/components/chat/RenameChatModal"
 import { DeleteChatModal } from "@/interface/components/chat/DeleteChatModal"
 
-const navItems = [
-    { href: "/chat?id=new", icon: MessageSquare, label: "Chat" },
-    { href: "/brain", icon: Brain, label: "Brain" },
-    { href: "/memories", icon: Database, label: "Memórias" },
-    { href: "/settings", icon: Settings, label: "Configurações" },
-]
-
-export const categories = [
-    { id: "all", label: "Todos", icon: Database, count: 1247 },
-    { id: "personal", label: "Pessoal", icon: User, count: 342 },
-    { id: "work", label: "Trabalho", icon: Briefcase, count: 289 },
-    { id: "education", label: "Educação", icon: GraduationCap, count: 156 },
-    { id: "travel", label: "Viagens", icon: Plane, count: 134 },
-    { id: "relationships", label: "Relacionamentos", icon: Heart, count: 198 },
-    { id: "locations", label: "Lugares", icon: MapPin, count: 128 },
-]
-
-// ANOS DISPONÍVEIS NO FILTRO DE TIMELINE
-export const timelineYears = ["2024", "2023", "2022", "2021"]
-
-export const settingsSections = [
-    { id: "general", label: "Geral", icon: Settings },
-    { id: "models", label: "Modelos", icon: Bot },
-    { id: "chat-database", label: "Chat Database", icon: ServerCog },
-    { id: "api-keys", label: "Chaves API", icon: Key },
-    { id: "tools", label: "Ferramentas", icon: Hammer },
-    { id: "appearance", label: "Aparência", icon: Palette },
-    { id: "notifications", label: "Notificações", icon: Bell },
-    { id: "privacy", label: "Privacidade", icon: Shield },
-    { id: "data", label: "Dados", icon: Database },
-]
-
 // COMPONENTE PRINCIPAL DA SIDEBAR — EXIBE NAVEGAÇÃO, LISTA DE CHATS E USUÁRIO
 export const AppSidebar = memo(function AppSidebar() {
+    const { t } = useTranslation()
+
+    const navItems = useMemo(() => [
+        { href: "/chat?id=new", icon: MessageSquare, label: t("sidebar.chat") },
+        { href: "/brain", icon: Brain, label: t("sidebar.brain") },
+        { href: "/memories", icon: Database, label: t("sidebar.memories") },
+        { href: "/settings", icon: Settings, label: t("sidebar.settings") },
+    ], [t])
+
+    const categories = useMemo(() => {
+        const counts: Record<string, number> = {
+            all: 1247,
+            personal: 342,
+            work: 289,
+            education: 156,
+            travel: 134,
+            relationships: 198,
+            locations: 128
+        }
+        return CATEGORIES_META.map(c => ({
+            id: c.id,
+            icon: c.icon,
+            label: t(`sidebar.categories.${c.id}`),
+            count: counts[c.id] || 0
+        }))
+    }, [t])
+
+    const settingsSections = useMemo(() => [
+        { id: "general", label: t("settings.sections.general"), icon: Settings },
+        { id: "models", label: t("settings.sections.models"), icon: Bot },
+        { id: "chat-database", label: t("settings.sections.chatDatabase"), icon: ServerCog },
+        { id: "api-keys", label: t("settings.sections.apiKeys"), icon: Key },
+        { id: "tools", label: t("settings.sections.tools"), icon: Hammer },
+        { id: "appearance", label: t("settings.sections.appearance"), icon: Palette },
+        { id: "notifications", label: t("settings.sections.notifications"), icon: Bell },
+        { id: "privacy", label: t("settings.sections.privacy"), icon: Shield },
+        { id: "data", label: t("settings.sections.data"), icon: Database },
+        { id: "help", label: t("settings.sections.help"), icon: HelpCircle },
+    ], [t])
+
     const location = useLocation()
     const pathname = location.pathname
     const [searchParams] = useSearchParams()
@@ -150,14 +161,14 @@ export const AppSidebar = memo(function AppSidebar() {
 
         return (
             <div className={cn(
-                "flex flex-col h-full border-t border-border/70 border-r w-full",
+                "flex flex-col h-full w-full",
                 isMobileView && "pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
             )}>
                 {/* Header */}
                 <div className="flex items-center justify-between p-2 ">
                     {!collapsed && (
                         <Link to="/chat?id=new" className="flex items-center gap-2" onClick={() => isMobileView && setIsOpenMobile(false)}>
-                            <span className="text-lg font-semibold gradient-text">Elana</span>
+                            <span className="text-lg pl-2 font-semibold gradient-text">Elana</span>
                         </Link>
                     )}
                     {!isMobileView && (
@@ -191,7 +202,7 @@ export const AppSidebar = memo(function AppSidebar() {
                                     </Link>
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent side="right">Novo Chat</TooltipContent>
+                            <TooltipContent side="right">{t("sidebar.newChat")}</TooltipContent>
                         </Tooltip>
                     ) : (
                         <Button
@@ -200,7 +211,7 @@ export const AppSidebar = memo(function AppSidebar() {
                         >
                             <Link to="/chat?id=new" onClick={() => isMobileView && setIsOpenMobile(false)}>
                                 <Plus className="h-4 w-4" />
-                                Novo Chat
+                                {t("sidebar.newChat")}
                             </Link>
                         </Button>
                     )}
@@ -272,7 +283,7 @@ export const AppSidebar = memo(function AppSidebar() {
                                 {/* Submenu for Memories */}
                                 {isActive && item.href === "/memories" && !collapsed && !collapsedMenus["/memories"] && (
                                     <div className="pl-9 pr-2 py-2 space-y-1">
-                                        <div className="text-xs font-medium text-muted-foreground mb-2 px-2">Categorias</div>
+                                        <div className="text-xs font-medium text-muted-foreground mb-2 px-2">{t("sidebar.categoriesTitle", "Categorias")}</div>
                                         {categories.map((category) => {
                                             const isCategoryActive = searchParams.get("category") === category.id || (!searchParams.get("category") && category.id === "all")
                                             return (
@@ -341,14 +352,14 @@ export const AppSidebar = memo(function AppSidebar() {
                         <div className="px-4 pb-2">
                             <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
                                 <Clock className="h-3 w-3" />
-                                Recentes
+                                {t("sidebar.recent", "Recentes")}
                             </h3>
                         </div>
-                        <ScrollArea className="flex-1 px-3">
+                        <div className="flex-1 overflow-y-auto px-3 custom-scrollbar">
                             <div className="space-y-1 pb-4">
                                 {filteredChats.length === 0 && (
                                     <p className="text-xs text-muted-foreground px-3 py-2">
-                                        Nenhuma conversa ainda.
+                                        {t("sidebar.noChats")}
                                     </p>
                                 )}
                                 {filteredChats.map((chat) => {
@@ -393,13 +404,13 @@ export const AppSidebar = memo(function AppSidebar() {
                                                 }}
                                             >
                                                 <Pencil className="h-3.5 w-3.5" />
-                                                <span className="sr-only">Renomear</span>
+                                                <span className="sr-only">{t("common.rename", "Renomear")}</span>
                                             </Button>
                                         </div>
                                     )
                                 })}
                             </div>
-                        </ScrollArea>
+                        </div>
                     </div>
                 )}
 
@@ -425,7 +436,7 @@ export const AppSidebar = memo(function AppSidebar() {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent side="right">
-                                {resolvedTheme === "dark" ? "Tema claro" : "Tema escuro"}
+                                {resolvedTheme === "dark" ? t("sidebar.themeLight", "Tema claro") : t("sidebar.themeDark", "Tema escuro")}
                             </TooltipContent>
                         </Tooltip>
                     ) : (
@@ -441,7 +452,7 @@ export const AppSidebar = memo(function AppSidebar() {
                                 <Moon className="h-4 w-4" />
                             )}
                             <span className="text-sm">
-                                {resolvedTheme === "dark" ? "Tema Claro" : "Tema Escuro"}
+                                {resolvedTheme === "dark" ? t("sidebar.themeLight", "Tema Claro") : t("sidebar.themeDark", "Tema Escuro")}
                             </span>
                         </Button>
                     )}
@@ -454,7 +465,7 @@ export const AppSidebar = memo(function AppSidebar() {
                                     <span className="text-sm font-medium text-primary">{userInitial}</span>
                                 </div>
                             </TooltipTrigger>
-                            <TooltipContent side="right">{userName || "Usuário"}</TooltipContent>
+                            <TooltipContent side="right">{userName || t("sidebar.user", "Usuário")}</TooltipContent>
                         </Tooltip>
                     ) : (
                         <div className="flex items-center gap-3 px-2">
@@ -462,8 +473,8 @@ export const AppSidebar = memo(function AppSidebar() {
                                 <span className="text-sm font-medium text-primary">{userInitial}</span>
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium truncate">{userName || "Usuário"}</p>
-                                <p className="text-xs text-muted-foreground truncate">Plano Pro</p>
+                                <p className="text-sm font-medium truncate">{userName || t("sidebar.user", "Usuário")}</p>
+                                <p className="text-xs text-muted-foreground truncate">{t("sidebar.proPlan", "Plano Pro")}</p>
                             </div>
                         </div>
                     )}
@@ -492,7 +503,7 @@ export const AppSidebar = memo(function AppSidebar() {
             {/* Mobile Sidebar Content (Sheet) - Triggered via context */}
             <Sheet open={isOpenMobile} onOpenChange={setIsOpenMobile}>
                 <SheetContent side="left" className="p-0 w-72 flex flex-col bg-sidebar">
-                    <SheetTitle className="sr-only">Menu de Navegação</SheetTitle>
+                    <SheetTitle className="sr-only">{t("sidebar.navigationMenu", "Menu de Navegação")}</SheetTitle>
                     {renderSidebarContent(true)}
                 </SheetContent>
             </Sheet>

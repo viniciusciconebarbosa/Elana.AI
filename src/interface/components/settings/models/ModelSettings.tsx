@@ -10,6 +10,8 @@ import { ModelSettingsActions } from "./ModelSettingsActions"
 import { ModelSettingsProvider, useModelSettingsForm } from "./ContextSettings"
 import { ModelConfig } from "@/interface/context/ModelContext"
 
+import { useTranslation } from "react-i18next"
+
 interface ModelSelectorProps {
     onConfigChange?: (config: ModelConfig) => void
 }
@@ -17,6 +19,7 @@ interface ModelSelectorProps {
 // CONTEÚDO INTERNO DAS CONFIGURAÇÕES DE MODELO — EXIBE OS SUB-COMPONENTES COM GUARD DE LOADING
 function ModelSettingsContent() {
     const { draft } = useModelSettingsForm()
+    const { t } = useTranslation()
 
     if (!draft) {
         return (
@@ -35,8 +38,8 @@ function ModelSettingsContent() {
                             <Bot className="w-5 h-5" />
                         </div>
                         <div>
-                            <CardTitle className="text-lg">Modelo de IA</CardTitle>
-                            <CardDescription className="text-xs">Configure o cérebro do assistente</CardDescription>
+                            <CardTitle className="text-lg">{t("settings.models.title", "Modelo de IA")}</CardTitle>
+                            <CardDescription className="text-xs">{t("settings.models.description", "Configure o cérebro do assistente")}</CardDescription>
                         </div>
                     </div>
                 </div>

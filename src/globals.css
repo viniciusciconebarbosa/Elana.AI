@@ -123,6 +123,98 @@
   --shadow-inner: inset 0 2px 4px oklch(0 0 0 / 0.30);
 }
 
+/* ─── Tema Black Metal — Obsidian escuro com acentos metálicos azul-aço ─── */
+.black-metal {
+  --background: oklch(0.12 0.015 260);
+  --foreground: oklch(0.93 0.008 250);
+  --card: oklch(0.15 0.015 260);
+  --card-foreground: oklch(0.93 0.008 250);
+  --popover: oklch(0.13 0.015 260);
+  --popover-foreground: oklch(0.93 0.008 250);
+  --primary: oklch(0.78 0.08 240);
+  --primary-foreground: oklch(0.08 0.01 250);
+  --secondary: oklch(0.20 0.02 260);
+  --secondary-foreground: oklch(0.88 0.01 250);
+  --muted: oklch(0.18 0.012 260);
+  --muted-foreground: oklch(0.58 0.015 250);
+  --accent: oklch(0.24 0.03 245);
+  --accent-foreground: oklch(0.85 0.06 240);
+  --destructive: oklch(0.58 0.20 25);
+  --destructive-foreground: oklch(0.98 0.005 25);
+  --border: oklch(0.26 0.02 258);
+  --input: oklch(0.18 0.015 260);
+  --ring: oklch(0.78 0.08 240);
+  --chart-1: oklch(0.78 0.08 240);
+  --chart-2: oklch(0.72 0.10 220);
+  --chart-3: oklch(0.65 0.12 280);
+  --chart-4: oklch(0.70 0.08 180);
+  --chart-5: oklch(0.68 0.10 340);
+  --sidebar: oklch(0.09 0.012 260);
+  --sidebar-foreground: oklch(0.93 0.008 250);
+  --sidebar-primary: oklch(0.78 0.08 240);
+  --sidebar-primary-foreground: oklch(0.08 0.01 250);
+  --sidebar-accent: oklch(0.18 0.018 258);
+  --sidebar-accent-foreground: oklch(0.93 0.008 250);
+  --sidebar-border: oklch(0.20 0.015 258);
+  --sidebar-ring: oklch(0.78 0.08 240);
+  --glass: oklch(0.15 0.015 260 / 0.96);
+  --glass-border: oklch(0.35 0.025 250 / 0.55);
+  --glow: oklch(0.78 0.08 240 / 0.18);
+  --shadow-xs:  0 1px 2px oklch(0 0 0 / 0.30);
+  --shadow-sm:  0 1px 4px oklch(0 0 0 / 0.40), 0 0 1px oklch(0 0 0 / 0.20);
+  --shadow-md:  0 4px 12px oklch(0 0 0 / 0.50), 0 1px 3px oklch(0 0 0 / 0.30);
+  --shadow-lg:  0 8px 24px oklch(0 0 0 / 0.60), 0 2px 6px oklch(0 0 0 / 0.35);
+  --shadow-xl:  0 16px 40px oklch(0 0 0 / 0.70), 0 4px 10px oklch(0 0 0 / 0.40);
+  --shadow-lg-up: 0 -8px 24px oklch(0 0 0 / 0.55), 0 -2px 6px oklch(0 0 0 / 0.30);
+  --shadow-inner: inset 0 2px 4px oklch(0 0 0 / 0.35);
+}
+
+/* ─── Tema Sunrise — Fundo claro com laranja queimado forte ─── */
+.sunrise {
+  --background: oklch(0.993 0.002 70);
+  --foreground: oklch(0.20 0.02 50);
+  --card: oklch(0.995 0.002 70);
+  --card-foreground: oklch(0.20 0.02 50);
+  --popover: oklch(0.995 0.002 70);
+  --popover-foreground: oklch(0.20 0.02 50);
+  --primary: oklch(0.62 0.16 48);
+  --primary-foreground: oklch(0.99 0.005 70);
+  --secondary: oklch(0.97 0.004 70);
+  --secondary-foreground: oklch(0.28 0.02 50);
+  --muted: oklch(0.97 0.004 70);
+  --muted-foreground: oklch(0.50 0.01 55);
+  --accent: oklch(0.97 0.008 60);
+  --accent-foreground: oklch(0.35 0.03 48);
+  --destructive: oklch(0.55 0.16 25);
+  --destructive-foreground: oklch(0.98 0.005 70);
+  --border: oklch(0.94 0.005 68);
+  --input: oklch(0.97 0.004 70);
+  --ring: oklch(0.62 0.16 48);
+  --chart-1: oklch(0.62 0.16 48);
+  --chart-2: oklch(0.55 0.12 32);
+  --chart-3: oklch(0.58 0.08 85);
+  --chart-4: oklch(0.52 0.10 18);
+  --chart-5: oklch(0.65 0.12 62);
+  --sidebar: oklch(0.985 0.003 70);
+  --sidebar-foreground: oklch(0.20 0.02 50);
+  --sidebar-primary: oklch(0.62 0.16 48);
+  --sidebar-primary-foreground: oklch(0.99 0.005 70);
+  --sidebar-accent: oklch(0.96 0.005 68);
+  --sidebar-accent-foreground: oklch(0.28 0.02 50);
+  --sidebar-border: oklch(0.95 0.004 68);
+  --sidebar-ring: oklch(0.62 0.16 48);
+  --glass: oklch(0.995 0.002 70 / 0.92);
+  --glass-border: oklch(0.92 0.005 65 / 0.40);
+  --glow: oklch(0.62 0.16 48 / 0.10);
+  --shadow-xs:  0 1px 2px oklch(0 0 0 / 0.02);
+  --shadow-sm:  0 1px 4px oklch(0 0 0 / 0.03), 0 0 1px oklch(0 0 0 / 0.01);
+  --shadow-md:  0 4px 12px oklch(0 0 0 / 0.04), 0 1px 3px oklch(0 0 0 / 0.02);
+  --shadow-lg:  0 8px 24px oklch(0 0 0 / 0.06), 0 2px 6px oklch(0 0 0 / 0.03);
+  --shadow-xl:  0 16px 40px oklch(0 0 0 / 0.08), 0 4px 10px oklch(0 0 0 / 0.04);
+  --shadow-lg-up: 0 -1px 34px oklch(0 0 0 / 0.04), 0 -1px 6px oklch(0 0 0 / 0.02);
+  --shadow-inner: inset 0 2px 4px oklch(0 0 0 / 0.02);
+}
+
 @theme inline {
   --font-sans: 'Roboto', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-mono: 'Roboto Mono', ui-mono, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -210,9 +302,31 @@
     background: oklch(0.4 0.02 260);
   }
 
+  /* Custom scrollbar — Black Metal */
+  .black-metal ::-webkit-scrollbar-thumb {
+    background: oklch(0.28 0.02 258);
+  }
+  .black-metal ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.38 0.03 245);
+  }
+
+  /* Custom scrollbar — Sunrise */
+  .sunrise ::-webkit-scrollbar-thumb {
+    background: oklch(0.84 0.010 65);
+  }
+  .sunrise ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.74 0.015 55);
+  }
+
+  /* Thinner scrollbar for elements with .custom-scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
   /* Hide background scrollbars when modals/sidebars are open (Radix sets data-scroll-locked on body) */
-  body[data-scroll-locked] .custom-scrollbar,
-  body[data-scroll-locked] pre {
+  body[data-scroll-locked] .custom-scrollbar:not([role="dialog"] *),
+  body[data-scroll-locked] pre:not([role="dialog"] *) {
     overflow: hidden !important;
   }
 }
@@ -284,6 +398,66 @@
     box-shadow: none;
     padding: 0.5rem 0;
     border-radius: 0;
+  }
+
+  /* ─── Black Metal — Estilos de componentes ─── */
+
+  .black-metal .msg-user {
+    background: oklch(0.20 0.02 258);
+    color: oklch(0.93 0.008 250);
+    border: 1px solid oklch(0.78 0.08 240 / 0.15);
+    box-shadow: 0 1px 3px oklch(0 0 0 / 0.25);
+  }
+
+  .black-metal .msg-assistant {
+    background: transparent;
+    color: oklch(0.90 0.008 250);
+    box-shadow: none;
+    padding: 0.5rem 0;
+    border-radius: 0;
+  }
+
+  .black-metal .glass {
+    box-shadow: var(--shadow-md), inset 0 1px 0 oklch(1 0 0 / 0.04);
+  }
+
+  .black-metal .gradient-text {
+    background: linear-gradient(135deg, oklch(0.78 0.08 240), oklch(0.70 0.10 220));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px oklch(0.78 0.08 240 / 0.40))
+            drop-shadow(0 0 14px oklch(0.78 0.08 240 / 0.18));
+  }
+
+  /* ─── Sunrise Vintage — Estilos de componentes ─── */
+
+  .sunrise .msg-user {
+    background: oklch(0.97 0.003 70);
+    color: oklch(0.20 0.02 50);
+    border: 1px solid oklch(0 0 0 / 0.03);
+    box-shadow: 0 1px 2px oklch(0 0 0 / 0.02);
+  }
+
+  .sunrise .msg-assistant {
+    background: transparent;
+    color: oklch(0.22 0.02 50);
+    box-shadow: none;
+    padding: 0.5rem 0;
+    border-radius: 0;
+  }
+
+  .sunrise .glass {
+    box-shadow: var(--shadow-md), inset 0 1px 0 oklch(1 0 0 / 0.12);
+  }
+
+  .sunrise .gradient-text {
+    background: linear-gradient(135deg, oklch(0.62 0.16 48), oklch(0.55 0.14 38));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px oklch(0.62 0.16 48 / 0.30))
+            drop-shadow(0 0 16px oklch(0.62 0.16 48 / 0.12));
   }
 
   /* ─── Depth utility classes ─── */

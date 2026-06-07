@@ -3,9 +3,12 @@ import { Settings, Save, Menu } from "lucide-react"
 import { useSidebar } from "@/interface/context/SidebarContext"
 
 
+import { useTranslation } from "react-i18next"
+
 // CABEÇALHO DA PÁGINA DE CONFIGURAÇÕES — EXIBE TÍTULO E BOTÃO DE SALVAR
 export function SettingsHeader() {
   const { toggleMobile } = useSidebar()
+  const { t } = useTranslation()
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-background/80 backdrop-blur-sm shrink-0 flex-wrap gap-3" style={{ boxShadow: '0 1px 8px oklch(0 0 0 / 0.08), 0 1px 2px oklch(0 0 0 / 0.04)' }}>
@@ -22,8 +25,8 @@ export function SettingsHeader() {
           <Settings className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h1 className="text-xl font-semibold">Configurações</h1>
-          <p className="text-sm text-muted-foreground">Personalize sua experiência</p>
+          <h1 className="text-xl font-semibold">{t("settings.title", "Configurações")}</h1>
+          <p className="text-sm text-muted-foreground">{t("settings.subtitle", "Personalize sua experiência")}</p>
         </div>
       </div>
     </header>

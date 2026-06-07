@@ -1,6 +1,7 @@
 import { Suspense, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { categories } from "@/interface/components/app-sidebar"
+import { useTranslation } from "react-i18next"
+import { CATEGORIES_META } from "@/interface/lib/categories"
 import { Database } from "lucide-react"
 import { MemoriesHeader } from "@/interface/components/memories/MemoriesHeader"
 import { MemoriesSearchBar } from "@/interface/components/memories/MemoriesSearchBar"
@@ -11,8 +12,9 @@ const mockMemories: Memory[] = []
 
 // PÁGINA DE MEMÓRIAS — ENVOLVE O CONTEÚDO EM SUSPENSE PARA LOADING SEGURO
 export default function MemoriesPage() {
+  const { t } = useTranslation()
   return (
-    <Suspense fallback={<div className="p-6 text-muted-foreground">Carregando memórias...</div>}>
+    <Suspense fallback={<div className="p-6 text-muted-foreground">{t("common.loading", "Carregando...")}</div>}>
       <MemoriesContent />
     </Suspense>
   )
@@ -20,6 +22,7 @@ export default function MemoriesPage() {
 
 // CONTEÚDO DAS MEMÓRIAS — FILTRA, BUSCA E EXIBE OS CARTÕES DE MEMÓRIA
 function MemoriesContent() {
+  const { t } = useTranslation()
   const [searchParams] = useSearchParams()
   const selectedCategory = searchParams.get("category") || "all"
   const [searchQuery, setSearchQuery] = useState("")
@@ -35,14 +38,13 @@ function MemoriesContent() {
 
   // RETORNA O ÍCONE DA CATEGORIA PELO ID
   const getCategoryIcon = (categoryId: string) => {
-    const category = categories.find((c) => c.id === categoryId)
+    const category = CATEGORIES_META.find((c) => c.id === categoryId)
     return category?.icon || Database
   }
 
   // RETORNA O LABEL DA CATEGORIA PELO ID
   const getCategoryLabel = (categoryId: string) => {
-    const category = categories.find((c) => c.id === categoryId)
-    return category?.label || categoryId
+    return t(`sidebar.categories.${categoryId}`, categoryId)
   }
 
   return (
@@ -70,9 +72,9 @@ function MemoriesContent() {
               <div className="w-16 h-16 rounded-2xl bg-secondary/50 flex items-center justify-center mb-4">
                 <Database className="w-8 h-8 text-muted-foreground" />
               </div>
-              <h3 className="text-lg font-medium mb-2">Nenhuma memória encontrada</h3>
+              <h3 className="text-lg font-medium mb-2">{t("memories.noMemories", "Nenhuma memória encontrada")}</h3>
               <p className="text-sm text-muted-foreground max-w-sm">
-                Tente ajustar sua busca ou filtros para encontrar o que procura.
+                {t("memories.noMemoriesDesc", "Tente ajustar sua busca ou filtros para encontrar o que procura.")}
               </p>
             </div>
           )}

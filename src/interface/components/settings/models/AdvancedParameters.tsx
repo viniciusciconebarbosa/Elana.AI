@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Label } from "@/interface/components/ui/label"
 import { Slider } from "@/interface/components/ui/slider"
 import { Input } from "@/interface/components/ui/input"
@@ -14,6 +15,7 @@ import { useModelSettingsForm } from "./ContextSettings"
 // PARÂMETROS DE GERAÇÃO — CONTROLES DE TOKENS, TEMPERATURA, TOP-P, PRESENCE E FREQUENCY PENALTY
 export function GenerationParameters() {
     const { draft, updateDraftParam, handleResetAdvanced } = useModelSettingsForm()
+    const { t } = useTranslation()
 
     if (!draft) return null
 
@@ -23,8 +25,8 @@ export function GenerationParameters() {
             <div className="space-y-4 p-4 rounded-xl bg-secondary/20 border border-border/50">
                 <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                        <Label htmlFor="tokens-slider" className="text-sm font-medium">Limite de Resposta</Label>
-                        <p className="text-[11px] text-muted-foreground">Máximo de tokens por mensagem</p>
+                        <Label htmlFor="tokens-slider" className="text-sm font-medium">{t("settings.models.responseLimit", "Limite de Resposta")}</Label>
+                        <p className="text-[11px] text-muted-foreground">{t("settings.models.maxTokensDesc", "Máximo de tokens por mensagem")}</p>
                     </div>
                     <div className="flex items-center gap-2">
                         <Input
@@ -53,7 +55,7 @@ export function GenerationParameters() {
                     <AccordionTrigger className="py-2 px-4 rounded-lg hover:bg-secondary/30 transition-all hover:no-underline text-sm font-medium text-muted-foreground">
                         <div className="flex items-center gap-2">
                             <Settings2 className="w-4 h-4" />
-                            Ajustes Avançados
+                            {t("settings.models.advancedSettings", "Ajustes Avançados")}
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="pt-4 pb-2 space-y-6 px-4">
@@ -64,15 +66,15 @@ export function GenerationParameters() {
                                 className="h-auto p-0 text-[11px] text-muted-foreground hover:text-primary"
                                 onClick={handleResetAdvanced}
                             >
-                                Restaurar padrões
+                                {t("settings.models.restoreDefaults", "Restaurar padrões")}
                             </Button>
                         </div>
 
                         {/* Temperature */}
                         <div className="space-y-3">
                             <div className="flex items-center justify-between">
-                                <Label className="text-xs">Temperatura ({draft.temperature?.toFixed(2) || '0.70'})</Label>
-                                <span className="text-[10px] text-muted-foreground">Criatividade vs Precisão</span>
+                                <Label className="text-xs">{t("settings.models.temperature", "Temperatura")} ({draft.temperature?.toFixed(2) || '0.70'})</Label>
+                                <span className="text-[10px] text-muted-foreground">{t("settings.models.creativityVsPrecision", "Criatividade vs Precisão")}</span>
                             </div>
                             <Slider
                                 min={0}
@@ -87,7 +89,7 @@ export function GenerationParameters() {
                         <div className="space-y-3">
                             <div className="flex items-center justify-between">
                                 <Label className="text-xs">Top P ({draft.topP?.toFixed(2) || '1.00'})</Label>
-                                <span className="text-[10px] text-muted-foreground">Diversidade de vocabulário</span>
+                                <span className="text-[10px] text-muted-foreground">{t("settings.models.vocabularyDiversity", "Diversidade de vocabulário")}</span>
                             </div>
                             <Slider
                                 min={0}
@@ -102,7 +104,7 @@ export function GenerationParameters() {
                         <div className="space-y-3">
                             <div className="flex items-center justify-between">
                                 <Label className="text-xs">Presence Penalty ({draft.presencePenalty?.toFixed(2) || '0.00'})</Label>
-                                <span className="text-[10px] text-muted-foreground">Assuntos novos</span>
+                                <span className="text-[10px] text-muted-foreground">{t("settings.models.newTopics", "Assuntos novos")}</span>
                             </div>
                             <Slider
                                 min={-2}
@@ -117,7 +119,7 @@ export function GenerationParameters() {
                         <div className="space-y-3">
                             <div className="flex items-center justify-between">
                                 <Label className="text-xs">Frequency Penalty ({draft.frequencyPenalty?.toFixed(2) || '0.00'})</Label>
-                                <span className="text-[10px] text-muted-foreground">Evitar repetição</span>
+                                <span className="text-[10px] text-muted-foreground">{t("settings.models.avoidRepetition", "Evitar repetição")}</span>
                             </div>
                             <Slider
                                 min={-2}

@@ -1,5 +1,4 @@
-"use client"
-
+import { useTranslation } from "react-i18next"
 import { useRef, useState, useEffect } from "react"
 import { cn } from "@/interface/lib/utils"
 import { Button } from "@/interface/components/ui/button"
@@ -30,6 +29,7 @@ function fileToDataUrl(file: File | Blob): Promise<string> {
 
 // COMPONENTE DE ENTRADA DO CHAT — TEXTAREA, IMAGENS E BOTÕES DE AÇÃO
 export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, webSearchEnabled, onToggleWebSearch }: ChatInputProps) {
+    const { t } = useTranslation()
     const textareaRef = useRef<HTMLTextAreaElement>(null)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [images, setImages] = useState<string[]>([])
@@ -46,7 +46,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault()
             if (isLoading) {
-                toast.warning("Aguarde a resposta", { description: "O modelo ainda está respondendo." })
+                toast.warning(t("chat.waitResponse"), { description: t("chat.waitDescription") })
                 return
             }
             submitWithImages(e as unknown as React.FormEvent)
@@ -69,7 +69,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                     setImages((prev) => [...prev, url])
                 }).catch((err) => {
                     console.error("Erro ao processar imagem selecionada:", err)
-                    toast.error("Erro ao carregar imagem")
+                    toast.error(t("common.errorImageLoad", "Erro ao carregar imagem"))
                 })
             }
         })
@@ -80,7 +80,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
     // CAPTURA IMAGENS COLADAS DO CLIPBOARD (CTRL+V)
     const handlePaste = async (e: React.ClipboardEvent) => {
         if (isLoading) {
-            toast.warning("Aguarde a resposta", { description: "O modelo ainda está respondendo." })
+            toast.warning(t("chat.waitResponse"), { description: t("chat.waitDescription") })
             return
         }
 
@@ -198,7 +198,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                         onChange={(e) => onChange(e.target.value)}
                         onKeyDown={handleKeyDown}
                         onPaste={handlePaste}
-                        placeholder="Envie uma mensagem..."
+                        placeholder={t("chat.sendPlaceholder")}
                         className="min-h-[56px] max-h-[200px] resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] leading-relaxed px-4 pt-4 pb-2 placeholder:text-muted-foreground/50"
                         rows={1}
                     />
@@ -219,7 +219,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                                             <Paperclip className="h-4 w-4" />
                                         </Button>
                                     </TooltipTrigger>
-                                    <TooltipContent>Anexar arquivo</TooltipContent>
+                                    <TooltipContent>{t("chat.attachFile")}</TooltipContent>
                                 </Tooltip>
 
                                 <Tooltip>
@@ -239,7 +239,7 @@ export function ChatInput({ value, onChange, onSubmit, isLoading, modelName, web
                                             {webSearchEnabled ? <Globe className="h-4 w-4" /> : <Ghost className="h-4 w-4" />}
                                         </Button>
                                     </TooltipTrigger>
-                                    <TooltipContent>{webSearchEnabled ? "Busca na Web Ativada" : "Busca na Web Desativada"}</TooltipContent>
+                                    <TooltipContent>{webSearchEnabled ? t("chat.webSearchOn") : t("chat.webSearchOff")}</TooltipContent>
                                 </Tooltip>
                             </TooltipProvider>
                         </div>

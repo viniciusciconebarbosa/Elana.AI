@@ -1,6 +1,5 @@
-"use client"
-
 import { useState, useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Label } from "@/interface/components/ui/label"
 import { Switch } from "@/interface/components/ui/switch"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/interface/components/ui/card"
@@ -9,6 +8,7 @@ import { Shield } from "lucide-react"
 
 // PAINEL DE PRIVACIDADE — TOGGLES DE ANALYTICS, MELHORIA DE MODELOS E RETENÇÃO DE HISTÓRICO
 export function PrivacySettings() {
+  const { t } = useTranslation()
   const [settings, setSettings] = useState({
     shareAnalytics: false,
     improveModels: false,
@@ -32,15 +32,16 @@ export function PrivacySettings() {
       <Card className="glass border-glass-border">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            Privacidade & Segurança
+            <Shield className="w-5 h-5 text-primary" />
+            {t("settings.privacy.title", "Privacidade & Segurança")}
           </CardTitle>
-          <CardDescription>Gerencie como seus dados são tratados</CardDescription>
+          <CardDescription>{t("settings.privacy.description", "Gerencie como seus dados são tratados")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <Label>Compartilhar Analytics</Label>
-              <p className="text-sm text-muted-foreground">Ajude-nos a melhorar o app (anônimo)</p>
+              <Label>{t("settings.privacy.shareAnalytics.label", "Compartilhar Analytics")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.privacy.shareAnalytics.desc", "Ajude-nos a melhorar o app (anônimo)")}</p>
             </div>
             <Switch
               checked={settings.shareAnalytics}
@@ -52,8 +53,8 @@ export function PrivacySettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Melhorar Modelos</Label>
-              <p className="text-sm text-muted-foreground">Permitir uso das mensagens para treino (anônimo)</p>
+              <Label>{t("settings.privacy.improveModels.label", "Melhorar Modelos")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.privacy.improveModels.desc", "Permitir uso das mensagens para treino (anônimo)")}</p>
             </div>
             <Switch
               checked={settings.improveModels}
@@ -65,8 +66,8 @@ export function PrivacySettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Reter Histórico</Label>
-              <p className="text-sm text-muted-foreground">Mantém suas conversas salvas no dispositivo</p>
+              <Label>{t("settings.privacy.retainHistory.label", "Reter Histórico")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.privacy.retainHistory.desc", "Mantém suas conversas salvas no dispositivo")}</p>
             </div>
             <Switch
               checked={settings.retainHistory}

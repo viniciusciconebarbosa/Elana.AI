@@ -1,5 +1,4 @@
-"use client"
-
+import { useTranslation } from "react-i18next"
 import { Label } from "@/interface/components/ui/label"
 import { Switch } from "@/interface/components/ui/switch"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/interface/components/ui/card"
@@ -9,6 +8,7 @@ import { useEffect, useState } from "react"
 
 // PAINEL DE NOTIFICAÇÕES — TOGGLES DE E-MAIL, PUSH E RESUMO SEMANAL
 export function NotificationsSettings() {   
+  const { t } = useTranslation()
   const [settings, setSettings] = useState({
     email: true,
     push: false,
@@ -33,15 +33,15 @@ export function NotificationsSettings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bell className="w-5 h-5" />
-            Notificações
+            {t("settings.notifications.title", "Notificações")}
           </CardTitle>
-          <CardDescription>Escolha como você quer ser avisado</CardDescription>
+          <CardDescription>{t("settings.notifications.description", "Escolha como você quer ser avisado")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <Label>E-mail</Label>
-              <p className="text-sm text-muted-foreground">Alertas de segurança por e-mail</p>
+              <Label>{t("settings.notifications.email.label", "E-mail")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.notifications.email.desc", "Alertas de segurança por e-mail")}</p>
             </div>
             <Switch
               checked={settings.email}
@@ -53,8 +53,8 @@ export function NotificationsSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Push</Label>
-              <p className="text-sm text-muted-foreground">Notificações no navegador</p>
+              <Label>{t("settings.notifications.push.label", "Push")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.notifications.push.desc", "Notificações no navegador")}</p>
             </div>
             <Switch
               checked={settings.push}
@@ -66,8 +66,8 @@ export function NotificationsSettings() {
 
           <div className="flex items-center justify-between">
             <div>
-              <Label>Resumo Semanal</Label>
-              <p className="text-sm text-muted-foreground">Relatório de uso da semana</p>
+              <Label>{t("settings.notifications.weeklyDigest.label", "Resumo Semanal")}</Label>
+              <p className="text-sm text-muted-foreground">{t("settings.notifications.weeklyDigest.desc", "Relatório de uso da semana")}</p>
             </div>
             <Switch
               checked={settings.weeklyDigest}

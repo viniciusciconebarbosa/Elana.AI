@@ -1,22 +1,6 @@
-"use client"
-
+import { useTranslation } from "react-i18next"
+import { useMemo } from "react"
 import { Sparkles, Map, Atom, Terminal, BookOpen, Coffee } from "lucide-react"
-
-// SUGESTÕES DE PROMPTS EXIBIDAS NA TELA INICIAL (CARD DESIGN)
-const suggestedPrompts = [
-{
-    title: "Projetos & Conquistas",
-    prompt: "Quais foram os meus principais projetos recentes e os resultados que alcancei neles?",
-    description: "Uma retrospectiva inteligente dos seus marcos técnicos e entregas de alto impacto.",
-    icon: BookOpen
-  },
-  {
-    title: "Planejador de Viagens",
-    prompt: "Monte um roteiro de viagem personalizado e otimizado com base nas minhas preferências.",
-    description: "Itinerários inteligentes e logísticas personalizadas para o seu próximo destino.",
-    icon: Map
-  }
-]
 
 interface WelcomeScreenProps {
   onPromptClick: (prompt: string) => void
@@ -24,18 +8,35 @@ interface WelcomeScreenProps {
 
 // TELA DE BOAS-VINDAS — EXIBIDA QUANDO NÃO HÁ MENSAGENS NO CHAT
 export function WelcomeScreen({ onPromptClick }: WelcomeScreenProps) {
+  const { t } = useTranslation()
+
+  // SUGESTÕES DE PROMPTS EXIBIDAS NA TELA INICIAL (CARD DESIGN)
+  const suggestedPrompts = useMemo(() => [
+    {
+      title: t("welcome.prompts.projects"),
+      prompt: t("welcome.prompts.projectsPrompt"),
+      description: t("welcome.prompts.projectsDesc"),
+      icon: BookOpen
+    },
+    {
+      title: t("welcome.prompts.travel"),
+      prompt: t("welcome.prompts.travelPrompt"),
+      description: t("welcome.prompts.travelDesc"),
+      icon: Map
+    }
+  ], [t])
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-2 sm:px-10 md:px-12 lg:px-14"> 
       <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 glow">
         <Terminal className="w-8 h-8 gradient-text shadow-depth-lg " /> 
       </div>
       <h2 className="text-3xl font-bold mb-3">
-        <p>Olá! Sou a Elana.</p>
-        <p className="gradient-text"> Pronto para explorar novas ideias?</p>
+        <p>{t("welcome.greeting")}</p>
+        <p className="gradient-text"> {t("welcome.subtitle")}</p>
       </h2>
       <p className="text-muted-foreground mb-8 max-w-md text-sm leading-relaxed">
-        Sou sua assistente pessoal com memória de longo prazo.
-        Conheço sua história e posso ajudar de forma personalizada.
+        {t("welcome.description")}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-2xl mt-1">

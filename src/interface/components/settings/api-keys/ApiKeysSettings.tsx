@@ -1,6 +1,5 @@
-"use client"
-
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { cn } from "@/interface/lib/utils"
 import { Button } from "@/interface/components/ui/button"
 import { Input } from "@/interface/components/ui/input"
@@ -14,6 +13,7 @@ export type { ApiKeyMeta as ApiKey } from "@/interface/context/ApiKeysContext"
 
 // PAINEL DE GERENCIAMENTO DE CHAVES DE API — ADICIONA, LISTA E REMOVE CHAVES CRIPTOGRAFADAS
 export function ApiKeysSettings() {
+  const { t } = useTranslation()
   const { apiKeys, isLoading, addKey, deleteKey } = useApiKeys()
   const [showNewKeyInput, setShowNewKeyInput] = useState(false)
   const [newKeyValue, setNewKeyValue] = useState("")
@@ -28,7 +28,7 @@ export function ApiKeysSettings() {
     
     // Validar se URL foi preenchida para provedor customizado
     if (newKeyProvider === "custom" && !newKeyBaseUrl.trim()) {
-      toast.error("A URL base é obrigatória para provedores personalizados")
+      toast.error(t("settings.apiKeys.validation.urlRequired", "A URL base é obrigatória para provedores personalizados"))
       return
     }
 
@@ -45,9 +45,9 @@ export function ApiKeysSettings() {
       setNewKeyBaseUrl("")
       setNewKeyProvider("auto")
       setShowNewKeyInput(false)
-      toast.success("Chave criptografada e salva!")
+      toast.success(t("settings.apiKeys.toast.saved", "Chave criptografada e salva!"))
     } catch {
-      toast.error("Erro ao salvar chave API")
+      toast.error(t("settings.apiKeys.toast.saveError", "Erro ao salvar chave API"))
     } finally {
       setIsSaving(false)
     }
@@ -56,7 +56,7 @@ export function ApiKeysSettings() {
   // REMOVE UMA CHAVE PELO ID E NOTIFICA O USUÁRIO
   const handleDelete = async (id: string) => {
     await deleteKey(id)
-    toast.success("Chave removida")
+    toast.success(t("settings.apiKeys.toast.deleted", "Chave removida"))
   }
 
   return (
@@ -67,13 +67,13 @@ export function ApiKeysSettings() {
             <div>
               <CardTitle className="flex items-center gap-2">
                 <Key className="w-5 h-5" />
-                Chaves de API
+                {t("settings.apiKeys.title", "Chaves de API")}
               </CardTitle>
-              <CardDescription>Chaves criptografadas e salvas com segurança no navegador</CardDescription>
+              <CardDescription>{t("settings.apiKeys.description", "Chaves criptografadas e salvas com segurança no navegador")}</CardDescription>
             </div>
             {!showNewKeyInput && (
               <Button variant="outline" size="sm" onClick={() => setShowNewKeyInput(true)} disabled={isLoading}>
-                Adicionar Chave
+                {t("settings.apiKeys.addKey", "Adicionar Chave")}
               </Button>
             )}
           </div>
@@ -82,7 +82,7 @@ export function ApiKeysSettings() {
           {isLoading && (
             <div className="flex items-center justify-center py-8 gap-2 text-muted-foreground">
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="text-sm">Verificando chaves salvas...</span>
+              <span className="text-sm">{t("settings.apiKeys.checkingKeys", "Verificando chaves salvas...")}</span>
             </div>
           )}
 
@@ -90,23 +90,23 @@ export function ApiKeysSettings() {
             <div className="space-y-4 p-4 rounded-lg bg-secondary/20 border border-glass-border">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase">Tipo de Provedor</label>
+                  <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.providerType", "Tipo de Provedor")}</label>
                   <select 
                     className="w-full bg-background border border-glass-border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
                     value={newKeyProvider}
                     onChange={(e) => setNewKeyProvider(e.target.value)}
                   >
-                    <option value="auto">Detecção Automática</option>
-                    <option value="openai">OpenAI Compatível (Proxy)</option>
-                    <option value="custom">Provedor Personalizado</option>
+                    <option value="auto">{t("settings.apiKeys.providers.auto", "Detecção Automática")}</option>
+                    <option value="openai">{t("settings.apiKeys.providers.openai", "OpenAI Compatível (Proxy)")}</option>
+                    <option value="custom">{t("settings.apiKeys.providers.custom", "Provedor Personalizado")}</option>
                   </select>
                 </div>
                 
                 {(newKeyProvider === "custom" || newKeyProvider === "openai") && (
                   <div className="space-y-2">
-                    <label className="text-xs font-medium text-muted-foreground uppercase">Nome do Provedor</label>
+                    <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.providerName", "Nome do Provedor")}</label>
                     <Input
-                      placeholder="Ex: Meu Proxy DigitalOcean"
+                      placeholder={t("settings.apiKeys.providerNamePlaceholder", "Ex: Meu Proxy DigitalOcean")}
                       value={newKeyName}
                       onChange={(e) => setNewKeyName(e.target.value)}
                     />
@@ -116,23 +116,23 @@ export function ApiKeysSettings() {
 
               {(newKeyProvider === "custom" || newKeyProvider === "openai") && (
                 <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase">Base URL (API Host)</label>
+                  <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.baseUrl", "Base URL (API Host)")}</label>
                   <Input
-                    placeholder="Ex: http://localhost:3100/v1"
+                    placeholder={t("settings.apiKeys.baseUrlPlaceholder", "Ex: http://localhost:3100/v1")}
                     value={newKeyBaseUrl}
                     onChange={(e) => setNewKeyBaseUrl(e.target.value)}
                   />
                   <p className="text-[10px] text-muted-foreground italic">
-                    A URL onde os modelos estão hospedados. Deve suportar /models e /chat/completions.
+                    {t("settings.apiKeys.baseUrlTip", "A URL onde os modelos estão hospedados. Deve suportar /models e /chat/completions.")}
                   </p>
                 </div>
               )}
 
               <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground uppercase">Chave de API</label>
+                <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.apiKey", "Chave de API")}</label>
                 <Input
                   type="password"
-                  placeholder="Cole sua chave aqui..."
+                  placeholder={t("settings.apiKeys.apiKeyPlaceholder", "Cole sua chave aqui...")}
                   value={newKeyValue}
                   onChange={(e) => setNewKeyValue(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAdd()}
@@ -141,10 +141,10 @@ export function ApiKeysSettings() {
 
               <div className="flex gap-2 pt-2">
                 <Button onClick={handleAdd} disabled={isSaving} className="flex-1">
-                  {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : "Salvar Chave"}
+                  {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : t("settings.apiKeys.saveKey", "Salvar Chave")}
                 </Button>
                 <Button variant="outline" onClick={() => { setShowNewKeyInput(false); setNewKeyValue("") }}>
-                  Cancelar
+                  {t("common.cancel", "Cancelar")}
                 </Button>
               </div>
             </div>
@@ -186,8 +186,8 @@ export function ApiKeysSettings() {
           {!isLoading && apiKeys.length === 0 && !showNewKeyInput && (
             <div className="text-center py-8">
               <AlertCircle className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">Nenhuma chave configurada</p>
-              <p className="text-xs text-muted-foreground mt-1">As chaves são criptografadas com AES-256 antes de serem salvas</p>
+              <p className="text-sm text-muted-foreground">{t("settings.apiKeys.noKeys", "Nenhuma chave configurada")}</p>
+              <p className="text-xs text-muted-foreground mt-1">{t("settings.apiKeys.encryptionNotice", "As chaves são criptografadas com AES-256 antes de serem salvas")}</p>
             </div>
           )}
         </CardContent>

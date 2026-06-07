@@ -30,6 +30,7 @@ const AppearanceSettings   = lazy(() => import("@/interface/components/settings/
 const NotificationsSettings = lazy(() => import("@/interface/components/settings/notifications/NotificationsSettings").then(m => ({ default: m.NotificationsSettings })))
 const PrivacySettings      = lazy(() => import("@/interface/components/settings/privacy/PrivacySettings").then(m => ({ default: m.PrivacySettings })))
 const DataSettings         = lazy(() => import("@/interface/components/settings/data/DataSettings").then(m => ({ default: m.DataSettings })))
+const HelpSettings         = lazy(() => import("@/interface/components/settings/help/HelpSettings").then(m => ({ default: m.HelpSettings })))
 
 function MainLayout() {
   return (
@@ -54,6 +55,7 @@ function MainLayout() {
                   <Route path="notifications" element={<NotificationsSettings />} />
                   <Route path="privacy" element={<PrivacySettings />} />
                   <Route path="data" element={<DataSettings />} />
+                  <Route path="help" element={<HelpSettings />} />
                 </Route>
                 <Route path="/memories" element={<MemoriesPage />} />
                 <Route path="/brain" element={<BrainPage />} />
@@ -70,20 +72,26 @@ function MainLayout() {
 const isMobileDevice = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 export default function App() {
+  useEffect(() => {
+    const saved = localStorage.getItem("elana-chat-font-size")
+    const size = saved ? parseInt(saved, 10) : 16
+    document.documentElement.style.setProperty('--chat-font-size', `${size}px`)
+  }, [])
+
   return (
     <ThemeProvider
-    
       attribute="class"
       defaultTheme="dark"
       enableSystem={false}
       disableTransitionOnChange
+      themes={["light", "dark", "system", "black-metal", "sunrise"]}
     >
       <DatabaseSettingsProvider>
         <ApiKeysProvider>
           <ToolsSettingsProvider>
             <ModelProvider>
             <UserProfileProvider>
-            <div id="app-container" className="relative flex flex-col h-screen w-screen overflow-hidden bg-background  border-black/20 border-t border-l border-r border-b pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
+            <div id="app-container" className="relative flex flex-col h-screen w-screen overflow-hidden bg-background border border-black/50 rounded-[25px] pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]">
               {!isMobileDevice && <TitleBar />}
             <div className="flex-1 overflow-hidden relative">
               <Routes>

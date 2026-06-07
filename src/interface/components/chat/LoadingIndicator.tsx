@@ -1,5 +1,4 @@
-"use client"
-
+import { useTranslation } from "react-i18next"
 import { Sparkles, Loader2, Globe, Search, Database, Terminal, Cpu, Cog, Coffee } from "lucide-react"
 
 interface LoadingIndicatorProps {
@@ -22,6 +21,7 @@ function getToolIcon(status: string) {
 }
 
 export function LoadingIndicator({ toolStatus }: LoadingIndicatorProps = {}) {
+  const { t } = useTranslation()
   const isTool = !!toolStatus
 
   // --- ESTADO 1: PENSANDO (FLUXO PADRÃO) ---
@@ -41,7 +41,7 @@ export function LoadingIndicator({ toolStatus }: LoadingIndicatorProps = {}) {
               <span className="w-1 h-1 rounded-full bg-primary/60 animate-bounce" style={{ animationDelay: "300ms", animationDuration: "0.8s" }} />
             </div>
             <span className="text-sm font-medium text-muted-foreground tracking-wide">
-              Pensando...
+              {t("chat.thinking")}
             </span>
           </div>
         </div>
@@ -74,10 +74,10 @@ export function LoadingIndicator({ toolStatus }: LoadingIndicatorProps = {}) {
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-semibold text-foreground/90 tracking-widest leading-none">
-                  Recurso
+                  {t("chat.resource")}
                 </span>
                 <span className="text-[9px] text-muted-foreground/70 mt-0.5 leading-none">
-                  Processando
+                  {t("chat.processing")}
                 </span>
               </div>
             </div>
@@ -88,7 +88,7 @@ export function LoadingIndicator({ toolStatus }: LoadingIndicatorProps = {}) {
                 <span className="absolute inline-flex h-full w-full rounded-md bg-emerald-500 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-md bg-emerald-500" />
               </span>
-              Ativo
+              {t("chat.active")}
             </span>
           </div>
 

@@ -1,5 +1,5 @@
-"use client"
 import React, { createContext, useContext, useState, useMemo } from "react"
+import { useTranslation } from "react-i18next"
 import { useModel, ModelConfig, ModelInfo, RouteModels } from "@/interface/context/ModelContext"
 import { toast } from "sonner"
 
@@ -31,6 +31,7 @@ export function useModelSettingsForm() {
 // PROVIDER LOCAL DE ESTADO DO FORMULÁRIO DE MODELO — ISOLA O DRAFT DO CONTEXTO GLOBAL
 export function ModelSettingsProvider({ children, onConfigChange }: { children: React.ReactNode, onConfigChange?: (config: ModelConfig) => void }) {
     const { config, updateConfig, routes, isRoutesLoading, refreshRoutes } = useModel()
+    const { t } = useTranslation()
 
     // Draft inicializado diretamente com o config atual — sem useEffect
     const [draft, setDraft] = useState<ModelConfig | null>(() => config ?? null)
@@ -92,7 +93,7 @@ export function ModelSettingsProvider({ children, onConfigChange }: { children: 
             frequencyPenalty: 0.3,
             maxTokens: 4096
         }) : null)
-        toast.info("Parâmetros avançados resetados para o padrão")
+        toast.info(t("settings.models.toast.resetAdvanced", "Parâmetros avançados resetados para o padrão"))
     }
 
     // SALVA O DRAFT NO CONTEXTO GLOBAL (LOCALSTORAGE) E NOTIFICA O CALLBACK OPCIONAL
@@ -100,7 +101,7 @@ export function ModelSettingsProvider({ children, onConfigChange }: { children: 
         if (!draft) return
         updateConfig(draft)
         onConfigChange?.(draft)
-        toast.success(`Modelo salvo: ${draft.modelName}`)
+        toast.success(t("settings.models.toast.saved", "Modelo salvo: {{modelName}}", { modelName: draft.modelName }))
     }
 
     const value = {

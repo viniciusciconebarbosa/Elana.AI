@@ -1,5 +1,5 @@
-"use client"
-
+import { useTranslation } from "react-i18next"
+import { useMemo } from "react"
 import { Button } from "@/interface/components/ui/button"
 import { Badge } from "@/interface/components/ui/badge"
 import {
@@ -16,14 +16,6 @@ import { useSidebar } from "@/interface/context/SidebarContext"
 // TIPO DOS MODOS DE CONVERSA DISPONÍVEIS
 type ConversationMode = "casual" | "deep" | "planning" | "memory"
 
-// LISTA DE MODOS COM ÍCONE E DESCRIÇÃO
-const modes: { id: ConversationMode; label: string; icon: typeof Coffee; description: string }[] = [
-    { id: "casual", label: "Casual", icon: Coffee, description: "Conversa leve e descontraída" },
-    { id: "deep", label: "Deep Thinking", icon: Brain, description: "Análise profunda e reflexiva" },
-    { id: "planning", label: "Planning", icon: CalendarDays, description: "Planejamento e organização" },
-    { id: "memory", label: "Memory Review", icon: Lightbulb, description: "Revisão de memórias" },
-]
-
 interface ChatHeaderProps {
     isNewChat: boolean
     modelName?: string
@@ -34,9 +26,19 @@ interface ChatHeaderProps {
 
 // CABEÇALHO DO CHAT — EXIBE O TÍTULO, SELETOR DE MODO E BOTÃO DE DELETAR
 export function ChatHeader({ isNewChat, modelName, mode, onModeChange, onDelete }: ChatHeaderProps) {
-    // Encontra o objeto do modo atual para exibir o ícone e label corretos
-    const currentMode = modes.find((m) => m.id === mode)!
+    const { t } = useTranslation()
     const { toggleMobile } = useSidebar()
+
+    // LISTA DE MODOS COM ÍCONE E DESCRIÇÃO DINÂMICOS
+    const modes = useMemo<({ id: ConversationMode; label: string; icon: typeof Coffee; description: string })[]>(() => [
+        { id: "casual", label: t("chatModes.casual"), icon: Coffee, description: t("chatModes.casualDesc") },
+        { id: "deep", label: t("chatModes.deep"), icon: Brain, description: t("chatModes.deepDesc") },
+        { id: "planning", label: t("chatModes.planning"), icon: CalendarDays, description: t("chatModes.planningDesc") },
+        { id: "memory", label: t("chatModes.memory"), icon: Lightbulb, description: t("chatModes.memoryDesc") },
+    ], [t])
+
+    // Encontra o objeto do modo atual para exibir o ícone e label corretos
+    const currentMode = useMemo(() => modes.find((m) => m.id === mode) || modes[0], [modes, mode])
 
     return (
         <header
@@ -53,7 +55,7 @@ export function ChatHeader({ isNewChat, modelName, mode, onModeChange, onDelete 
                 </Button>
 
                 <h1 className="text-lg font-semibold tracking-tight text-foreground whitespace-nowrap">
-                    {isNewChat ? "Novo Chat" : "Chat"}
+                    {isNewChat ? t("chat.newChat") : t("chat.chat")}
                 </h1>
 
                 <div className="h-5 w-[1px] bg-border/60 hidden sm:block" />
@@ -92,10 +94,10 @@ export function ChatHeader({ isNewChat, modelName, mode, onModeChange, onDelete 
                             variant="ghost"
                             size="icon"
                             className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive h-8 w-8 rounded-full transition-colors"
-                            title="Excluir chat"
+                            title={t("modals.deleteChat.confirm", "Excluir Chat")}
                         >
                             <Trash2 className="h-4 w-4" />
-                            <span className="sr-only">Excluir Chat</span>
+                            <span className="sr-only">{t("modals.deleteChat.confirm", "Excluir Chat")}</span>
                         </Button>
                     </DeleteChatModal>
                 </div>

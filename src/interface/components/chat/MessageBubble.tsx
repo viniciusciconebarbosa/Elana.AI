@@ -84,10 +84,13 @@ export function MessageBubbleComponent({ message, isStreaming, onDeleteFromHere,
                         </div>
                     )}
 
-                    <div className={cn(
-                        "leading-relaxed font-[400] tracking-[0.02em] break-words",
-                        !isUser && ""
-                    )}>
+                    <div 
+                        className={cn(
+                            "leading-relaxed font-[400] tracking-[0.02em] break-words",
+                            !isUser && ""
+                        )}
+                        style={{ fontSize: "var(--chat-font-size, 0.875rem)" }}
+                    >
                         {wasStreaming && !isUser ? (
                             <TypingEffect text={message.content} isStreaming={isStreaming ?? false} />
                         ) : (

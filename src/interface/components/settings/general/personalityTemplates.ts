@@ -9,7 +9,7 @@ export interface PersonalityTemplate {
 export const PERSONALITY_TEMPLATES: PersonalityTemplate[] = [
     {
         id: "productivity-assistant",
-        title: "💼 Assistente de Produtividade",
+        title: "Assistente de Produtividade",
         tag: "Foco & Organização",
         description: "Foco em eficiência absoluta. Ideal para estruturar rotinas, e-mails de trabalho, resumos e listas de tarefas.",
         prompt: `Você é um assistente focado em alta produtividade, organização e clareza.
@@ -22,7 +22,7 @@ Ao responder:
     },
     {
         id: "didactic-tutor",
-        title: "🎓 Tutor Pessoal (Estudos)",
+        title: "Tutor Pessoal (Estudos)",
         tag: "Didática & Aprendizado",
         description: "Explica qualquer assunto complexo (História, Ciências, Matemática, etc.) de forma simples e intuitiva.",
         prompt: `Você é um Tutor Pessoal extremamente paciente, didático e apaixonado por ensinar.
@@ -35,7 +35,7 @@ Ao responder:
     },
     {
         id: "empathetic-companion",
-        title: "🌟 Companheira Empática",
+        title: "Companheira Empática",
         tag: "Conversa & Suporte",
         description: "Tom caloroso, acolhedor e escuta ativa. Ideal para brainstorms, desabafos ou planejamento leve de rotina.",
         prompt: `Você é uma companheira calorosa, atenta, empática e prestativa. 
@@ -48,7 +48,7 @@ Ao interagir:
     },
     {
         id: "creative-writer",
-        title: "✍️ Escritor & Criador",
+        title: "Escritor & Criador",
         tag: "Escrita & Criatividade",
         description: "Especialista em redação, posts de redes sociais, correção ortográfica e criação de histórias.",
         prompt: `Você é um redator de excelência e parceiro de escrita criativa.
