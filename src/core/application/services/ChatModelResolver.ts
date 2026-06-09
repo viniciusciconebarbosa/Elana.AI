@@ -29,8 +29,25 @@ export async function resolveModelConfig(clientConfig?: ModelConfig) {
     return { ...finalConfig, isGeminiModel };
 }
 
-// DESCRIPTOGRAFA E RETORNA A CHAVE DE API CORRETA COM BASE NO TIPO DE PROVEDOR (GEMINI OU OPENAI)
-export async function resolveApiKey(isGeminiModel: boolean, apiKeys?: { gemini?: string; openai?: string }) {
+// DESCRIPTOGRAFA E RETORNA A CHAVE DE API CORRETA COM BASE NO TIPO DE PROVEDOR (GEMINI OU OPENAI) OU ID DA ROTA
+export async function resolveApiKey(
+    isGeminiModel: boolean, 
+    apiKeys?: { gemini?: string; openai?: string; all?: any[] },
+    routeId?: string
+) {
+    // 1. Tentar buscar a chave específica da rota ativa (ex: openai-171789123456)
+    if (routeId && apiKeys?.all) {
+        const matchingKey = apiKeys.all.find(k => k.id === routeId);
+        if (matchingKey?.encryptedKey) {
+            try {
+                return await decrypt(matchingKey.encryptedKey);
+            } catch (e) {
+                console.error(`Erro ao descriptografar chave para rota ${routeId}:`, e);
+            }
+        }
+    }
+
+    // 2. Fallback para comportamento padrão
     if (isGeminiModel) {
         if (apiKeys?.gemini) {
             try {

@@ -54,22 +54,30 @@ export function ApiKeysProvider({ children }: { children: ReactNode }) {
 
   // ADICIONA UMA NOVA CHAVE DE API, DETECTANDO O PROVEDOR AUTOMATICAMENTE
   const addKey = useCallback(async (rawKey: string, customProvider?: string, customName?: string, baseUrl?: string) => {
-    const autoProvider = rawKey.startsWith('AIza') ? 'gemini'
-      : rawKey.startsWith('sk-ant') ? 'anthropic'
+    const trimmedKey = rawKey.trim()
+    const autoProvider = trimmedKey.startsWith('AIza') ? 'gemini'
+      : trimmedKey.startsWith('sk-ant') ? 'anthropic'
+      : trimmedKey.startsWith('sk-or-') ? 'openrouter'
       : 'openai'
     
     const providerStr = customProvider || autoProvider
-    const providerName = providerStr.charAt(0).toUpperCase() + providerStr.slice(1)
+    const providerName = providerStr === 'openrouter' 
+      ? 'OpenRouter' 
+      : providerStr.charAt(0).toUpperCase() + providerStr.slice(1)
 
     // Criptografar a chave localmente
-    const encryptedKey = await encrypt(rawKey)
+    const encryptedKey = await encrypt(trimmedKey)
+
+    const finalBaseUrl = baseUrl || (
+      providerStr === 'openrouter' ? 'https://openrouter.ai/api/v1' : undefined
+    )
 
     const newKey: ApiKeyMeta = {
       id: `${providerStr}-${Date.now()}`,
       name: customName || `Chave ${providerName}`,
       provider: providerName,
-      baseUrl: baseUrl,
-      maskedKey: `${rawKey.slice(0, 6)}...${rawKey.slice(-4)}`,
+      baseUrl: finalBaseUrl,
+      maskedKey: `${trimmedKey.slice(0, 6)}...${trimmedKey.slice(-4)}`,
       encryptedKey,
       isActive: true,
       lastUsed: new Date(),

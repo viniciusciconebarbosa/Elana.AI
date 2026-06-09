@@ -22,20 +22,42 @@ export function ApiKeysSettings() {
   const [newKeyName, setNewKeyName] = useState("")
   const [newKeyBaseUrl, setNewKeyBaseUrl] = useState("")
 
+  const presets = [
+    { id: "custom", name: "Personalizado (Digitar URL)", provider: "openai", baseUrl: "" },
+    { id: "openrouter", name: "OpenRouter", provider: "openrouter", baseUrl: "https://openrouter.ai/api/v1" },
+    { id: "deepseek", name: "DeepSeek", provider: "deepseek", baseUrl: "https://api.deepseek.com" },
+    { id: "groq", name: "Groq", provider: "groq", baseUrl: "https://api.groq.com/openai/v1" },
+    { id: "alibaba", name: "Alibaba Cloud (Qwen)", provider: "alibaba", baseUrl: "https://dashscope.aliyuncs.com/compatible-mode/v1" },
+    { id: "zenapi", name: "Zen API (OpenCode)", provider: "zenapi", baseUrl: "https://opencode.ai/zen/v1" },
+    { id: "mistral", name: "Mistral AI", provider: "mistral", baseUrl: "https://api.mistral.ai/v1" },
+    { id: "ollama", name: "Ollama (Local)", provider: "ollama", baseUrl: "http://localhost:11434/v1" },
+  ]
+  const [selectedPreset, setSelectedPreset] = useState("custom")
+
+  const handlePresetChange = (presetId: string) => {
+    setSelectedPreset(presetId)
+    const preset = presets.find(p => p.id === presetId)
+    if (preset) {
+      setNewKeyName(preset.id === "custom" ? "" : preset.name)
+      setNewKeyBaseUrl(preset.baseUrl)
+      setNewKeyProvider(preset.provider)
+    }
+  }
+
   // CRIPTOGRAFA E SALVA UMA NOVA CHAVE, VALIDANDO O TIPO DE PROVEDOR
   const handleAdd = async () => {
     if (!newKeyValue.trim() || isSaving) return
     
-    // Validar se URL foi preenchida para provedor customizado
-    if (newKeyProvider === "custom" && !newKeyBaseUrl.trim()) {
-      toast.error(t("settings.apiKeys.validation.urlRequired", "A URL base é obrigatória para provedores personalizados"))
+    // Validar se URL foi preenchida para provedor customizado/proxy
+    if (newKeyProvider !== "auto" && !newKeyBaseUrl.trim()) {
+      toast.error(t("settings.apiKeys.validation.urlRequired", "A URL base é obrigatória para provedores personalizados/proxies"))
       return
     }
 
     setIsSaving(true)
     try {
       await addKey(
-        newKeyValue, 
+        newKeyValue.trim(), 
         newKeyProvider === "auto" ? undefined : newKeyProvider,
         newKeyName || undefined,
         newKeyBaseUrl || undefined
@@ -44,6 +66,7 @@ export function ApiKeysSettings() {
       setNewKeyName("")
       setNewKeyBaseUrl("")
       setNewKeyProvider("auto")
+      setSelectedPreset("custom")
       setShowNewKeyInput(false)
       toast.success(t("settings.apiKeys.toast.saved", "Chave criptografada e salva!"))
     } catch {
@@ -93,8 +116,16 @@ export function ApiKeysSettings() {
                   <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.providerType", "Tipo de Provedor")}</label>
                   <select 
                     className="w-full bg-background border border-glass-border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-                    value={newKeyProvider}
-                    onChange={(e) => setNewKeyProvider(e.target.value)}
+                    value={newKeyProvider === "auto" ? "auto" : (newKeyProvider === "custom" ? "custom" : "openai")}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setNewKeyProvider(val)
+                      if (val === "auto") {
+                        setSelectedPreset("custom")
+                        setNewKeyName("")
+                        setNewKeyBaseUrl("")
+                      }
+                    }}
                   >
                     <option value="auto">{t("settings.apiKeys.providers.auto", "Detecção Automática")}</option>
                     <option value="openai">{t("settings.apiKeys.providers.openai", "OpenAI Compatível (Proxy)")}</option>
@@ -102,7 +133,24 @@ export function ApiKeysSettings() {
                   </select>
                 </div>
                 
-                {(newKeyProvider === "custom" || newKeyProvider === "openai") && (
+                {newKeyProvider !== "auto" && (
+                  <div className="space-y-2">
+                    <label className="text-xs font-medium text-muted-foreground uppercase">Preset de Provedor</label>
+                    <select 
+                      className="w-full bg-background border border-glass-border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+                      value={selectedPreset}
+                      onChange={(e) => handlePresetChange(e.target.value)}
+                    >
+                      {presets.map(p => (
+                        <option key={p.id} value={p.id}>{p.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+
+              {newKeyProvider !== "auto" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.providerName", "Nome do Provedor")}</label>
                     <Input
@@ -111,21 +159,22 @@ export function ApiKeysSettings() {
                       onChange={(e) => setNewKeyName(e.target.value)}
                     />
                   </div>
-                )}
-              </div>
 
-              {(newKeyProvider === "custom" || newKeyProvider === "openai") && (
-                <div className="space-y-2">
-                  <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.baseUrl", "Base URL (API Host)")}</label>
-                  <Input
-                    placeholder={t("settings.apiKeys.baseUrlPlaceholder", "Ex: http://localhost:3100/v1")}
-                    value={newKeyBaseUrl}
-                    onChange={(e) => setNewKeyBaseUrl(e.target.value)}
-                  />
-                  <p className="text-[10px] text-muted-foreground italic">
-                    {t("settings.apiKeys.baseUrlTip", "A URL onde os modelos estão hospedados. Deve suportar /models e /chat/completions.")}
-                  </p>
+                  <div className="space-y-2 flex-1">
+                    <label className="text-xs font-medium text-muted-foreground uppercase">{t("settings.apiKeys.baseUrl", "Base URL (API Host)")}</label>
+                    <Input
+                      placeholder={t("settings.apiKeys.baseUrlPlaceholder", "Ex: http://localhost:3100/v1")}
+                      value={newKeyBaseUrl}
+                      onChange={(e) => setNewKeyBaseUrl(e.target.value)}
+                    />
+                  </div>
                 </div>
+              )}
+
+              {newKeyProvider !== "auto" && (
+                <p className="text-[10px] text-muted-foreground italic">
+                  {t("settings.apiKeys.baseUrlTip", "A URL onde os modelos estão hospedados. Deve suportar /models e /chat/completions.")}
+                </p>
               )}
 
               <div className="space-y-2">

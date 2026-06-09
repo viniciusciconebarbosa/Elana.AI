@@ -24,7 +24,7 @@ export interface ChatServiceInput {
     parentId?: string;
     webSearchEnabled?: boolean;
     config?: ModelConfig;
-    apiKeys?: { gemini?: string; openai?: string };
+    apiKeys?: { gemini?: string; openai?: string; all?: any[] };
 }
 
 // ORQUESTRA TODO O FLUXO DO CHAT: RESOLVE MODELO, PROCESSA IMAGENS, PERSISTE E INICIA O STREAM
@@ -34,7 +34,7 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
     // 1. Resolver Configuração do Modelo e API Key
     const resolvedConfig = await resolveModelConfig(config);
     const { model: modelId, modelName, maxTokens, temperature, topP, presencePenalty, frequencyPenalty, isGeminiModel } = resolvedConfig;
-    const apiKey = await resolveApiKey(isGeminiModel, apiKeys);
+    const apiKey = await resolveApiKey(isGeminiModel, apiKeys, resolvedConfig.route);
 
     if (!apiKey) {
         const providerName = isGeminiModel ? 'Gemini' : 'OpenAI/Compatible';
@@ -105,6 +105,7 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
             } : {})
         },
         onError: ({ error }) => {
+            console.error('Erro na transmissão do chat (streamText):', error);
             streamError = error;
         },
         onFinish: async (info) => {
@@ -112,8 +113,8 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
 
             if (!finalContent.trim()) {
                 finalContent = imagesToDb.length > 0
-                    ? `⚠️ **Erro da API**\n\nO modelo selecionado não suporta envio de imagens ou a conexão falhou silenciosamente.`
-                    : `⚠️ **Erro da API**\n\nO modelo não retornou nenhuma resposta.`;
+                    ? ` **Erro da API**\n\nO modelo selecionado não suporta envio de imagens ou a conexão falhou silenciosamente.`
+                    : ` **Erro da API**\n\nO modelo não retornou nenhuma resposta.`;
             }
 
             if (currentChatId) {
@@ -177,12 +178,34 @@ export async function runChatService({ messages, rawUserText, chatId, parentId, 
                     } else if (chunk.type === 'tool-result') {
                         controller.enqueue(encoder.encode(`[TOOL_DONE]\n`));
                     } else if (chunk.type === 'error') {
-                        // Encerra o stream e deixa o frontend tratar o conteúdo vazio
+                        const rawError = chunk.error instanceof Error ? chunk.error.message : String(chunk.error);
+                        let displayError = rawError;
+                        try {
+                            const parsed = JSON.parse(rawError);
+                            const errorObj = parsed.error || parsed;
+                            displayError = typeof errorObj === 'object' && errorObj !== null
+                                ? (errorObj.message || JSON.stringify(errorObj))
+                                : String(errorObj);
+                        } catch {
+                            // Não é JSON
+                        }
+                        controller.enqueue(encoder.encode(`\n\n **Erro da API:**\n${displayError}\n`));
                         break;
                     }
                 }
             } catch (err) {
-                controller.error(err);
+                const rawError = err instanceof Error ? err.message : String(err);
+                let displayError = rawError;
+                try {
+                    const parsed = JSON.parse(rawError);
+                    const errorObj = parsed.error || parsed;
+                    displayError = typeof errorObj === 'object' && errorObj !== null
+                        ? (errorObj.message || JSON.stringify(errorObj))
+                        : String(errorObj);
+                } catch {
+                    // Não é JSON
+                }
+                controller.enqueue(encoder.encode(`\n\n **Erro de Conexão:**\n${displayError}\n`));
             } finally {
                 controller.close();
             }
